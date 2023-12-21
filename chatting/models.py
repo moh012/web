@@ -18,22 +18,22 @@ class Order(models.Model):
     Area_id = models.IntegerField()
     User_ID = models.IntegerField()
     Order_Date = models.DateField()
-    Order_Type = models.CharField()
-    State = models.CharField()
-    Start_Price = models.DecimalField()
-    End_Price = models.DecimalField()
-    Room_Number = models.DecimalField()
-    Floor = models.CharField()
-    Details = models.CharField()
-    Build_Year = models.CharField()
-    Bathrooms = models.CharField()
-    Hall_Room = models.CharField()
-    Basement = models.CharField()
-    Pool = models.CharField()
-    Furnished = models.CharField()
-    Elevator = models.CharField()
-    Street_number = models.CharField()
-    Appendix = models.CharField()
+    Order_Type = models.CharField(max_length=100)
+    State = models.CharField(max_length=100)
+    Start_Price = models.DecimalField(max_digits=10, decimal_places=2)
+    End_Price = models.DecimalField(max_digits=10, decimal_places=2)
+    Room_Number = models.IntegerField()
+    Floor = models.CharField(max_length=100)
+    Details = models.TextField()
+    Build_Year = models.CharField(max_length=100)
+    Bathrooms = models.CharField(max_length=100)
+    Hall_Room = models.CharField(max_length=100)
+    Basement = models.CharField(max_length=100)
+    Pool = models.CharField(max_length=100)
+    Furnished = models.CharField(max_length=100)
+    Elevator = models.CharField(max_length=100)
+    Street_number = models.CharField(max_length=100)
+    Appendix = models.CharField(max_length=100)
     Space = models.IntegerField()
 
 
@@ -47,12 +47,12 @@ class Booking(models.Model):
 class Area(models.Model):
     Area_id = models.IntegerField()
     City_id = models.IntegerField()
-    Area_Name = models.CharField()
+    Area_Name = models.CharField(max_length=100)
 
 
 class City(models.Model):
     City_id = models.IntegerField()
-    City_Name = models.CharField()
+    City_Name = models.CharField(max_length=100)
 
 
 class Property(models.Model):
@@ -62,20 +62,20 @@ class Property(models.Model):
     User_ID = models.IntegerField()
     Title = models.CharField(max_length=50)
     Description = models.CharField(max_length=100)
-    Features = models.CharField()
-    Location = models.CharField()
-    Price = models.DecimalField()
+    Features = models.CharField(max_length=100)
+    Location = models.CharField(max_length=100)
+    Price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
 class Type(models.Model):
     Type_id = models.IntegerField()
-    Type_Name = models.CharField()
+    Type_Name = models.CharField(max_length=100)
 
 
 class Report_Agent(models.Model):
     Report_Agent_id = models.IntegerField()
     Order_id = models.IntegerField()
     User_ID = models.IntegerField()
-    Report_Type = models.CharField()
-    Report_Text = models.CharField()
-    Report_State = models.CharField()
+    Report_Type = models.CharField(max_length=100)
+    Report_Text = models.CharField(max_length=100)
+    Report_State = models.CharField(max_length=100)
