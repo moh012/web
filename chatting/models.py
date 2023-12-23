@@ -5,10 +5,12 @@ from accounts.models import Customer, Agent
 
 
 class Chat(models.Model):
-    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
-    chat1 = models.TextField()
-    chat2 = models.TextField()
+    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
+    chat1 = models.TextField(null=True)
+    chat2 = models.TextField(null=True)
     date1 = models.DateTimeField()
     date2 = models.DateTimeField()
 
