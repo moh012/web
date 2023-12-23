@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    #link the applications with urls
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
     path('chatting/', include('chatting.urls')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('fm/', include('fm.urls')),
+    path('order/', include('order.urls')),
+    path('property/', include('property.urls')),
 ]
