@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'chatting.apps.ChattingConfig',
     #'admin_soft.apps.AdminSoftDashboardConfig',

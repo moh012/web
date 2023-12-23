@@ -1,20 +1,19 @@
 from django.db import models
+from accounts.models import Customer, Agent
 
 # Create your models here.
 
 
 class Chat(models.Model):
-    Chat_id = models.IntegerField()
-    User_ID = models.IntegerField()
-    Cus_user_id = models.IntegerField()
-    Chat1 = models.TextField()
-    Chat2 = models.TextField()
-    Date1 = models.DateTimeField()
-    Date2 = models.DateTimeField()
+    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    chat1 = models.TextField()
+    chat2 = models.TextField()
+    date1 = models.DateTimeField()
+    date2 = models.DateTimeField()
 
 
 class Order(models.Model):
-    Order_id = models.IntegerField()
     Area_id = models.IntegerField()
     User_ID = models.IntegerField()
     Order_Date = models.DateField()
