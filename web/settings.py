@@ -31,8 +31,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
-    'pages.apps.PagesConfig',
     'chatting.apps.ChattingConfig',
+    'fm.apps.FmConfig',
+    'order.apps.OrderConfig',
+    'pages.apps.PagesConfig',
+    'property.apps.PropertyConfig',
     #'admin_soft.apps.AdminSoftDashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
