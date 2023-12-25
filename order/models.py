@@ -1,12 +1,15 @@
 from django.db import models
-from .models import Area, City
 from accounts.models import Customer
-
+from property.models import Property, Area
 
 # Create your models here.
+
+
 class Order(models.Model):
-    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     order_date = models.DateField()
     order_type = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -24,19 +27,14 @@ class Order(models.Model):
     elevator = models.CharField(max_length=100)
     street_number = models.CharField(max_length=100)
     appendix = models.CharField(max_length=100)
-    space = models.IntegerField()
+    space = models.IntegerField(null=True)
 
 
 class Booking(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
-    property = models.IntegerField()
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
+    property = models.ForeignKey(Property,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     booking_status = models.BooleanField()
-
-
-class Area(models.Model):
-    city = models.ForeignKey(City, on_delete=models.DO_NOTHING)
-    area_name = models.CharField(max_length=100)
-
-
-class City(models.Model):
-    city_name = models.CharField(max_length=100)
