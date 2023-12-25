@@ -19,22 +19,26 @@ class Chat(models.Model):
 
 class Report_Agent(models.Model):
     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True)
-    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING)
+    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
     report_type = models.CharField(max_length=100)
     report_text = models.CharField(max_length=100)
     report_state = models.CharField(max_length=100)
 
 
 class Report_Customer(models.Model):
-    ads = models.ForeignKey(ADS, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    ads = models.ForeignKey(ADS, on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     report_text = models.CharField(max_length=150)
     report_type = models.CharField(max_length=100)
     report_state = models.CharField(max_length=50)
 
 
 class Evaluation(models.Model):
-    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     rating = models.IntegerField()
     review = models.CharField(max_length=50)
