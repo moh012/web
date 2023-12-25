@@ -1,11 +1,12 @@
 from django.db import models
-from models import Area , City
+from .models import Area, City
 from accounts.models import Customer
+
 
 # Create your models here.
 class Order(models.Model):
-    area= models.ForeignKey(Area, on_delete= models.DO_NOTHING )
-    customer = models.ForeignKey(Customer)
+    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     order_date = models.DateField()
     order_type = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -27,13 +28,13 @@ class Order(models.Model):
 
 
 class Booking(models.Model):
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     property = models.IntegerField()
     booking_status = models.BooleanField()
 
 
 class Area(models.Model):
-    city= models.ForeignKey(City)
+    city = models.ForeignKey(City, on_delete=models.DO_NOTHING)
     area_name = models.CharField(max_length=100)
 
 
