@@ -16,17 +16,15 @@ class Chat(models.Model):
 
 
 class Report_Agent(models.Model):
-    Report_Agent_id = models.IntegerField()
-    Order_id = models.IntegerField()
-    User_ID = models.IntegerField()
-    Report_Type = models.CharField(max_length=100)
-    Report_Text = models.CharField(max_length=100)
-    Report_State = models.CharField(max_length=100)
+    order_id = models.IntegerField()
+    user_id = models.IntegerField()
+    report_type = models.CharField(max_length=100)
+    report_text = models.CharField(max_length=100)
+    report_state = models.CharField(max_length=100)
 
 
 class Report_Customer(models.Model):
-    Report_Customer_id = models.IntegerField()
-    ADS_id = models.IntegerField()
+    ads_id = models.IntegerField()
     user_id = models.IntegerField()
     report_text = models.CharField(max_length=150)
     report_type = models.CharField(max_length=100)
@@ -34,7 +32,6 @@ class Report_Customer(models.Model):
 
 
 class Evaluation(models.Model):
-    evaluation_id = models.IntegerField()
     user_id = models.IntegerField()
     cus_user_id = models.IntegerField()
     rating = models.IntegerField()
