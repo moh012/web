@@ -9,7 +9,7 @@ class Notification(models.Model):
 
 
 class Financial_Movement(models.Model):
-    FM_id = models.IntegerField()
+    
     user_id = models.IntegerField()
     use_user_id = models.IntegerField()
     discription = models.TextField()
