@@ -7,9 +7,7 @@ from property.models import Property, Area
 
 class Order(models.Model):
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True)
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.DO_NOTHING,
-                                 null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     order_date = models.DateField()
     order_type = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -31,9 +29,7 @@ class Order(models.Model):
 
 
 class Booking(models.Model):
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.DO_NOTHING,
-                                 null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     property = models.ForeignKey(Property,
                                  on_delete=models.DO_NOTHING,
                                  null=True)
