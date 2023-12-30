@@ -8,6 +8,7 @@ from property.models import Property, Area
 class Order(models.Model):
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=50, null= True)
     order_date = models.DateField()
     order_type = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
