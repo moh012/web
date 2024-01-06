@@ -668,6 +668,7 @@ progress {
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
+  justify-content: space-around;
 }
 .row > * {
   flex-shrink: 0;
@@ -1455,7 +1456,7 @@ progress {
   }
 
   .offset-lg-8 {
-    margin-left: 66.66666667%;
+    margin-left: 100%;
   }
 
   .offset-lg-9 {

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static 'images/ejad.jpg' %}" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" action="verificationCode">
+					<span class="login100-form-title">
+						Welcome
+					</span>
+
+					
+
+					
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+                        <label for="phoneNumber"> Enter Your Phone Number  </label>
+						<div class="phone-input-container">
+							<span class="country-code">+967</span>
+						<input class="input100"  id="noSpaceInput" type="text" name="firstDigit" placeholder="Phone Number"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " required>
+
+						<span class="focus-input100"></span>
+						<span class="symbol-input100"></span>
+					</div>
+				
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Next
+						</button>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="logIn">
+							Sign_in
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
