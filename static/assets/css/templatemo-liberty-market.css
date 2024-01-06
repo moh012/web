@@ -28,7 +28,7 @@ font & reset css
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900");
 @font-face {
   font-family: 'Noto Kufi Arabic';
-  src: url("/assets/fonts/NotoKufiArabic-VariableFont_wght.ttf");
+  src: url("assets/fonts/NotoKufiArabic-VariableFont_wght.ttf");
 }
 /* 
 ---------------------------------------------
@@ -171,8 +171,8 @@ body {
 }
 
 .border-button a:hover {
-  background-color: #427d9d;
-  color: #fff;
+  background-color: #fff;
+  color: #427d9d;
 }
 
 .main-button a {
@@ -612,7 +612,7 @@ Header Style
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .header-area {
     top: 0;
   }
@@ -930,6 +930,8 @@ Categories & Collections Style
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   padding: 30px;
+  direction: rtl;
+  font-family: 'Noto Kufi Arabic';
 }
 
 .collections .item .down-content h4 {
@@ -1027,6 +1029,7 @@ Create NFT Style
   padding: 60px 0px;
   position: relative;
   direction: rtl;
+  text-align: center;
 }
 
 .create-nft .section-heading .line-dec {
@@ -1103,6 +1106,7 @@ Create NFT Style
 
 .create-nft p {
   margin-right: 30px;
+  font-family: 'Noto Kufi Arabic';
 }
 
 .create-nft .item a {
@@ -2033,6 +2037,7 @@ Create Page Style
   padding: 60px 30px;
   margin-bottom: 120px;
   font-family: 'Noto Kufi Arabic';
+  text-align: center;
 }
 
 #contact input {

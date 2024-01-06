@@ -7,18 +7,18 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="{% url 'index' %}" class="logo">
                         <img src="{% static 'assets/images/logo4.png' %}" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">الرئيسية</a></li>
-                        <li><a href="explore.html">الطلبات</a></li>
-                        <li><a href="details.html">العقارات</a></li>
+                        <li><a href="{% url 'index' %}">الرئيسية</a></li>
+                        <li><a href="#">الطلبات</a></li>
+                        <li><a href="#">العقارات</a></li>
                         <li><a href="#aboutEjad">عن ايجاد</a></li>
-                        <li><a href="create.html"><i class="fas fa-search"></i> البحث</a></li>
-                        <li><a href="create.html"><i class="fas fa-user"></i> تسجيل </a></li>
+                        <li><a href=""><i class="fas fa-search"></i> البحث</a></li>
+                        <li><a href="phoneNumber"><i class="fas fa-user"></i> تسجيل </a></li>
                         
                     </ul>   
                     <a class='menu-trigger'>
