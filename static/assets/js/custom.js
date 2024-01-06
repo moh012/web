@@ -9,19 +9,6 @@
 
     });
 
-	// WOW JS
-	$(window).on ('load', function (){
-        if ($(".wow").length) { 
-            var wow = new WOW ({
-                boxClass:     'wow',      // Animated element css class (default is wow)
-                animateClass: 'animated', // Animation css class (default is animated)
-                offset:       20,         // Distance to the element when triggering the animation (default is 0)
-                mobile:       true,       // Trigger animations on mobile devices (default is true)
-                live:         true,       // Act on asynchronously loaded content (default is true)
-            });
-            wow.init();
-        }
-    });
 
 	$(window).scroll(function() {
 	  var scroll = $(window).scrollTop();
@@ -53,6 +40,18 @@
         }
     })
 
+	var width = $(window).width();
+		$(window).resize(function() {
+			if (width > 992 && $(window).width() < 992) {
+				location.reload();
+			}
+			else if (width < 992 && $(window).width() > 992) {
+				location.reload();
+			}
+	})
+
+
+
 	$(document).on("click", ".naccs .menu div", function() {
 		var numberIndex = $(this).index();
 	
@@ -70,8 +69,8 @@
 		}
 	});
 
-	$('.owl-cites-town').owlCarousel({
-		items:4,
+	$('.owl-features').owlCarousel({
+		items:3,
 		loop:true,
 		dots: false,
 		nav: true,
@@ -85,18 +84,21 @@
 				  items:2
 			  },
 			  1000:{
-				  items:4
+				  items:3
+			  },
+			  1800:{
+				items:4
 			}
 		}
 	})
 
-	$('.owl-weekly-offers').owlCarousel({
+	$('.owl-collection').owlCarousel({
 		items:3,
 		loop:true,
 		dots: false,
 		nav: true,
 		autoplay: true,
-		margin:15,
+		margin:30,
 		responsive:{
 			  0:{
 				  items:1
