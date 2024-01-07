@@ -2164,6 +2164,7 @@ body {
 @media (max-width: 1200px) {
   
 }
+
 /*---------------------------------------------*/
 
 /* phone number page */
@@ -2216,10 +2217,6 @@ label {
 
 
 
-body, html {
-	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
-}
 
 /*---------------------------------------------*/
 
