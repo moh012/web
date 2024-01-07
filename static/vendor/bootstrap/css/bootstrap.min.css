@@ -1365,7 +1365,7 @@ progress {
   }
 
   .col-lg-2 {
-    flex: 0 0 auto;
+    flex: auto;
     width: 16.66666667%;
   }
 
