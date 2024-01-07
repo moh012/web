@@ -2217,10 +2217,6 @@ label {
 
 
 
-body, html {
-	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
-}
 
 /*---------------------------------------------*/
 
@@ -2437,5 +2433,231 @@ button {
 	background: transparent;
 }
 
+/* VerificationCode Css Page */
 
 
+/*//////////////////////////////////////////////////////////////////
+[ squares ]*/
+
+/* body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin: 0;
+  
+} */
+
+.input-containerB {
+  display: flex;
+}
+
+.digit-inputB {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  font-size: 1.5em;
+  margin: 0 0.2em;
+  border: 1px solid #427d9d;
+  border-radius: 5px;
+}
+
+.digit-inputB:focus {
+  background-color: #427d9d;
+  
+
+
+}
+.digit-inputB:focus {
+  box-shadow: 0 0 1px 1px;
+}
+ .digit-inputB:focus {
+  transform:scale(1.2);
+  
+ }
+
+ .digit-inputB:valid {
+  color: #040303;
+ }
+ 
+ .digit-inputB:focus {
+  font-size: 1.6em;
+ }
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+}
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ pic form title  ]*/
+
+/* body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
+} */
+
+
+.limiterB {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100B {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #151515;
+  background: -webkit-linear-gradient(-135deg, #6d666d, #141418);
+  background: -o-linear-gradient(-135deg, #3e3b3e, #1f1f24);
+  background: -moz-linear-gradient(-135deg, #2f2a2e, #131418);
+  background: linear-gradient(-135deg, #164863, #ddf2fd);
+}
+
+.wrap-login100B {
+  width: 960px;
+  height: 700px;
+  background: -webkit-linear-gradient(-135deg, #6d666d, #141418);
+  background: -o-linear-gradient(-135deg, #3e3b3e, #1f1f24);
+  background: -moz-linear-gradient(-135deg, #2f2a2e, #131418);
+  background: linear-gradient(-135deg, #ddf2fd, #164863);
+  border-radius: 20px;
+  overflow: hidden;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 177px 130px 33px 95px;
+}
+
+
+.login100-picB {
+  width: 250px;
+}
+
+.login100-picB img {
+  max-width: 100%;
+  border-radius: 20%;
+
+
+}
+
+
+
+.login100-formB {
+  width: 300px;
+}
+
+.login100-form-titleB {
+  font-family: Poppins-Bold;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1.2;
+  text-align: center;
+
+
+  width: 95%;
+  display: block;
+  padding-bottom: 80px;
+}
+
+
+
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+
+
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+.container-login100-form-btnB {
+  width: 95%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.login100-form-btnB {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 2.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 50px;
+  border-radius: 20px 20px 20px 20px;
+  background: #164863;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  padding: 0 25px;
+  margin-top: 50px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btnB:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #427d9d;
+}
