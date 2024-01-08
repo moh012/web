@@ -6,7 +6,7 @@
 		<div class="container-login100D">
 			<div class="wrap-login100D">
 				<div class="login100-picD js-tiltD" d2ata-tilt>
-					<img src="{% static 'images/img-01.png' %}" alt="IMG">
+					<img src="{% static 'assets/images/img-01.png' %}" alt="IMG">
 				</div>
 
 				<form class="login100-formD validate-formD" action="logIn">
@@ -15,7 +15,7 @@
 					</span>
 
 					<div class="wrap-input100D validate-inputD" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100D" type="text" name="name" placeholder="Your Name">
+						<input class="input100D" type="text" name="name" placeholder="Your Name" required>
 						<span class="focus-input100D"></span>
 						<span class="symbol-input100D">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -23,7 +23,7 @@
 					</div>
 
 					<div class="wrap-input100D validate-inputD" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100D" type="text" name="email" placeholder="Email">
+						<input class="input100D" type="text" name="email" placeholder="Email" required>
 						<span class="focus-input100D"></span>
 						<span class="symbol-input100D">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -31,7 +31,7 @@
 					</div>
 
 					<div class="wrap-input100D validate-inputD" data-validate = "Password is required">
-						<input class="input100D" type="password" name="pass" placeholder="Password">
+						<input class="input100D" type="password" name="pass" placeholder="Password" required>
 						<span class="focus-input100D"></span>
 						<span class="symbol-input100D">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -39,7 +39,7 @@
 					</div>
 					
 					<div class="wrap-input100D validate-inputD" data-validate = "Password is required">
-						<input class="input100D" type="password" name="con" placeholder=" Confirm Password">
+						<input class="input100D" type="password" name="con" placeholder=" Confirm Password" required>
 						<span class="focus-input100D"></span>
 						<span class="symbol-input100D">
 							<i class="fa fa-retweet" aria-hidden="true"></i>
