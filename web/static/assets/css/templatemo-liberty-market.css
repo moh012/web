@@ -2665,7 +2665,7 @@ button:hover {
 
 
 
-/* EDIT PAGE SIGN UP */
+/* EDIT PAGE LogIn */
 
 
 
@@ -2709,7 +2709,7 @@ body, html {
 }
 
 /*---------------------------------------------*/
-a {
+.txt2C a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
@@ -2721,13 +2721,13 @@ a {
   -moz-transition: all 0.4s;
 }
 
-a:focus {
+.txt2C a:focus {
 	outline: none !important;
 }
 
-a:hover {
+.txt2C a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #000;
 }
 
 /*---------------------------------------------*/
@@ -2735,13 +2735,13 @@ h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
 
-p {
+/* p {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
-}
+} */
 
 ul, li {
 	margin: 0px;
@@ -2952,7 +2952,7 @@ iframe {
   }
 }
 
-.symbol-input100DD {
+.symbol-input100D {
   font-size: 15px;
 
   display: -webkit-box;
@@ -3189,7 +3189,7 @@ iframe {
 }
 
 /*---------------------------------------------*/
-a {
+.txt2C a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
@@ -3201,27 +3201,27 @@ a {
   -moz-transition: all 0.4s;
 }
 
-a:focus {
+.txt2C a:focus {
 	outline: none !important;
 }
 
-a:hover {
+.txt2C a:hover {
 	text-decoration: none;
   color: #fff;
 }
 
 /*---------------------------------------------*/
-h1,h2,h3,h4,h5,h6 {
+/* h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
-}
+} */
 
-p {
+/* p {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
-}
+} */
 
 ul, li {
 	margin: 0px;
@@ -3297,7 +3297,6 @@ iframe {
   font-size: 13px;
   line-height: 1.5;
   color: #0000009e;
-  padding-top: 50px;
 }
 
 .text-centerC.p-t-136C {
