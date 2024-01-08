@@ -2269,8 +2269,8 @@ textarea:focus, input:focus {
 }
 
 .wrap-login100A {
-  width: 960px;
-  height: 700px;
+  width: 1117px;
+  height: 651px;
   background: -webkit-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -o-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -moz-linear-gradient(-135deg, #ddf2fd, #164863);
@@ -2550,8 +2550,8 @@ button {
 }
 
 .wrap-login100B {
-  width: 960px;
-  height: 700px;
+  width: 1117px;
+  height: 651px;
   background: -webkit-linear-gradient(-135deg, #6d666d, #141418);
   background: -o-linear-gradient(-135deg, #3e3b3e, #1f1f24);
   background: -moz-linear-gradient(-135deg, #2f2a2e, #131418);
@@ -2845,8 +2845,8 @@ iframe {
 }
 
 .wrap-login100D {
-  width: 960px;
-  height: 700px;
+  width: 1117px;
+  height: 651px;
   background: -webkit-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -o-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -moz-linear-gradient(-135deg, #ddf2fd, #164863);
@@ -3287,6 +3287,9 @@ iframe {
   font-size: 13px;
   line-height: 1.5;
   color: #ddf2fd;
+  padding-left: 70px;
+  
+  
 }
 
 .txt2C {
@@ -3294,6 +3297,12 @@ iframe {
   font-size: 13px;
   line-height: 1.5;
   color: #0000009e;
+  padding-top: 50px;
+}
+
+.text-centerC.p-t-136C {
+  margin-top: 100px;
+  padding-left: 90px;
 }
 
 
@@ -3325,8 +3334,8 @@ iframe {
 }
 
 .wrap-login100C {
-  width: 960px;
-  height: 700px;
+  width: 1117px;
+  height: 651px;
   background: -webkit-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -o-linear-gradient(-135deg, #ddf2fd, #164863);
   background: -moz-linear-gradient(-135deg, #ddf2fd, #164863);
