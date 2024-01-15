@@ -53,3 +53,8 @@ def property_grid(request):
 
 def property_single(request):
     return render(request, 'pages/property-single.html')
+
+
+def fave(request):
+    return render(request, 'pages/fave.html')
+
