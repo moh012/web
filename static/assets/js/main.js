@@ -39,28 +39,28 @@ imageLinks.forEach(function(imageLink) {
 
 
 
-// هذا الكود الخاص بصفحة edit_profile 
+// // هذا الكود الخاص بصفحة edit_profile 
 
-const new_Password = document.getElementById("new_password");
-const confirm_Password = document.getElementById("confirm_password");
+// const new_Password = document.getElementById("new_password");
+// const confirm_Password = document.getElementById("confirm_password");
 
-// استدعاء الدالة عند حدث oninput
-new_Password.oninput = function() {
-    if (new_Password.value != confirm_Password.value) {
-        confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
-    } else {
-        confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
-    }
-}
+// // استدعاء الدالة عند حدث oninput
+// new_Password.oninput = function() {
+//     if (new_Password.value != confirm_Password.value) {
+//         confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
+//     } else {
+//         confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
+//     }
+// }
 
-// استدعاء الدالة عند حدث oninput
-confirm_Password.oninput = function() {
-    if (new_Password.value != confirm_Password.value) {
-        confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
-    } else {
-        confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
-    }
-}
+// // استدعاء الدالة عند حدث oninput
+// confirm_Password.oninput = function() {
+//     if (new_Password.value != confirm_Password.value) {
+//         confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
+//     } else {
+//         confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
+//     }
+// }
 
 /* نهاية الكود  */
 
