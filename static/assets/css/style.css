@@ -2240,7 +2240,7 @@ footer .credits {
 */
 .image-overlay {
   position: fixed;
-  z-index: 1;
+  z-index: 1035;
   top: 0;
   left: 0;
   width: 100%;
@@ -2266,28 +2266,3 @@ footer .credits {
 }
 
 /* نهاية الكود  */
-
-
-
-
-
-
-/* هذا الكود الخاص بصفحة edit_profile */
-/* 
-
-Tooplate 2135 Mini Finance
-
-https://www.tooplate.com/view/2135-mini-finance
-
-*/
-
-/*---------------------------------------
-  CUSTOM PROPERTIES ( VARIABLES )             
------------------------------------------*/
-
-
-/* نهاية الكود  */
-
-
-
-
