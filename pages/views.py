@@ -59,5 +59,5 @@ def fave(request):
     return render(request, 'pages/fave.html')
 
 def edit_profile(request):
-    return render(request, 'pages/edit_profile')
+    return render(request, 'pages/edit_profile.html')
 
