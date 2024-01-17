@@ -58,3 +58,6 @@ def property_single(request):
 def fave(request):
     return render(request, 'pages/fave.html')
 
+def edit_profile(request):
+    return render(request, 'pages/edit_profile')
+
