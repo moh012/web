@@ -15,5 +15,7 @@ urlpatterns = [
     path('property-grid', views.property_grid, name='property-grid'),
     path('property-single', views.property_single, name='property-single'),
     path('fave', views.fave, name='fave'),
+    path('edit_profile', views.edit_profile, name='edit_profile'),
+    
 
 ]
