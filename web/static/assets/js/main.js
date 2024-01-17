@@ -34,42 +34,6 @@ imageLinks.forEach(function(imageLink) {
 
 /* نهاية الكود  */
 
-
-
-
-
-
-// هذا الكود الخاص بصفحة edit_profile 
-
-const new_Password = document.getElementById("new_password");
-const confirm_Password = document.getElementById("confirm_password");
-
-// استدعاء الدالة عند حدث oninput
-new_Password.oninput = function() {
-    if (new_Password.value != confirm_Password.value) {
-        confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
-    } else {
-        confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
-    }
-}
-
-// استدعاء الدالة عند حدث oninput
-confirm_Password.oninput = function() {
-    if (new_Password.value != confirm_Password.value) {
-        confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
-    } else {
-        confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
-    }
-}
-
-/* نهاية الكود  */
-
-
-
-
-
-
-
 /**
 * Template Name: EstateAgency
 * Updated: Sep 18 2023 with Bootstrap v5.3.2
