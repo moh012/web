@@ -28,4 +28,4 @@ class Financial_Movement(models.Model):
     admin_configration = models.BooleanField()
     im_port = models.DecimalField(max_digits=5, decimal_places=2)
     export = models.DecimalField(max_digits=5, decimal_places=2)
-    img = models.ImageField()
+    img = models.ImageField(upload_to='fmPhoto/%Y/%m/%d/')
