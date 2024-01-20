@@ -42,3 +42,13 @@ class Evaluation(models.Model):
                                  null=True)
     rating = models.IntegerField()
     review = models.CharField(max_length=50)
+
+
+class Contact(models.Model):
+    username = models.CharField(max_length=50, null=True)
+    email = models.EmailField(max_length=150, null=True)
+    subject = models.CharField(max_length=150, null=True)
+    message = models.TextField(null=True)
+
+    def __str__(self):
+        return self.username

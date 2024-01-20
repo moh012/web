@@ -49,11 +49,12 @@
           <div class="col-sm-12 section-t8">
             <div class="row">
               <div class="col-md-7">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <form action="{% url "contact" %}" method="POST">                  
+                  {% csrf_token %}
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <div class="form-group">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
+                        <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
                       </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -71,15 +72,17 @@
                         <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="محتوى الرسالة" required></textarea>
                       </div>
                     </div>
-                    <div class="col-md-12 my-3">
+                    <!-- <div class="col-md-12 my-3">
                       <div class="mb-3">
                         <div class="loading">جاري التحميل...</div>
                         <div class="error-message"></div>
                         <div class="sent-message">تم ارسال رسالتك. شكراً لك!</div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-12 text-center">
+                      <br>
+                      <br>
                       <button type="submit" class="btn btn-a">ارسل الرسالة</button>
                     </div>
                   </div>
