@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from chatting.models import Contact
 
 # Create your views here.
 
@@ -28,6 +29,17 @@ def blog_single(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        data = Contact(username=username,
+                       email=email,
+                       subject=subject,
+                       message=message)
+        data.save()
+
     return render(request, 'pages/contact.html')
 
 
@@ -58,6 +70,6 @@ def property_single(request):
 def fave(request):
     return render(request, 'pages/fave.html')
 
+
 def edit_profile(request):
     return render(request, 'pages/edit_profile.html')
-
