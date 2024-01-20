@@ -10,10 +10,12 @@ urlpatterns = [
     path('blog-single', views.blog_single, name='blog-single'),
     path('contact', views.contact, name='contact'),
     path('signup', views.signup, name='signup'),
+    path('login', views.login, name='login'),
     path('order-grid', views.order_grid, name='order-grid'),
     path('order-single', views.order_single, name='order-single'),
     path('property-grid', views.property_grid, name='property-grid'),
     path('property-single', views.property_single, name='property-single'),
     path('fave', views.fave, name='fave'),
-    path('edit_profile', views.edit_profile, name='edit_profile'),
+    path('userdata', views.userdata, name='userdata'),
+    path('verification', views.verification, name='verification'),
 ]

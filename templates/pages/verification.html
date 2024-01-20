@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-تسجيل الدخول
+كود التحقق
 {% endblock %}
 
 {% block content %}
@@ -13,13 +13,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "property" %}" method="POST">                  
+    <form action="{% url "userdata" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <!-- <div class="col-md-6 mb-3">
           <div class="form-group">
             <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
           </div>
@@ -28,17 +30,30 @@
           <div class="form-group">
             <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
           </div>
-        </div>
+        </div> -->
+        <h1>أدخل كود التحقق</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="الموضوع" required>
+            <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="كود التحقق" required>
           </div>
         </div>
-        <div class="col-md-12">
+        <br>
+        <!-- <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" required>
+            </div>
+          </div> -->
+        <!-- <div class="col-md-12">
           <div class="form-group">
             <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="محتوى الرسالة" required></textarea>
           </div>
-        </div>
+        </div> -->
         <!-- <div class="col-md-12 my-3">
           <div class="mb-3">
             <div class="loading">جاري التحميل...</div>
@@ -48,9 +63,14 @@
         </div> -->
 
         <div class="col-md-12 text-center">
+          <p>
+            <a href="verification">أعد ارسال الكود</a></p>
           <br>
           <br>
-          <button type="submit" class="btn btn-a">ارسل الرسالة</button>
+          <br>
+          <button type="submit" class="btn btn-a">تحقق</button>
+          <br>
+          <br>
         </div>
       </div>
     </form>
