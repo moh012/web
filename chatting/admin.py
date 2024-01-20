@@ -7,6 +7,8 @@ from .models import Chat, Report_Agent, Report_Customer, Evaluation, Contact
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['id', 'username', 'email']
     search_fields = ['username']
+    list_filter = ['username', 'email']
+    list_display_links = ['id', 'username']
 
 
 admin.site.register(Chat)
