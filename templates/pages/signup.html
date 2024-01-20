@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-تسجيل الدخول
+إنشاء حساب
 {% endblock %}
 
 {% block content %}
@@ -15,16 +15,18 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "login" %}" method="POST">                  
+    <form action="{% url "verification" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
+        <h1>رقم الهاتف</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="col-md-6 mb-3" style="width: 75%; direction: ltr;">
           <div class="form-group">
             <input type="text" name="countrycode" class="form-control form-control-lg form-control-a" placeholder="7xxxxxxxx" required>
@@ -60,7 +62,7 @@
           <br>
           <p>لدي حساب بالفعل...
             <br>
-            <a href="#">تسجيل دخول</a></p>
+            <a href="login">تسجيل دخول</a></p>
         </div>
       </div>
     </form>

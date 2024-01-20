@@ -47,6 +47,10 @@ def index(request):
     return render(request, 'pages/index.html')
 
 
+def login(request):
+    return render(request, 'pages/login.html')
+
+
 def signup(request):
     return render(request, 'pages/signup.html')
 
@@ -71,5 +75,9 @@ def fave(request):
     return render(request, 'pages/fave.html')
 
 
-def edit_profile(request):
-    return render(request, 'pages/edit_profile.html')
+def userdata(request):
+    return render(request, 'pages/userdata.html')
+
+
+def verification(request):
+    return render(request, 'pages/verification.html')
