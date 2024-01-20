@@ -38,7 +38,7 @@
         <div class="col-md-12 mb-3">
             <div class="form-group">
                 أضف صورة
-              <input type="file" name="img" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" required>
+              <input type="file" name="img" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
             </div>
         </div>
         <br>
@@ -46,7 +46,7 @@
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
+            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
           </div>
         </div>
         <br>
@@ -54,7 +54,7 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" required>
+              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
             </div>
           </div>
           <br>
@@ -62,7 +62,7 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" required>
+              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
             </div>
           </div>
           <br>
@@ -70,22 +70,23 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" required>
+              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
             </div>
           </div>
           <br>
           <br>
           <br>
+          <h4>نوع الحساب</h4>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="username" class="" required>
-                <label for="">وكيل عقاري</label>
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">وكيل عقاري</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="username" class="" required>
-                <label for="">باحث عن عقار</label>
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">باحث عن عقار</label>
             </div>
           </div>
           <br>
@@ -93,8 +94,8 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="checkbox" name="email" class="" required>
-              <label for="">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
+              <input type="checkbox" name="email" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
+              <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
             </div>
           </div>
         <!-- <div class="col-md-12">
@@ -112,7 +113,7 @@
 
         <div class="col-md-12 text-center">
           <br>
-          <button type="submit" class="btn btn-a">تسجيل الدخول</button>
+          <button type="submit" class="btn btn-a">إنشاء حساب</button>
         </div>
       </div>
     </form>
