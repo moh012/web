@@ -55,12 +55,20 @@ def signup(request):
     return render(request, 'pages/signup.html')
 
 
+def order(request):
+    return render(request, 'pages/order.html')
+
+
 def order_grid(request):
     return render(request, 'pages/order-grid.html')
 
 
 def order_single(request):
     return render(request, 'pages/order-single.html')
+
+
+def property(request):
+    return render(request, 'pages/property.html')
 
 
 def property_grid(request):
