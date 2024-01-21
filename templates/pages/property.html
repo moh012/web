@@ -2,12 +2,11 @@
 {% load static %}
 
 {% block title %}
-بيانات
+إضافة عقار
 {% endblock %}
 
 {% block content %}
 
-<br>
 <br>
 <br>
 <br>
@@ -35,76 +34,85 @@
         <br>
         <br>
         <br>
-        <div class="col-md-12 mb-3">
-          <div class="form-group">
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">إيجار</label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">بيع</label>
+            </div>
+          </div>
+
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
+            <select class="form-control form-select form-control-a" id="bathrooms" title="نوع العقار" style="line-height: 2;">
+              <option>شقة</option>
+              <option>فيلا</option>
+              <option>أرض</option>
+              <option>محل</option>
+              <option>شاليهات</option>
+              <option>غرف</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
+            <select class="form-control form-select form-control-a" id="bathrooms" title="المحافظة" style="line-height: 2;">
+              <option>الأمانة</option>
+              <option>صنعاء</option>
+              <option>عدن</option>
+              <option>تعز</option>
+              <option>إب</option>
+              <option>الحديدة</option>
+              <option>حجة</option>
+              <option>عمران</option>
+              <option>البيضاء</option>
+              <option>الجوف</option>
+              <option>ذمار</option>
+              <option>شبوة</option>
+              <option>مأرب</option>
+              <option>المهرة</option>
+              <option>أبين</option>
+              <option>لحج</option>
+              <option>المحويت</option>
+              <option>الضالع</option>
+              <option>صعدة</option>
+              <option>ريمة</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
+            <select class="form-control form-select form-control-a" id="bathrooms" title="المديرية" style="line-height: 2;">
+              <option>الوحدة</option>
+              <option>معين</option>
+              <option>صنعاء القديمة</option>
+              <option>شعوب</option>
+              <option>اّزال</option>
+              <option>الصافية</option>
+              <option>السبعين</option>
+              <option>التحرير</option>
+              <option>الثورة</option>
+              <option>بني حارث</option>
+            </select>
           </div>
         </div>
         <br>
         <br>
         <br>
-        <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-          <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-          <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-          <h4>نوع الحساب</h4>
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
-                <label for="" style="font-size: 20px;">وكيل عقاري</label>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
-                <label for="" style="font-size: 20px;">باحث عن عقار</label>
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-          <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <input type="checkbox" name="email" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
-              <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
-            </div>
-          </div>
-        <!-- <div class="col-md-12">
-          <div class="form-group">
-            <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="محتوى الرسالة" required></textarea>
-          </div>
-        </div> -->
-        <!-- <div class="col-md-12 my-3">
-          <div class="mb-3">
-            <div class="loading">جاري التحميل...</div>
-            <div class="error-message"></div>
-            <div class="sent-message">تم ارسال رسالتك. شكراً لك!</div>
-          </div>
-        </div> -->
 
         <div class="col-md-12 text-center">
           <br>
-          <button type="submit" class="btn btn-a">إنشاء حساب</button>
+          <button type="submit" class="btn btn-a">التالي</button>
         </div>
       </div>
     </form>

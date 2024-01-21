@@ -4,7 +4,7 @@ from accounts.models import Agent, Customer
 
 # Create your models here.
 class Type(models.Model):
-    type_name = models.CharField(max_length=100, null=True)
+    search_type = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.type_name
@@ -29,11 +29,28 @@ class Property(models.Model):
     type = models.ForeignKey(Type, on_delete=models.DO_NOTHING, null=True)
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True)
     agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
-    title = models.CharField(max_length=50)
-    tescription = models.CharField(max_length=100)
-    features = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
+    type_name = models.CharField(max_length=100, null=True)
+    property_type = models.CharField(max_length=100, null=True)
+    title = models.CharField(max_length=50, null=True)
+    description = models.CharField(max_length=100, null=True)
+    features = models.CharField(max_length=100, null=True)
+    location = models.CharField(max_length=100, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    property_date = models.DateField(null=True)
+    state = models.CharField(max_length=100, null=True)
+    room_number = models.IntegerField(null=True)
+    floor = models.CharField(max_length=100, null=True)
+    details = models.TextField(null=True)
+    build_year = models.CharField(max_length=100, null=True)
+    bathrooms = models.CharField(max_length=100, null=True)
+    hall_room = models.CharField(max_length=100, null=True)
+    basement = models.CharField(max_length=100, null=True)
+    pool = models.CharField(max_length=100, null=True)
+    furnished = models.CharField(max_length=100, null=True)
+    elevator = models.CharField(max_length=100, null=True)
+    street_number = models.CharField(max_length=100, null=True)
+    appendix = models.CharField(max_length=100, null=True)
+    space = models.IntegerField(null=True)
 
     def __str__(self):
         return self.title
