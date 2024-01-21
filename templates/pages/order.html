@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+تسجيل الدخول
+{% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+<div class="col-md-7">
+    <form action="{% url "order" %}" method="POST">                  
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="الموضوع" required>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="محتوى الرسالة" required></textarea>
+          </div>
+        </div>
+        <!-- <div class="col-md-12 my-3">
+          <div class="mb-3">
+            <div class="loading">جاري التحميل...</div>
+            <div class="error-message"></div>
+            <div class="sent-message">تم ارسال رسالتك. شكراً لك!</div>
+          </div>
+        </div> -->
+
+        <div class="col-md-12 text-center">
+          <br>
+          <br>
+          <button type="submit" class="btn btn-a">ارسل الرسالة</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</center>
+{% endblock %}

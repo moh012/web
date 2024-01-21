@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+بيانات
+{% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+<div class="col-md-7">
+    <form action="{% url "index" %}" method="POST">                  
+      {% csrf_token %}
+      <div class="row">
+        <!-- <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
+          </div>
+        </div> -->
+        <h1>أدخل بياناتك</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 mb-3">
+            <div class="form-group">
+                أضف صورة
+              <input type="file" name="img" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <h4>نوع الحساب</h4>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">وكيل عقاري</label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <label for="" style="font-size: 20px;">باحث عن عقار</label>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <input type="checkbox" name="email" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
+              <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
+            </div>
+          </div>
+        <!-- <div class="col-md-12">
+          <div class="form-group">
+            <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="محتوى الرسالة" required></textarea>
+          </div>
+        </div> -->
+        <!-- <div class="col-md-12 my-3">
+          <div class="mb-3">
+            <div class="loading">جاري التحميل...</div>
+            <div class="error-message"></div>
+            <div class="sent-message">تم ارسال رسالتك. شكراً لك!</div>
+          </div>
+        </div> -->
+
+        <div class="col-md-12 text-center">
+          <br>
+          <button type="submit" class="btn btn-a">إنشاء حساب</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</center>
+{% endblock %}

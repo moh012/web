@@ -1,3 +1,75 @@
+/* هذا الكود  وظيفته عندما يضغط المستخدم على الصورة تفتح في نفس الصفحه وعندما يضغط خارج اطار الصورة 
+ يغلق الصورة ويضل في نفس الصفحة 
+*/
+const imageLinks = document.querySelectorAll('.image-link');
+
+imageLinks.forEach(function(imageLink) {
+  imageLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    const imageSource = imageLink.getAttribute('href');
+    const imageOverlay = document.createElement('div');
+    imageOverlay.classList.add('image-overlay');
+    const image = document.createElement('img');
+    image.setAttribute('src', imageSource);
+    imageOverlay.appendChild(image);
+
+    const closeButton = document.createElement('span');
+    closeButton.innerHTML = '&times;';
+    closeButton.classList.add('close-btn');
+    imageOverlay.appendChild(closeButton);
+
+    document.body.appendChild(imageOverlay);
+
+    closeButton.addEventListener('click', function() {
+      document.body.removeChild(imageOverlay);
+    });
+
+    imageOverlay.addEventListener('click', function(event) {
+      if (event.target === imageOverlay) {
+        document.body.removeChild(imageOverlay);
+      }
+    });
+  });
+});
+
+/* نهاية الكود  */
+
+
+
+
+
+
+// // هذا الكود الخاص بصفحة edit_profile 
+
+// const new_Password = document.getElementById("new_password");
+// const confirm_Password = document.getElementById("confirm_password");
+
+// // استدعاء الدالة عند حدث oninput
+// new_Password.oninput = function() {
+//     if (new_Password.value != confirm_Password.value) {
+//         confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
+//     } else {
+//         confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
+//     }
+// }
+
+// // استدعاء الدالة عند حدث oninput
+// confirm_Password.oninput = function() {
+//     if (new_Password.value != confirm_Password.value) {
+//         confirm_Password.setCustomValidity("كلمة المرور غير متطابقة"); // تعيين رسالة الخطأ المخصصة
+//     } else {
+//         confirm_Password.setCustomValidity(" "); // حذف رسالة الخطأ المخصصة
+//     }
+// }
+
+/* نهاية الكود  */
+
+
+
+
+
+
+
 /**
 * Template Name: EstateAgency
 * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -473,3 +545,4 @@
 
 // })(jQuery);
 // end login pages js
+
