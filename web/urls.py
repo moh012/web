@@ -26,4 +26,5 @@ urlpatterns = [
     path('fm/', include('fm.urls')),
     path('order/', include('order.urls')),
     path('property/', include('property.urls')),
+    
 ]

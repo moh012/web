@@ -2231,3 +2231,38 @@ footer .credits {
 .phonenum {
   width: 30px;
 }
+
+
+
+
+/* هذا الكود  وظيفته عندما يضغط المستخدم على الصورة تفتح في نفس الصفحه وعندما يضغط خارج اطار الصورة 
+ يغلق الصورة ويضل في نفس الصفحة 
+*/
+.image-overlay {
+  position: fixed;
+  z-index: 1035;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-overlay .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* نهاية الكود  */
