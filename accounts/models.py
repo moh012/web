@@ -9,6 +9,7 @@ class Agent(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
+    photo = models.ImageField(upload_to='agentPhoto/%Y/%m/%d/', blank=True)
 
     def __str__(self):
         return self.user.username
@@ -19,6 +20,7 @@ class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
+    photo = models.ImageField(upload_to='customerPhoto/%Y/%m/%d/', blank=True)
 
     def __str__(self):
         return self.user.username
