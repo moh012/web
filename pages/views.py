@@ -67,6 +67,10 @@ def order_single(request):
     return render(request, 'pages/order-single.html')
 
 
+def serious_order(request):
+    return render(request, 'pages/serious_order.html')
+
+
 def property(request):
     return render(request, 'pages/property.html')
 

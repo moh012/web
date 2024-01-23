@@ -14,6 +14,7 @@ urlpatterns = [
     path('order', views.order, name='order'),
     path('order-grid', views.order_grid, name='order-grid'),
     path('order-single', views.order_single, name='order-single'),
+    path('serious_order', views.serious_order, name='serious_order'),
     path('property', views.property, name='property'),
     path('property-grid', views.property_grid, name='property-grid'),
     path('property-single', views.property_single, name='property-single'),
