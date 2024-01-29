@@ -1,12 +1,21 @@
 from django.shortcuts import render
-from chatting.models import Contact
+from django.template import loader #اضافتي للمستقبل القريب
+from chatting.models import Contact 
+from property.models import City 
+from django.http import HttpResponse
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'pages/index.html')
 
+    city = City.objects.all().values()
+    #template = loader.get_template('index.html')
+    #return render(request, 'pages/index.html',{'citys':city})
+    context = {
+        {'citys':city}
+    }
+    #return HttpResponse(template.render(context, request))
 
 def about(request):
     return render(request, 'pages/about.html')
