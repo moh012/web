@@ -12,6 +12,7 @@ class Type(models.Model):
 
 class City(models.Model):
     city_name = models.CharField(max_length=100, null=True)
+    phohto = models.ImageField(upload_to='city_photo', null=True , blank=True)
 
     def __str__(self):
         return self.city_name

@@ -152,8 +152,7 @@ imageLinks.forEach(function(imageLink) {
       clickable: true
     }
   });
-
-  /**
+ /**
    * Property carousel
    */
   new Swiper('#property-carousel', {
