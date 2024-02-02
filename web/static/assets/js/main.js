@@ -175,7 +175,7 @@ imageLinks.forEach(function(imageLink) {
       },
 
       1200: {
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 20
       }
     }
@@ -205,7 +205,7 @@ imageLinks.forEach(function(imageLink) {
       },
 
       1200: {
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 20
       }
     }
@@ -234,7 +234,7 @@ imageLinks.forEach(function(imageLink) {
       },
 
       1200: {
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 20
       }
     }
