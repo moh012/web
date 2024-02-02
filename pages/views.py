@@ -10,8 +10,10 @@ def index(request):
     context = {
         'citys': City.objects.all(),
         'allorder': Order.objects.all().count(),
+        
+        
     }
 
-    return render(request, 'pages/index.html')
+    return render(request, 'pages/index.html', context)
     #template = loader.get_template('index.html')
 
