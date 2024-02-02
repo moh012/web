@@ -1,21 +1,25 @@
 from django.shortcuts import render
-from django.template import loader #اضافتي للمستقبل القريب
-from chatting.models import Contact 
-from property.models import City 
+from django.template import loader  #اضافتي للمستقبل القريب
+from chatting.models import Contact
+from property.models import City
 from django.http import HttpResponse
+from order.models import Order
 
 # Create your views here.
 
 
 def index(request):
 
-    city = City.objects.all().values()
-    #template = loader.get_template('index.html')
-    #return render(request, 'pages/index.html',{'citys':city})
     context = {
-        {'citys':city}
+        'citys': City.objects.all(),
+        'allorder': Order.objects.all().count(),
     }
+
+    #template = loader.get_template('index.html')
+    return render(request, 'pages/index.html', context)
+
     #return HttpResponse(template.render(context, request))
+
 
 def about(request):
     return render(request, 'pages/about.html')
@@ -65,11 +69,18 @@ def signup(request):
 
 
 def order(request):
+    if request.method == 'POST':
+        title = request.POST.get('rental')
     return render(request, 'pages/order.html')
 
 
 def order_grid(request):
-    return render(request, 'pages/order-grid.html')
+
+    context = {
+        'orders': Order.objects.all(),
+    }
+
+    return render(request, 'pages/order-grid.html', context)
 
 
 def order_single(request):

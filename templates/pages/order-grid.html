@@ -40,8 +40,8 @@
           </div>
 
 
-
-
+          {% for order in orders %}
+          <!-- بداية الطلب -->
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
@@ -55,7 +55,7 @@
                   <div class="card-header-a">
                     <h2 class="card-title-a">
                       <a href="#">مطلوب
-                        <br />شقة للإيجار</a>
+                        <br />{{order.title}}</a>
                     </h2>
                   </div>
                   <div class="card-body-a">
@@ -99,6 +99,11 @@
               </div>
             </div>
           </div>
+          <!-- نهاية الطلب -->
+          {% endfor %}
+
+
+
         </div>
 
 
