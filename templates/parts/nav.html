@@ -112,40 +112,40 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'order-grid' %}active{% endif %}" href="order-grid">الطلبات</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'order_grid' %}active{% endif %}" href="{% url 'order_grid' %}">الطلبات</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'property-grid' %}active{% endif %}" href="property-grid">العقارات</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'property_grid' %}active{% endif %}" href="{% url 'property_grid' %}">العقارات</a>
           </li>
           
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إضافة</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'property' %}active{% endif %}" href="property">إضافة عقار</a>
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'order' %}active{% endif %}" href="order">إضافة طلب</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'property' %}active{% endif %}" href="{% url 'property' %}">إضافة عقار</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'order' %}active{% endif %}" href="{% url 'order' %}">إضافة طلب</a>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'fave' %}active{% endif %}" href="fave">المفضلة</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'fave' %}active{% endif %}" href="{% url 'fave' %}">المفضلة</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="about">الدردشة</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">الدردشة</a>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">عن إيجاد</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="about">من نحن</a>
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="contact">تواصلوا معنا</a>
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'blog-grid' %}active{% endif %}" href="blog-grid">مدونة</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">من نحن</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">تواصلوا معنا</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'blog_grid' %}active{% endif %}" href="{% url 'blog_grid' %}">مدونة</a>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="signup">تسجيل</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'signup' %}">تسجيل</a>
           </li>
 
         </ul>
