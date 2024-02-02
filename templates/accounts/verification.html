@@ -21,16 +21,7 @@
     <form action="{% url "userdata" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
-        <!-- <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
-          </div>
-        </div> -->
+       
         <h1>أدخل كود التحقق</h1>
         <br>
         <br>
@@ -40,7 +31,7 @@
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="subject" class="form-control form-control-lg form-control-a digit-input input-container " placeholder="كود التحقق" minlength="6" maxlength="6"   autofocus required>
+            <input type="text" name="ValidationCode_VC" class="form-control form-control-lg form-control-a digit-input input-container " placeholder="كود التحقق" minlength="6" maxlength="6"   autofocus required>
           </div>
         </div>
         <br>

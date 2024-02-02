@@ -19,16 +19,7 @@
     <form action="{% url "serious_order" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
-        <!-- <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
-          </div>
-        </div> -->
+      
         <h1>أضافة طلب</h1>
         
 
@@ -133,12 +124,7 @@
             <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" placeholder="الحد الأعلى" required>
           </div>
         </div>
-        <!-- <div class="col-md-12 mb-3">
-          <div class="form-group">
-            <label for="" style="display: flex;">العنوان</label>
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="العنوان" title="قم بإدخال عنوان العقار" required>
-          </div>
-        </div> -->
+       
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الغرف</label>

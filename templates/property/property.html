@@ -19,16 +19,7 @@
     <form action="{% url "property" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
-        <!-- <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
-          </div>
-        </div> -->
+       
         <h1>أضافة عقار</h1>
         
 
@@ -37,13 +28,13 @@
         <br>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <input type="radio" name="rent_property" class="" required style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">إيجار</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+                <input type="radio" name="selling_property" class="" required style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">بيع</label>
             </div>
           </div>
@@ -51,7 +42,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="نوع العقار" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="propertyType" id="bathrooms" title="نوع العقار" style="line-height: 2;">
               <option>شقة</option>
               <option>فيلا</option>
               <option>أرض</option>
@@ -65,7 +56,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="المحافظة" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="area_property" id="bathrooms" title="المحافظة" style="line-height: 2;">
               <option>الأمانة</option>
               <option>صنعاء</option>
               <option>عدن</option>
@@ -93,7 +84,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="المديرية" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="Directorate_property" id="bathrooms" title="المديرية" style="line-height: 2;">
               <option>الوحدة</option>
               <option>معين</option>
               <option>صنعاء القديمة</option>
@@ -115,7 +106,7 @@
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">الموقع</label>
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="بجانب..." title="قم بإدخال موقع العقار" required>
+            <input type="text" name="location_property" class="form-control form-control-lg form-control-a" placeholder="بجانب..." title="قم بإدخال موقع العقار" required>
           </div>
         </div>
         <br>
@@ -124,7 +115,7 @@
         <div class="col-md-12 mb-3">
             <div class="form-group">
               <label for="" style="display: flex;">أضف صورة رئيسية</label>
-              <input type="file" name="img" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
+              <input type="file" name="image_property" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
             </div>
         </div>
         <br>
@@ -133,7 +124,7 @@
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">صور اضافية للعقار</label>
-            <input type="file" name="img" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة عدة صور" required>
+            <input type="file" name="addImage_property" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة عدة صور" required>
           </div>
       </div>
       <br>
@@ -142,22 +133,17 @@
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">السعر</label>
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="السعر" title="قم بإدخال سعر العقار" required>
+            <input type="text" name="price_property" class="form-control form-control-lg form-control-a" placeholder="السعر" title="قم بإدخال سعر العقار" required>
           </div>
         </div>
         <br>
         <br>
         <br>
-        <!-- <div class="col-md-12 mb-3">
-          <div class="form-group">
-            <label for="" style="display: flex;">العنوان</label>
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="العنوان" title="قم بإدخال عنوان العقار" required>
-          </div>
-        </div> -->
+       
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الغرف</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="room_property" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -171,7 +157,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الصالات</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="عدد الصالات" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="hall_property" id="bathrooms" title="عدد الصالات" style="line-height: 2;">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -185,7 +171,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">دورات المياه</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="bathroom_property" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -199,7 +185,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الادوار</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="عدد الادوار" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="floor_property" id="bathrooms" title="عدد الادوار" style="line-height: 2;">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -213,7 +199,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الشوارع</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="عدد الشوارع المطلة" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="street_property" id="bathrooms" title="عدد الشوارع المطلة" style="line-height: 2;">
               <option>شارع</option>
               <option>شارعين (زاوية)</option>
               <option>3 شوارع</option>
@@ -224,7 +210,7 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">عمر العقار</label>
-            <select class="form-control form-select form-control-a" id="bathrooms" title="أضف عمر العقار" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="propertyAge" id="bathrooms" title="أضف عمر العقار" style="line-height: 2;">
               <option>جديد</option>
               <option>أقل من سنه</option>
               <option>أقل من سنتين</option>
@@ -258,20 +244,20 @@
         <label for="" style="display: flex;">نوع السكن</label>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="radio" name="AccommodationType_single" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عزابي</label>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="radio" name="AccommodationType_family" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عوائل</label>
           </div>
         </div>
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="المساحة" title="قم بإدخال مساحة العقار" required>
+            <input type="text" name="space_property" class="form-control form-control-lg form-control-a" placeholder="المساحة" title="قم بإدخال مساحة العقار" required>
           </div>
         </div>
         <br>
@@ -280,7 +266,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <label for="" style="display: flex;">الوصف</label>
-            <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="وصف العقار" title="اضف وصف للعقار" required></textarea>
+            <textarea name="message" class="form-control" name="description" cols="45" rows="8" placeholder="وصف العقار" title="اضف وصف للعقار" required></textarea>
           </div>
         </div>
         <br>
@@ -298,49 +284,49 @@
         <br>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="pool_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مسبح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="kitchen_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مطبخ راكب</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="Roof_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مع سطح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="new_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">جديدة</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="yard_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">حوش</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="elevator_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مصعد</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="basement_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">بدروم</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="username" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="Furnished_property" class="" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مفروشة</label>
           </div>
         </div>
@@ -350,7 +336,7 @@
         <hr>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="checkbox" name="email" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
+            <input type="checkbox" name="ApprovalOfProvisions_property" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
             <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
           </div>
         </div>
