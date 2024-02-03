@@ -20,16 +20,7 @@
     <form action="{% url "login" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
-        <!-- <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="إسمك" required>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-            <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="البريد الإلكتروني" required>
-          </div>
-        </div> -->
+       
         <h1>تسجيل الدخول</h1>
         <br>
         <br>
@@ -37,7 +28,7 @@
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="رقم الهاتف" required>
+            <input type="text" name="phoneNumber_login" class="form-control form-control-lg form-control-a" placeholder="رقم الهاتف" required>
           </div>
         </div>
         <br>
@@ -45,7 +36,7 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="subject" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" required>
+              <input type="password" name="password_login" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" required>
             </div>
           </div>
         <!-- <div class="col-md-12">
