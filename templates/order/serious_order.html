@@ -16,7 +16,7 @@
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "order-grid" %}" method="POST">                  
+    <form action="{% url "order_grid" %}" method="POST">                  
       {% csrf_token %}
       <div class="row">
       
@@ -43,7 +43,7 @@
           <button type="submit" class="btn btn-b" style="width: 80%; border-radius: 10px;">ترقية لطلب جاد</button>
           <br>
           <br>
-            <button type="submit" class="btn btn-a" style="width: 80%;">تخطي</button>
+            <a href="{% url 'order_grid' %}" class="btn btn-a" style="width: 80%;">تخطي</a>
         </div>
       </div>
     </form>
