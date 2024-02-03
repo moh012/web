@@ -48,24 +48,26 @@
                 <img src="{% static 'assets/img/about-1.jpg' %}" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
+                {% if order.state == True %}
                 <div class="price-box d-flex" style="margin: 20px;">
                   <span class="price-a">طلب جاد</span>
                 </div>
+                {% endif %}
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">مطلوب
-                        <br />{{order.title}}</a>
+                      <a href="{% url 'order_single' %}">مطلوب
+                        <br />{{order.title}} {{order.order_type}}</a>
                     </h2>
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">بين | 12.000 ريال</span>
+                      <span class="price-a">بين | {{order.start_price}} ريال</span>
                     </div>
                     <div class="price-box d-flex">
-                      <span class="price-a">وبين | 20.000 ريال</span>
+                      <span class="price-a">وبين | {{order.end_price}} ريال</span>
                     </div>
-                    <a href="order-single" class="link-a">المزيد من التفاصيل
+                    <a href="{% url 'order_single' %}" class="link-a">المزيد من التفاصيل
                       <span class="bi bi-chevron-left"></span>
                     </a>
                   </div>
@@ -73,25 +75,21 @@
                     <ul class="card-info d-flex justify-content-around">
                       <li>
                         <h4 class="card-info-title">المساحة</h4>
-                        <span>340m
+                        <span>{{order.space}}m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li>
                         <h4 class="card-info-title">الغرف</h4>
-                        <span>2</span>
+                        <span>{{order.room_number}}</span>
                       </li>
                       <li>
                         <h4 class="card-info-title">دورات المياه</h4>
-                        <span>4</span>
+                        <span>{{order.bathrooms}}</span>
                       </li>
                       <li>
                         <h4 class="card-info-title">الصالات</h4>
-                        <span>1</span>
-                      </li>
-                      <li>
-                        <h4 class="card-info-title">مفضلة</h4>
-                        <span><input type="checkbox"></span>
+                        <span>{{order.hall_room}}</span>
                       </li>
                     </ul>
                   </div>

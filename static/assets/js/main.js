@@ -152,8 +152,7 @@ imageLinks.forEach(function(imageLink) {
       clickable: true
     }
   });
-
-  /**
+ /**
    * Property carousel
    */
   new Swiper('#property-carousel', {
@@ -171,7 +170,7 @@ imageLinks.forEach(function(imageLink) {
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 20
       },
 
@@ -201,7 +200,7 @@ imageLinks.forEach(function(imageLink) {
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 20
       },
 
@@ -215,7 +214,7 @@ imageLinks.forEach(function(imageLink) {
   /**
    * Property carousel
    */
-  new Swiper('#property-carousel1', {
+  new Swiper('#property-carousel', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -230,7 +229,7 @@ imageLinks.forEach(function(imageLink) {
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 20
       },
 
