@@ -44,6 +44,7 @@
           <!-- بداية الطلب -->
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
+              <a href="{% url 'order_single' %}">
               <div class="img-box-a">
                 <img src="{% static 'assets/img/about-1.jpg' %}" alt="" class="img-a img-fluid">
               </div>
@@ -56,8 +57,8 @@
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="{% url 'order_single' %}">مطلوب
-                        <br />{{order.title}} {{order.order_type}}</a>
+                      مطلوب
+                        <br />{{order.title}} {{order.order_type}}
                     </h2>
                   </div>
                   <div class="card-body-a">
@@ -67,8 +68,8 @@
                     <div class="price-box d-flex">
                       <span class="price-a">وبين | {{order.end_price}} ريال</span>
                     </div>
-                    <a href="{% url 'order_single' %}" class="link-a">المزيد من التفاصيل
-                      <span class="bi bi-chevron-left"></span>
+                    <a href="{% url 'order_single' %}" class="link-a">{{order.order_date}}
+                      <!-- <span class="bi bi-chevron-left"></span> -->
                     </a>
                   </div>
                   <div class="card-footer-a">
@@ -95,6 +96,7 @@
                   </div>
                 </div>
               </div>
+            </a>
             </div>
           </div>
           <!-- نهاية الطلب -->
