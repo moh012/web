@@ -9,19 +9,20 @@ def agent_single(request):
     return render(request, 'accounts/agent_single.html')
 
 
-
 def agents_grid(request):
     return render(request, 'accounts/agents_grid.html')
-
 
 
 def login(request):
     return render(request, 'accounts/login.html')
 
 
+def privacy_policy(request):
+    return render(request, 'accounts/privacy_policy.html')
+
+
 def signup(request):
     return render(request, 'accounts/signup.html')
-
 
 
 def userdata(request):
