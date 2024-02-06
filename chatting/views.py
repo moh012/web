@@ -1,21 +1,24 @@
-from django.shortcuts import render 
-from chatting.models import Contact
+from django.shortcuts import render
+from chatting.models import Contact, Comment
+from accounts.models import Customer
 
 
 def about(request):
     return render(request, 'chatting/about.html')
 
 
-
 def blog_grid(request):
     return render(request, 'chatting/blog_grid.html')
-
 
 
 def blog_single(request):
 
     return render(request, 'chatting/blog_single.html')
 
+
+def chat(request):
+
+    return render(request, 'chatting/chat.html')
 
 
 def contact(request):
@@ -31,4 +34,3 @@ def contact(request):
         data.save()
 
     return render(request, 'chatting/contact.html')
-
