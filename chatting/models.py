@@ -2,6 +2,8 @@ from django.db import models
 from accounts.models import Customer, Agent
 from order.models import Order
 from property.models import ADS
+from django.conf import settings
+from django.utils import timezone
 
 # Create your models here.
 
@@ -52,3 +54,14 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class Comment(models.Model):
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
+    comment = models.TextField()
+    date = models.DateField(default=timezone.now, null=True)
+
+    def __str__(self):
+        return self.comment

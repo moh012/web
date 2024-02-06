@@ -294,6 +294,74 @@
               </div> 
             </div>
           </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+            <div class="title-box-d1">
+              <h3 class="title-d1" style="direction: rtl;">التعليقات ({{commentnum}})</h3>
+            </div>
+            <div class="box-comments">
+              <ul class="list-comments">
+                {% for comment in cuscomment %}
+                <li style="padding-bottom: 0.5rem;">
+                  <div class="comment-avatar">
+                    <img src="{% static 'assets/img/author-2.jpg' %}" alt="">
+                  </div>
+                  <div class="comment-details" style="padding-right: 25px;">
+                    <h4 class="comment-author">{{user.username}}</h4>
+                    <span>{{comment.date}}</span>
+                    <p class="comment-description">
+                      {{comment.comment}}
+                    </p>
+                    <a href="#">Reply</a>
+                  </div>
+                </li>
+                <hr>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="form-comments">
+              <div class="title-box-d1">
+                <h3 class="title-d1" style="direction: rtl;"> اترك تعليقك هنا</h3>
+              </div>
+              <form class="form-a" action="{% url "property_single" %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                      <textarea id="textMessage" class="form-control" placeholder="التعليق..." name="message" cols="45" rows="8" required></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-a">ارسل تعليقك</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section><!-- End Property Single-->

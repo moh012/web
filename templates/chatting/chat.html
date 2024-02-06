@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+الدردشة
+{% endblock %}
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">Book Cover Deisgn</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Blog Single ======= -->
+    <section class="news-single nav-arrow-b">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+                <div class="box-comments" style="overflow: auto; height: 500px;">
+                  <ul class="list-comments">
+                    <li>
+                      <div class="comment-avatar">
+                        <img src="{% static 'assets/img/author-2.jpg' %}" alt="">
+                      </div>
+                      <div class="comment-details">
+                        <h4 class="comment-author">Emma Stone</h4>
+                        <span>18 Sep 2017</span>
+                        <p class="comment-description">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque
+                          ipsam temporibus maiores
+                          quae natus libero optio, at qui beatae ducimus placeat debitis voluptates amet corporis.
+                        </p>
+                        <a href="3">Reply</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="form-comments">
+                  <form class="form-a">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control form-control-lg form-control-a" id="inputName" placeholder="مراسلة" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-a bi bi-send"></button>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section><!-- End Blog Single-->
+
+  </main><!-- End #main -->
+  {% endblock %}
