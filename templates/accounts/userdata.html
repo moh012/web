@@ -45,7 +45,7 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="password_userDate" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
+              <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
             </div>
           </div>
           <br>
@@ -53,7 +53,25 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="confirmPassword_userDate " class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
+              <input type="password" name="confirm-password" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
+              <div id="divCheckPasswordMatch"></div>
+              <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
+              <script>
+                var password = document.getElementById("password");
+                var confirm_password = document.getElementById("confirm-password");
+                
+                function validatePassword(){
+                  if(password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("كلمة المرور غير متطابقة!");
+                  } else {
+                    confirm_password.setCustomValidity('');
+                  }
+                }
+                password.onchange = validatePassword;
+                confirm_password.onkeyup = validatePassword;
+              </script>
+              <!-- نهاية الكود -->
+
             </div>
           </div>
           <br>
@@ -70,13 +88,13 @@
           <h4>نوع الحساب</h4>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="agent_userDate" class="" required style="width: 20px; height: 20px;">
+                <input type="radio" name="userDate" class="" required style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">وكيل عقاري</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="customer_userData" class="" required style="width: 20px; height: 20px;">
+                <input type="radio" name="userDate" class="" required style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">باحث عن عقار</label>
             </div>
           </div>

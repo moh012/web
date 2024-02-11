@@ -1,6 +1,7 @@
 /* هذا الكود  وظيفته عندما يضغط المستخدم على الصورة تفتح في نفس الصفحه وعندما يضغط خارج اطار الصورة 
  يغلق الصورة ويضل في نفس الصفحة 
 */
+
 const imageLinks = document.querySelectorAll('.image-link');
 
 imageLinks.forEach(function(imageLink) {
