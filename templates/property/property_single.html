@@ -209,7 +209,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <a href="agent-single">
+                <a href="{% url 'agent_single' %}">
                 <img src="{% static 'assets/img/agent-4.jpg' %}" alt="" class="img-fluid">
               </a>
               </div>
@@ -323,26 +323,30 @@
             <div class="title-box-d1">
               <h3 class="title-d1" style="direction: rtl;">التعليقات ({{commentnum}})</h3>
             </div>
-            <div class="box-comments">
+            <div class="box-comments" style="width: 100%; height: 500px; overflow: auto; border-top: 2px solid #2eca6a; border-bottom: 2px solid #2eca6a; padding: 10px;">
               <ul class="list-comments">
                 {% for comment in cuscomment %}
                 <li style="padding-bottom: 0.5rem;">
+                  {% for cus in cust %}
                   <div class="comment-avatar">
-                    <img src="{% static 'assets/img/author-2.jpg' %}" alt="">
+                    <img src="{{cus.photo.url}}" alt="">
                   </div>
                   <div class="comment-details" style="padding-right: 25px;">
-                    <h4 class="comment-author">{{user.username}}</h4>
+                    <h4 class="comment-author">{{cus.user.username}}</h4>
                     <span>{{comment.date}}</span>
                     <p class="comment-description">
                       {{comment.comment}}
                     </p>
                     <a href="#">Reply</a>
                   </div>
+                  {% endfor %}
                 </li>
                 <hr>
                 {% endfor %}
               </ul>
             </div>
+            <br>
+            <br>
             <div class="form-comments">
               <div class="title-box-d1">
                 <h3 class="title-d1" style="direction: rtl;"> اترك تعليقك هنا</h3>
