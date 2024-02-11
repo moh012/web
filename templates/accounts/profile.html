@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+إنشاء حساب
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'alwi.css' %}">
+
+  <div class="my-form container p-5 my-5 rounded border border-warning">
+
+    {% include 'parts/alerts.html' %}
+    <h2 class="text-center">الملف الشخصي </h2>
+    <hr>  
+  {% if is_add == True %}
+  <form method="POST" style="display: none;">
+  {% else %}
+  <form method="POST">
+
+  {% endif %}
+    
+        {% csrf_token %} 
+
+        
+        <!-- {% if book.photo_book %}
+        <div class="form-group">
+          <label for="profil_photo" style="display: flex;">أضف صورة</label>
+          <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.profil_photo.url}}" required >
+        </div>
+        <img style="height: 120px; width: 120px;"  src="{{book.photo_book.url}}" alt="" class="img-circle img-fluid">
+    {% else %}
+        <img style="height: 120px; width: 120px;"  src="{%static 'assets/img/1.png'%}" alt="" class="img-circle img-fluid">
+    {% endif %} -->
+      
+<!-- 
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="profil_photo" style="display: flex;">أضف صورة</label>
+                <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.Agent.profil_photo.url}}" required >
+              </div>
+          </div> -->
+          
+          
+
+          <h4>نوع الحساب</h4>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio"  name="exit" class="checkmark"  style="width: 20px; height: 20px;"  value="on" >
+                <label for="" style="font-size: 20px;">وكيل عقاري</label>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 mb-3">
+            <div class="form-group"> 
+                <input type="radio" name="exit" class="checkmark"  style="width: 20px; height: 20px;"  valeu="{{cust}}" >
+                <label for="" style="font-size: 20px;">باحث عن عقار</label>
+            </div>
+          </div>  -->
+        
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="fname"> اسمك الأول</label>
+                <input type="text" class="form-control" id="fname" name="fname" required value="{{fname}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name"> الاسم الأخير (اللقب)</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required value="{{last_name}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="" required value="{{username}}">
+              </div>
+           
+            </div>
+      
+            <div class="form-group">
+              <label for="password">كلمة المرور</label>
+              <input type="password" name="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  كتابة كلمة المرور" required value="{{password}}">
+            </div>
+            <div class="form-group">
+              <label for="password_confirm">تأكيد كلمة المرور</label>
+              <input type="password" name="password_confirm" class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" requiredvalue="{{password_confirm}}">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label for="phone">رقم الهاتف </label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " 
+                  placeholder="967+" required value="{{phone}}" >
+              </div>
+            </div>
+      
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="email">رقم البريد الإلكتروني </label>
+                <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
+                              required value="{{email}}">
+              </div>
+          
+            <div class-row>
+           
+            </div>
+      
+                  <div class="form-group">
+                      <div class="pretty p-svg p-curve p-jelly">
+                          <input type="checkbox" id="inputTerms" name="terms" />
+                          <div class="state p-warning">
+                              <!-- svg path -->
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                  <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label> أنا موافق على سياسة الخصوصية والاستخدام</label>
+                          </div>
+                      </div>
+                      <button type="submit"  name="btnprof" class="btn btn-warning"> تسجيل</button>
+                  </div>
+                
+              </form>
+      
+          </div>
+        
+
+{% endblock %}

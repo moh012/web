@@ -40,7 +40,7 @@
           </div>
         
 
-
+        {% for property in property %}
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
@@ -56,7 +56,7 @@
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">السعر | 12.000 ريال</span>
+                      <span class="price-a">السعر | {{property.price}} ريال</span>
                     </div>
                     <a href="{% url 'property_single' %}" class="link-a">المزيد من التفاصيل
                       <span class="bi bi-chevron-left"></span>
@@ -65,25 +65,25 @@
                   <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
-                        <h4 class="card-info-title">المساحة</h4>
+                        <h4 class="card-info-title">{{property.space}}:المساحة</h4>
                         <span>340m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">الغرف</h4>
+                        <h4 class="card-info-title">{{property.room_number}}:الغرف</h4>
                         <span>2</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">دورات المياه</h4>
+                        <h4 class="card-info-title">{{property.bathrooms}}:دورات المياه</h4>
                         <span>4</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">الصالات</h4>
+                        <h4 class="card-info-title"> {{property.hall_room}}:الصالات</h4>
                         <span>1</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">مفضلة</h4>
+                        <h4 class="card-info-title">{{favorite}} :مفضلة</h4>
                         <span><input type="checkbox"></span>
                       </li>
                     </ul>
@@ -121,6 +121,7 @@
           </div>
         </div>
       </div>
+      {% endfor %}
     </section><!-- End Property Grid Single-->
 
   </main><!-- End #main -->

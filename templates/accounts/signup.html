@@ -18,31 +18,31 @@
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "verification" %}" method="POST">                  
-      {% csrf_token %}
+    <form method ="POST">                  
+      {% csrf_token %} 
       <div class="row">
+
         <h1>رقم الهاتف</h1>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        {% include 'parts/alerts.html' %} 
+
         <div class="col-md-6 mb-3" style="width: 75%; direction: ltr;">
           <div class="form-group">
-            <input type="text" name="textSignup_signup" class="form-control form-control-lg form-control-a" name="firstDigit" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " required>
+            <input type="text" name="signup_phone" class="form-control form-control-lg form-control-a" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " required>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 150px;">
           <div class="form-group">
-            <input name="countryCode_signup" type="email" class="form-control form-control-lg form-control-a" placeholder="967+" readonly required>
+            <input  type="email" class="form-control form-control-lg form-control-a"  name="countryCode" placeholder="967+" readonly required>
           </div>
         </div>
 
 
         <div class="col-md-12 text-center">
           <br>
-          <button type="submit" class="btn btn-a"> التالي</button>
+          <button type="submit" name="btnsignup" class="btn btn-a"> التالي</button>
           <br>
+          <br>
+          <button type="submit" class="btn btn-a"> آخر </button>
           <br>
           <p>لدي حساب بالفعل...
             <br>
