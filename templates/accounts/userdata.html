@@ -17,10 +17,13 @@
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "index" %}" method="POST">                  
-      {% csrf_token %}
+    <form method="post">                  
+      {% csrf_token %} 
       <div class="row">
        
+        <hr>
+        {% include 'parts/alerts.html' %} 
+        <hr>
         <h1>أدخل بياناتك</h1>
         <br>
         <br>
@@ -29,7 +32,7 @@
         <div class="col-md-12 mb-3">
             <div class="form-group">
               <label for="" style="display: flex;">أضف صورة</label>
-              <input type="file" name="addImage_userData" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
+              <input type="file" name="user_photo" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
             </div>
         </div>
         <br>
@@ -37,7 +40,7 @@
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="name_userData" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
+            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
           </div>
         </div>
         <br>
@@ -45,7 +48,7 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="password_userDate" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
+              <input type="password" name="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
             </div>
           </div>
           <br>
@@ -53,7 +56,7 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="confirmPassword_userDate " class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
+              <input type="password" name="Password_confirm" class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
             </div>
           </div>
           <br>
@@ -61,7 +64,7 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="email" name="email_userData" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
+              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
             </div>
           </div>
           <br>
@@ -70,13 +73,13 @@
           <h4>نوع الحساب</h4>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="agent_userDate" class="" required style="width: 20px; height: 20px;">
+                <input type="radio"  name="exit" class="checkmark" required style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">وكيل عقاري</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <div class="form-group">
-                <input type="radio" name="customer_userData" class="" required style="width: 20px; height: 20px;">
+            <div class="form-group"> 
+                <input type="radio" name="exit" class="checkmark"  style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">باحث عن عقار</label>
             </div>
           </div>
@@ -87,7 +90,7 @@
           <div class="col-md-12 mb-3">
             <div class="form-group">
               <input type="checkbox" name="ApprovalOfProvisions_userData" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
-              <label for="" style="font-size: 20px;">الموافقة على <a href="{% url 'privacy_policy' %}">سياسة وشروط الاحكام</a></label>
+              <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
             </div>
           </div>
        

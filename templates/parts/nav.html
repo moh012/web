@@ -9,6 +9,7 @@
     </div>
     <span class="close-box-collapse right-boxed bi bi-x"></span>
     <div class="box-collapse-wrap form">
+
       <form class="form-a">
         <div class="row">
           <div class="col-md-12 mb-2">
@@ -95,6 +96,10 @@
   </div><!-- End Property Search Section -->
 
   <!-- ======= Header/Navbar ======= -->
+
+
+
+
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,9 +109,21 @@
       </button>
       <a class="navbar-brand text-brand" href="{% url 'index' %}">EJAD</a>
 
+
+      <!--
+        لعرض اسم المستخدم في النافبار بجوار اسم EJAD
+        {% if request.user.is_authenticated %}
+      <span style="margin-right:50px">
+          أهلا  {{request.user.username}}
+      </span>
+    {% endif %}
+  
+  -->
+
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
 
+       
           <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">الرئيسية</a>
           </li>
@@ -132,24 +149,47 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="{% url 'chat' %}">الدردشة</a>
+            <a class="nav-link" href="{% url 'about' %}">الدردشة</a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">عن إيجاد</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">من نحن</a>
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">تواصلوا معنا</a>
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'blog_grid' %}active{% endif %}" href="{% url 'blog_grid' %}">مدونة</a>
-            </div>
+            <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {% if request.user.is_authenticated %}
+              مرحبا {{ request.user.username }}
+              {% else %}
+              عن إيجاد 
+              {% endif %}
+          </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">من نحن</a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">تواصلوا معنا</a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'blog_grid' %}active{% endif %}" href="{% url 'blog_grid' %}">مدونة</a>
+              </div>
           </li>
+            <!-- تسجيل الدخول والخروج -->
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                حسابك
+              </a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">حسابك </a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">تسجيل الخروج (صفحة مؤقتة)</a>
+                </div>
+              </li>
+                {% else %}
 
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'signup' %}">تسجيل</a>
-          </li>
+                <li class="nav-item">
+                  <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">تسجيل</a>
+                </li>
 
-        </ul>
-      </div>
+                {% endif %}
+
+              </ul>
+              </div>
+
+
+             
 
       <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
         <i class="bi bi-search"></i>

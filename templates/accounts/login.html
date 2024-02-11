@@ -15,28 +15,50 @@
 <br>
 <br>
 
+
+
 <center>
 <div class="col-md-7">
-    <form action="{% url "login" %}" method="POST">                  
-      {% csrf_token %}
-      <div class="row">
+
+    
        
-        <h1>تسجيل الدخول</h1>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="col-md-12 mb-3">
+    <h1>تسجيل الدخول</h1>
+    <br>
+
+  {% if request.user.is_authenticated %}
+        <h4 class="alert alert-secondoery">
+          أهلا وسهلاً , {{request.user.username}} , أنت الان قمت بتسجيل الدخول
+        </h4>
+
+
+{% else %}
+  <form method="POST" >
+    {% csrf_token %}
+      
+        
+        
+          {% include 'parts/alerts.html' %} 
+        
+       
+        <!-- <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="phoneNumber_login" class="form-control form-control-lg form-control-a" placeholder="رقم الهاتف" required>
+            <label for="phoneNumber_login">رقم الهاتف </label>
+            <input type="text" name="phoneNumber_login" class="form-control form-control-lg form-control-a"  required>
           </div>
+        </div> -->
+        <br>
+        <div class="form-group">
+          <label for="inputUsername">اسم المستخدم</label>
+          <input type="text" name="user"  class="form-control" id="inputUsername"  required>
         </div>
+        
+   
         <br>
-        <br>
-        <br>
+        
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="password_login" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" required>
+              <label for="inputPassword">كلمة المرور</label>
+              <input type="password" name="pass" class="form-control form-control-lg form-control-a" id="inputPassword" required>
             </div>
           </div>
       
@@ -44,15 +66,17 @@
         <div class="col-md-12 text-center">
           <br>
           <br>
-          <button type="submit" class="btn btn-a">تسجيل الدخول</button>
+          <button type="submit" name="btnlogin"  class="btn btn-a">تسجيل الدخول</button>
           <br>
           <br>
+        
           <p>ليس لدي حساب...
             <br>
-            <a href="signup">إنشاء حساب</a></p>
+            <a href="{% url 'signup' %}">إنشاء حساب</a></p>
         </div>
       </div>
-    </form>
-  </div>
+  </form>
+{% endif %}
+</div>
 </center>
 {% endblock %}
