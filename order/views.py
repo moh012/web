@@ -77,7 +77,12 @@ def order_grid(request):
 
 
 def order_single(request):
-    return render(request, 'order/order_single.html')
+
+    context = {
+        'orders': Order.objects.all(),
+    }
+
+    return render(request, 'order/order_single.html', context)
 
 
 def serious_order(request):
