@@ -149,16 +149,12 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">الدردشة</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="{% url 'chat' %}">الدردشة</a>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {% if request.user.is_authenticated %}
-              مرحبا {{ request.user.username }}
-              {% else %}
-              عن إيجاد 
-              {% endif %}
+            عن إيجاد  
           </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">من نحن</a>
@@ -170,20 +166,23 @@
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                حسابك
+                {% if request.user.is_authenticated %}
+                مرحبا {{ request.user.username }}
+                {% endif %}
+            
               </a>
                 <div class="dropdown-menu">
                 <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">حسابك </a>
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">تسجيل الخروج (صفحة مؤقتة)</a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">تسجيل الخروج </a>
                 </div>
               </li>
-                {% else %}
+            {% else %}
 
                 <li class="nav-item">
                   <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">تسجيل</a>
                 </li>
 
-                {% endif %}
+            {% endif %}
 
               </ul>
               </div>

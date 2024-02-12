@@ -1,10 +1,11 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import  auth
 from property.models import *
 from accounts.models import *
 import re
+
 
 
 
@@ -14,11 +15,13 @@ def login(request):
             username = request.POST['user']
             password = request.POST['pass']
 
-            agent = auth.authenticate(username =username , password =password )
+            user = auth.authenticate(username =username , password =password )
 
-            if agent is not None:
-                 auth.login(request,agent)
-                 messages.success(request,'قمت بتسجيل الدخول')
+            if user is not None:
+                 if 'rememberme' not in request.POST:
+                      request.session.set_expiry(0)
+                 auth.login(request,user)
+                #  messages.success(request,'قمت بتسجيل الدخول')
             else:
                  messages.error(request,' هناك خطأ في كلمة اسم المستخدم أو كلمة المرور')
                  
@@ -37,6 +40,17 @@ def signup(request):
     else:
 
         return render(request, 'accounts/signup.html')
+
+
+def logout(request):
+     
+     if request.user.is_authenticated:
+          auth.logout(request)
+
+     return redirect('index')
+
+
+
 
 
 def profile(request):
