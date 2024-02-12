@@ -28,6 +28,7 @@
   {% if request.user.is_authenticated %}
         <h4 class="alert alert-secondoery">
           أهلا وسهلاً , {{request.user.username}} , أنت الان قمت بتسجيل الدخول
+          <a class="text-dark" href="{% url 'logout' %}"  > تسجيل الخروج</a>
         </h4>
 
 
@@ -61,11 +62,17 @@
               <input type="password" name="pass" class="form-control form-control-lg form-control-a" id="inputPassword" required>
             </div>
           </div>
+
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <input type="checkbox" checked  name="rememberme" class=""  style="width: 20px; height: 20px;">
+            <label for="checkbox" style="font-size: 20px;"  >  تذكرني</label>
+          </div>
+        </div>
       
 
         <div class="col-md-12 text-center">
-          <br>
-          <br>
+        
           <button type="submit" name="btnlogin"  class="btn btn-a">تسجيل الدخول</button>
           <br>
           <br>
