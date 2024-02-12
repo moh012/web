@@ -17,7 +17,7 @@ body {
 }
 
 h1,
-h2,
+h2, 
 h3,
 h4,
 h5,
@@ -1734,6 +1734,7 @@ a:hover {
 .card-box-ico span {
   font-size: 4rem;
   color: #000000;
+  
 }
 
 .title-c {
