@@ -20,7 +20,7 @@
       {% csrf_token %}
       <div class="row">
        
-        <h1>أضافة عقار</h1>
+        <h1>إضافة عقار</h1>
         
 
         <br>
@@ -244,21 +244,33 @@
         <label for="" style="display: flex;">نوع السكن</label>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="AccommodationType_single" class="" required style="width: 20px; height: 20px;">
+              <input type="radio" name="AccommodationType" class="" value="عزابي" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عزابي</label>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="AccommodationType_family" class="" required style="width: 20px; height: 20px;">
+              <input type="radio" name="AccommodationType" class="" value="عوائل" required style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عوائل</label>
           </div>
         </div>
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="space_property" class="form-control form-control-lg form-control-a" placeholder="المساحة" title="قم بإدخال مساحة العقار" required>
+            <input type="text" name="space" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
           </div>
+          <script>
+            function checkInput() {
+              const numberInput = document.getElementById("numberInput");
+              const value = numberInput.value;
+          
+              if (value != "" && isNaN(value)) {
+                numberInput.value = "";
+                alert("يسمح بالأرقام فقط!");
+                return;
+              }
+            }
+          </script>
         </div>
         <br>
         <br>
@@ -284,49 +296,49 @@
         <br>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="pool_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="pool_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مسبح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="kitchen_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="kitchen_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مطبخ راكب</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="Roof_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="Roof_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مع سطح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="new_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="new_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">جديدة</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="yard_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="yard_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">حوش</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="elevator_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="elevator_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مصعد</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="basement_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="basement_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">بدروم</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" name="Furnished_property" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" name="Furnished_property" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مفروشة</label>
           </div>
         </div>
