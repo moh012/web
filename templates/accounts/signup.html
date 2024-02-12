@@ -27,8 +27,31 @@
 
         <div class="col-md-6 mb-3" style="width: 75%; direction: ltr;">
           <div class="form-group">
-            <input type="text" name="signup_phone" class="form-control form-control-lg form-control-a" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " required>
+          <input type="text" name="numberInput"   id="numberInput"  class="form-control form-control-lg form-control-a"  placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{8}"  oninput="checkInput()" title=" يجب أن لا يقل طول السلسلة عن 9 ارقام" required>
           </div>
+<script>
+  function checkInput() {
+    const numberInput = document.getElementById("numberInput");
+    const value = numberInput.value;
+
+    if (value != "" && isNaN(value)) {
+      numberInput.value = "";
+      alert("يسمح بالأرقام فقط!");
+      return;
+    }
+
+    if (value.length > 9) {
+      numberInput.value = value.slice(0, 9);
+    }
+
+    if (!value.startsWith("7")) {
+      numberInput.value = "";
+      alert("يجب أن يبدأ الرقم بـ 7!");
+    }
+  }
+</script>
+
+
         </div>
         <div class="col-md-6 mb-3" style="width: 150px;">
           <div class="form-group">

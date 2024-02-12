@@ -20,20 +20,23 @@
       {% csrf_token %}
       <div class="row">
       
-        <h1>أضافة طلب</h1>
+        <h1>إضافة طلب</h1>
         
 
         <br>
         <br>
         <br>
           
-        <div class="col-md-6 mb-2" style="width: 100%;">
-          <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">تصنيف الطلب</label>
-            <select class="form-control form-select form-control-a" name="orderTitle" id="bathrooms" title="تصنيف الطلب" style="line-height: 2;">
-              <option>إيجار</option>
-              <option>شراء</option>
-            </select>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="orderTitle" class="" value="إيجار" required style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">إيجار</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="orderTitle" class="" value="شراء" required style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">شراء</label>
           </div>
         </div>
 
@@ -113,13 +116,23 @@
         <label for="" style="display: flex;">السعر</label>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="minPrice" class="form-control form-control-lg form-control-a" placeholder="الحد الأدنى" required>
+            <input type="text" name="minPrice" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" required>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" placeholder="الحد الأعلى" required>
+            <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" required>
           </div>
+          <script>
+            function checkPriceRange() {
+                 const priceLow = document.getElementById("priceLow");
+                 const priceHigh = document.getElementById("priceHigh");
+         
+                 if (parseInt(priceLow.value) > parseInt(priceHigh.value)) {
+                     priceLow.value = priceHigh.value;
+                 }
+            }
+         </script>
         </div>
        
         <div class="col-md-6 mb-2" style="width: 100%;">
@@ -194,6 +207,7 @@
             <label class="pb-2" for="propertyType" style="display: flex;">عمر العقار</label>
             <select class="form-control form-select form-control-a" name="propertyAge" id="bathrooms" title="أضف عمر العقار" style="line-height: 2;">
               <option>جديد</option>
+              <br>
               <option>أقل من سنه</option>
               <option>أقل من سنتين</option>
               <option>أقل من 3 سنوات</option>
@@ -216,28 +230,40 @@
               <option>أقل من 20 سنه</option>
               <option>أكبر من 21 سنه</option>
             </select>
+            <br>
           </div>
         </div>
         <br>
-        <div class="col-md-6 mb-2" style="width: 100%;">
-          <div class="form-group mt-3">
-            <label for="" style="display: flex;">نوع السكن</label>
-            <select class="form-control form-select form-control-a" name="houseType" id="bathrooms" title="نوع العقار" style="line-height: 2;">
-              <option>عزابي</option>
-              <option>عوائل</option>
-            </select>
+        <label for="" style="display: flex;">نوع السكن</label>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="houseType" class="" value="عزابي" required style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">عزابي</label>
           </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="houseType" class="" value="عوائل" required style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">عوائل</label>
+          </div>
+        </div>        
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="space" class="form-control form-control-lg form-control-a" placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
+            <input type="text" name="space" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
           </div>
+          <script>
+            function checkInput() {
+              const numberInput = document.getElementById("numberInput");
+              const value = numberInput.value;
+          
+              if (value != "" && isNaN(value)) {
+                numberInput.value = "";
+                alert("يسمح بالأرقام فقط!");
+                return;
+              }
+            }
+          </script>
         </div>
         <br>
         <br>
@@ -245,7 +271,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <label for="" style="display: flex;">الوصف</label>
-            <textarea name="description" class="form-control" cols="45" rows="8" placeholder="وصف الطلب" title="اضف وصف للطلب" required></textarea>
+            <textarea name="description"  class="form-control" cols="45" rows="8" placeholder="وصف الطلب" title="اضف وصف للطلب" required></textarea>
           </div>
         </div>
         <br>
@@ -263,49 +289,49 @@
         <br>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="pool" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="pool" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مسبح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="kitchen" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="kitchen" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مطبخ راكب</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="roof" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="roof" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مع سطح</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="modern" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="modern" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">حديثة</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="yard" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="yard" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">حوش</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="elev" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="elev" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مصعد</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="basement" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="basement" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">بدروم</label>
           </div>
         </div>
         <div class="col-md-6 mb-3" style="width: 25%;">
           <div class="form-group">
-              <input type="checkbox" value="True" name="furnish" class="" required style="width: 20px; height: 20px;">
+              <input type="checkbox" value="True" name="furnish" class=""  style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">مفروشة</label>
           </div>
         </div>
