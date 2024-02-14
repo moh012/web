@@ -81,12 +81,30 @@
       
             <div class="form-group">
               <label for="password">كلمة المرور</label>
-              <input type="password" name="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  كتابة كلمة المرور" required value="{{password}}">
+              <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  بكتابة كلمة المرور" required >
             </div>
             <div class="form-group">
               <label for="password_confirm">تأكيد كلمة المرور</label>
-              <input type="password" name="password_confirm" class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required value="{{password_confirm}}">
+              <input type="password" name="password_confirm" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required value="{{password_confirm}}">
             </div>
+            <div id="divCheckPasswordMatch"></div>
+              <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
+              <script>
+                var password = document.getElementById("password");
+                var confirm_password = document.getElementById("confirm-password");
+                
+                function validatePassword(){
+                  if(password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("كلمة المرور غير متطابقة!");
+                  } else {
+                    confirm_password.setCustomValidity('');
+                  }
+                }
+                password.onchange = validatePassword;
+                confirm_password.onkeyup = validatePassword;
+              </script>
+              <!-- نهاية الكود -->
+
             <div class="form-row">
               <div class="form-group col-md-2">
                 <label for="phone">رقم الهاتف </label>
