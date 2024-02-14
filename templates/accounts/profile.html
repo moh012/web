@@ -7,9 +7,13 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'alwi.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'alwi.css' %}"> -->
 
-  <div class="my-form container p-5 my-5 rounded border border-warning">
+<div class="my-form container p-5 my-5 rounded border border-warning">
+<br>
+<br>
+<br>
+
 
     {% include 'parts/alerts.html' %}
     <h2 class="text-center">الملف الشخصي </h2>
@@ -63,6 +67,7 @@
                 <label for="fname"> اسمك الأول</label>
                 <input type="text" class="form-control" id="fname" name="fname" required value="{{fname}}">
               </div>
+              
               <div class="form-group col-md-6">
                 <label for="last_name"> الاسم الأخير (اللقب)</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" required value="{{last_name}}">
@@ -80,7 +85,7 @@
             </div>
             <div class="form-group">
               <label for="password_confirm">تأكيد كلمة المرور</label>
-              <input type="password" name="password_confirm" class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" requiredvalue="{{password_confirm}}">
+              <input type="password" name="password_confirm" class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required value="{{password_confirm}}">
             </div>
             <div class="form-row">
               <div class="form-group col-md-2">
@@ -92,30 +97,25 @@
       
             <div class="col-md-12 mb-3">
               <div class="form-group">
-                <label for="email">رقم البريد الإلكتروني </label>
+                <label for="email"> البريد الإلكتروني </label>
                 <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
                               required value="{{email}}">
               </div>
-          
             <div class-row>
-           
             </div>
-
-                 
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input type="checkbox"  id="inputTerms"  name="terms" class=""  style="width: 20px; height: 20px;">
-                                <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
-                              </div>
-                            </div>
-                          
-                      </div>
-                      <button type="submit"  name="btnprof" class="btn btn-a"> تسجيل</button>
-                  </div>
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <input type="checkbox"  id="inputTerms"  name="terms" class=""  style="width: 20px; height: 20px;">
+                <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
+              </div>
+            </div>
+          
+      </div>
+          <button type="submit"  name="btnprof" class="btn btn-a"> تسجيل</button>
+      </div>
                 
               </form>
-      
+
           </div>
-        
 
 {% endblock %}

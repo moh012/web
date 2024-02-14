@@ -71,7 +71,7 @@ def property_grid(request):
 def property_single(request):
 
     if request.method == 'POST':
-        customer = Customer(id=1)
+        customer = Customer()
         comment = request.POST.get('message')
         data = Comment(customer=customer, comment=comment)
         data.save()

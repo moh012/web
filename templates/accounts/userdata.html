@@ -17,29 +17,28 @@
 
 <center>
 <div class="col-md-7">
-    <form method="post">                  
-      {% csrf_token %} 
+    <form method="POST" enctype="multipart/form-data">                  
       <div class="row">
        
-        
+        {% csrf_token %} 
         {% include 'parts/alerts.html' %} 
         <h1>أدخل بياناتك</h1>
         <br>
         <br>
         <br>
         <br>
-        <div class="col-md-12 mb-3">
-            <div class="form-group">
+        <!-- <div class="col-md-12 mb-3">
+            <div class="form-group; roundees-circle ">
               <label for="" style="display: flex;">أضف صورة</label>
-              <input type="file" name="user_photo" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required>
+              <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required >
             </div>
-        </div>
+        </div> -->
         <br>
         <br>
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required>
+            <input type="text" name="user" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required value="{{user}}">
           </div>
         </div>
         <br>
@@ -47,16 +46,17 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required>
+              <input type="password" name="pass" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required value="{{pass}}" >
             </div>
           </div>
           <br>
           <br>
-          <br>
+          <br>  
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="confirm-password" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required>
+              <input type="password" name="pass2" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required value="email">
               <div id="divCheckPasswordMatch"></div>
+              
               <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
               <script>
                 var password = document.getElementById("password");
@@ -80,7 +80,10 @@
           <br>
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني" required>
+           
+              <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
+                     required value="{{email}}">
+              
             </div>
           </div>
           <br>
@@ -89,13 +92,13 @@
           <h4>نوع الحساب</h4>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="userDate" class="checkmark" required style="width: 20px; height: 20px;">
+                <input type="radio" name="userDate" class="checkmark"  style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">وكيل عقاري</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="userDate" class="checkmark" required style="width: 20px; height: 20px;">
+                <input type="radio" name="userDate" class="checkmark"  style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">باحث عن عقار</label>
             </div>
           </div>
@@ -103,17 +106,15 @@
           <br>
           <br>
           <hr>
-          <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <input type="checkbox" name="ApprovalOfProvisions_userData" class="" required style="width: 20px; height: 20px;" title="اتحمل مسؤولية الموافقة على سياسة وشروط احكام المنصة">
-              <label for="" style="font-size: 20px;">الموافقة على <a href="#">سياسة وشروط الاحكام</a></label>
-            </div>
+
+          <div class="form-group">
+            <input type="checkbox"  id="inputacceepted"  name="accepted" class=""  style="width: 20px; height: 20px;">
+            <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
           </div>
-       
 
         <div class="col-md-12 text-center">
           <br>
-          <button type="submit" class="btn btn-a">إنشاء حساب</button>
+          <button type="submit" class="btn btn-a" name="btncreate">إنشاء حساب</button>
         </div>
       </div>
     </form>

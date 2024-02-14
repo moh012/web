@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -31,15 +32,8 @@ def login(request):
 
 
 def signup(request):
-    if request.method == 'POST' and 'btnsignup' in request.POST:
-            
-            messages.info(request , 'This is POST')
-            
-            messages.success(request, 'tHIS IS btn signup')
-            return redirect('signup')
-    else:
 
-        return render(request, 'accounts/signup.html')
+    return render(request, 'accounts/signup.html')
 
 
 def logout(request):
@@ -48,7 +42,6 @@ def logout(request):
           auth.logout(request)
 
      return redirect('index')
-
 
 
 
@@ -82,9 +75,6 @@ def profile(request):
         #     user_photo = request.POST['user_photo']
         # else:
         #     messages.error(request, 'يوجد خطأ في الصورة ')
-
-
- 
 
         if 'fname' in request.POST:
             fname = request.POST['fname']
@@ -136,15 +126,13 @@ def profile(request):
                     if User.objects.filter(email=email).exists():
                         messages.error(request, 'ايميل موجود مسبقاً')
                     else:
-                        patt = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+                        patt = "r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'"
                         if re.match(patt, email):
                             # إنشاء مستخدم
                             user = User.objects.create_user(first_name=fname, last_name=last_name,
                                                             email=email, password=password, username=username)
                             user.save()
-                                
                             if ser == 'on':
-
                                 # إنشاء بروفايل للوكيل Agent
                                 agent_profile = Agent(user=user, phone=phone   )
                                 agent_profile.save()
@@ -153,7 +141,6 @@ def profile(request):
                                 customer_profile = Customer(user=user, phone=phone   )
                                 customer_profile.save()
                             # تفريغ القيم من الحقول
-
                             fname = ''
                             last_name = ''
                             password = ''
@@ -164,7 +151,7 @@ def profile(request):
                             terms = None
                             ser = None
 
-                            #  للتأكد من العملية
+                            #  للتأكد من    العملية
                             messages.success(request, 'تم انشاء الحساب بنجاح')
                             is_add =True
                         else:
@@ -187,53 +174,119 @@ def profile(request):
         }
 
         return render(request, 'accounts/profile.html', context)
+    
     else:
         return render(request, 'accounts/profile.html')
+
+
+
+
+def userdata(request):
+    if request.method == 'POST' and 'btncreate' in request.POST:
+
+        # user_photo=None
+        username = None
+        email = None
+        password = None
+        accepted = None
+
+
+        # if 'user_photo' in request.POST: user_photo = request.POST['user_photo']
+        # else:
+        #     messages.error(request, ' يوجد خطأ في صورة المستخدم')
+
+
+        if 'user' in request.POST: username = request.POST['user']
+        else:
+            messages.error(request, ' user name يوجد خطأ في  ')
+
+        if 'pass' in request.POST: password = request.POST['pass']
+        else:
+            messages.error(request, ' password  يوجد خطأ في  ')
+
+        if 'email' in request.POST: email = request.POST['email']
+        else:
+            messages.error(request, 'email  يوجد خطأ في  ')
+            
+        if 'accepted' in request.POST: accepted = request.POST['accepted']
+
+        #التحقق من القيم
+        if username and password and email:
+            #الموافقة على الشروط 
+            if accepted == 'on':
+                # التحقق من وجود المستخدم
+                 if User.objects.filter(username = username).exists():
+                     messages.error(request, 'مستخدم موجود ')
+                 else:
+                     #التحقق من وجود الايميل
+                     if User.objects.filter(email = email).exists():
+                         messages.error(request, 'ايميل موجود')
+                     else:
+                         patt = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+                         if re.match(patt , email):
+                             #  اضافة للمستخدم في جانغو
+                             user = User.objects.create_user(username = username, password = password, email = email)
+                             user.save()
+                             #اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
+                             agent = Agent(user = user )
+                             agent.save()
+
+                            #  user_photo=''
+                             username = ''
+                             password = ''
+                             email = ''
+                             accepted = None
+
+                             messages.success(request,'تم انشاء حسابك')
+                         else:
+                             messages.error(request, 'خطأ بالايميل')
+            else:
+                messages.error(request, 'يجب عليك الموافقة ')
+        else:
+            messages.error(request, 'تحقق من الحقول') 
+   
+        return render(request, 'accounts/userdata.html', {
+            # 'user_photo': user_photo,
+            'user': username,
+            'pass': password,
+            'email': email
+        })
+    else:
+        return render(request, 'accounts/userdata.html')
+
+
 
 def agent_single(request):
     if request.method == 'POST':
             
-            messages.info(request , 'This is POST')
-            return redirect('agent_single')
+        return render(request, 'accounts/agent_single.html')
     else:
-
         return render(request, 'accounts/agent_single.html')
 
 
 
 def agents_grid(request):
     if request.method == 'POST':
-            
-            messages.info(request , 'This is POST')
-            return redirect('agent_single')
+
+        return render(request, 'accounts/agents_grid.html')
     else:
 
         return render(request, 'accounts/agents_grid.html')
 
 
-def userdata(request):
-    if request.method == 'POST':
-            
-            messages.info(request , 'This is POST')
-            return redirect('userdata')
-    else:
-
-        return render(request, 'accounts/userdata.html')
 
 def verification(request):
     if request.method == 'POST':
-            
-            messages.info(request , 'This is POST')
-            return redirect('verification')
+
+        return render(request, 'accounts/verification.html')
     else:
 
         return render(request, 'accounts/verification.html')
 
 def edit_profile(request):
     if request.method == 'POST':
-            
-            messages.info(request , 'This is POST')
-            return redirect('edit_profile')
+
+        return render(request, 'accounts/edit_profile.html')
     else:
 
         return render(request, 'accounts/edit_profile.html')
