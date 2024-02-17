@@ -1,32 +1,33 @@
-{% extends 'base.html' %}
-{% load static %}
+  {% extends 'base.html' %}
+  {% load static %}
 
-{% block title %}
-بيانات
-{% endblock %}
+  {% block title %}
+  بيانات
+  {% endblock %}
 
-{% block content %}
+  {% block content %}
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<center>
-<div class="col-md-7">
-    <form method="POST" enctype="multipart/form-data">                  
-      <div class="row">
-       
-        {% csrf_token %} 
-        {% include 'parts/alerts.html' %} 
-        <h1>أدخل بياناتك</h1>
-        <br>
-        <br>
-        <br>
-        <br>
+  <center>
+  <div class="col-md-7">
+    {% include 'parts/alerts.html' %} 
+      <form method="POST" enctype="multipart/form-data">                  
+        <div class="row">
+        
+          {% csrf_token %} 
+        
+          <h1>أدخل بياناتك</h1>
+          <br>
+          <br>
+          <br>
+          <br>
         <!-- <div class="col-md-12 mb-3">
             <div class="form-group; roundees-circle ">
               <label for="" style="display: flex;">أضف صورة</label>
@@ -46,7 +47,7 @@
         <br>
         <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="pass" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور" required value="{{pass}}" >
+              <input type="password" name="pass" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور"  value="{{pass}}" >
             </div>
           </div>
           <br>
@@ -54,25 +55,27 @@
           <br>  
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="pass2" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور" required value="email">
+              <input type="password" name="pass2" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  value="{{email}}">
               <div id="divCheckPasswordMatch"></div>
               
               <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
+                 
               <script>
                 var password = document.getElementById("password");
-                var confirm_password = document.getElementById("confirm-password");
+                var pass2 = document.getElementById("pass2");
                 
                 function validatePassword(){
-                  if(password.value != confirm_password.value) {
-                    confirm_password.setCustomValidity("كلمة المرور غير متطابقة!");
+                  if(password.value != pass2.value) {
+                    pass2.setCustomValidity("كلمة المرور غير متطابقة!");
                   } else {
-                    confirm_password.setCustomValidity('');
+                    pass2.setCustomValidity('');
                   }
                 }
                 password.onchange = validatePassword;
-                confirm_password.onkeyup = validatePassword;
+                pass2.onkeyup = validatePassword;
               </script>
-              <!-- نهاية الكود -->
+
+
             </div>
           </div>
           <br>
@@ -87,18 +90,19 @@
             </div>
           </div>
           <br>
+
           <br>
           <br>
           <h4>نوع الحساب</h4>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="userDate" class="checkmark"  style="width: 20px; height: 20px;">
+                <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;" value="agent" required>
                 <label for="" style="font-size: 20px;">وكيل عقاري</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="userDate" class="checkmark"  style="width: 20px; height: 20px;">
+                <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;" value="customer" required >
                 <label for="" style="font-size: 20px;">باحث عن عقار</label>
             </div>
           </div>
@@ -108,7 +112,7 @@
           <hr>
 
           <div class="form-group">
-            <input type="checkbox"  id="inputacceepted"  name="accepted" class=""  style="width: 20px; height: 20px;">
+            <input type="checkbox"  id="checkbox"  name="accepted" class=""  style="width: 20px; height: 20px;" >
             <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
           </div>
 
