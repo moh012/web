@@ -394,7 +394,7 @@
             {% else %}
 
                 <li class="nav-item">
-                  <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'userdata' %}">إنشاء حساب</a>
+                  <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">تسجيل</a>
                 </li>
 
             {% endif %}
