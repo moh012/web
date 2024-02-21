@@ -1,160 +1,139 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base.html' %}
+{% load static %}
 
-        <meta name="description" content="">
-        <meta name="author" content="">
+{% block title %}
+إنشاء حساب
+{% endblock %}
 
-        <title>Settings</title>
+{% block content %}
 
-        <!-- CSS FILES -->      
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/tooplate-mini-finance.css" rel="stylesheet">
-    </head>
+<!-- <link rel="stylesheet" href="{% static 'alwi.css' %}"> -->
 
-
+<div class="my-form container p-5 my-5 rounded border border-warning">
+<br>
+<br>
+<br>
 
 
+    {% include 'parts/alerts.html' %}
+    <h2 class="text-center">الملف الشخصي </h2>
+    <hr>  
+  {% if is_add == True %}
+  <form method="POST" style="display: none;">
+  {% else %}
+  <form method="POST">
 
+  {% endif %}
+    
+        {% csrf_token %} 
 
+        
+        <!-- {% if book.photo_book %}
+        <div class="form-group">
+          <label for="profil_photo" style="display: flex;">أضف صورة</label>
+          <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.profil_photo.url}}" required >
+        </div>
+        <img style="height: 120px; width: 120px;"  src="{{book.photo_book.url}}" alt="" class="img-circle img-fluid">
+    {% else %}
+        <img style="height: 120px; width: 120px;"  src="{%static 'assets/img/1.png'%}" alt="" class="img-circle img-fluid">
+    {% endif %} -->
+      
+<!-- 
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="profil_photo" style="display: flex;">أضف صورة</label>
+                <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.Agent.profil_photo.url}}" required >
+              </div>
+          </div> -->
+          
+          
 
+          <h4>نوع الحساب</h4>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <input type="radio"  name="exit" class="checkmark"  style="width: 20px; height: 20px;"  value="on" >
+                <label for="" style="font-size: 20px;">وكيل عقاري</label>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 mb-3">
+            <div class="form-group"> 
+                <input type="radio" name="exit" class="checkmark"  style="width: 20px; height: 20px;"  valeu="{{cust}}" >
+                <label for="" style="font-size: 20px;">باحث عن عقار</label>
+            </div>
+          </div>  -->
+        
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="fname"> اسمك الأول</label>
+                <input type="text" class="form-control" id="fname" name="fname" required value="{{fname}}">
+              </div>
+              
+              <div class="form-group col-md-6">
+                <label for="last_name"> الاسم الأخير (اللقب)</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required value="{{last_name}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="" required value="{{username}}">
+              </div>
+           
+            </div>
+      
+            <div class="form-group">
+              <label for="password">كلمة المرور</label>
+              <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  بكتابة كلمة المرور" required >
+            </div>
+            <div class="form-group">
+              <label for="password_confirm">تأكيد كلمة المرور</label>
+              <input type="password" name="password_confirm" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required value="{{password_confirm}}">
+            </div>
+            <div id="divCheckPasswordMatch"></div>
+              <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
+              <script>
+                var password = document.getElementById("password");
+                var confirm_password = document.getElementById("confirm-password");
+                
+                function validatePassword(){
+                  if(password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("كلمة المرور غير متطابقة!");
+                  } else {
+                    confirm_password.setCustomValidity('');
+                  }
+                }
+                password.onchange = validatePassword;
+                confirm_password.onkeyup = validatePassword;
+              </script>
+              <!-- نهاية الكود -->
 
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label for="phone">رقم الهاتف </label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " 
+                  placeholder="967+" required value="{{phone}}" >
+              </div>
+            </div>
+      
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="email"> البريد الإلكتروني </label>
+                <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
+                              required value="{{email}}">
+              </div>
+            <div class-row>
+            </div>
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <input type="checkbox"  id="inputTerms"  name="terms" class=""  style="width: 20px; height: 20px;">
+                <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
+              </div>
+            </div>
+          
+      </div>
+          <button type="submit"  name="btnprof" class="btn btn-a"> تسجيل</button>
+      </div>
+                
+              </form>
 
-    <body>               
-                <main class=" col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 ">
-                    <div class="title-group mb-3">
-                        <h1 class="h2 mb-0">Settings</h1>
-                    </div>
+          </div>
 
-                    
-
-                    
-
-                    <div class="row my-4">
-                        <div class="col-lg-7 col-12">
-                            <div class="custom-block bg-white">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">Profile</button>
-                                    </li>
-
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
-                                        <a href="password.html"></a>
-                                    </li>
-
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification-tab-pane" type="button" role="tab" aria-controls="notification-tab-pane" aria-selected="false">Notification</button>
-                                    </li>
-                                </ul>
-
-
-
-
-
-
-                                
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                                        <h6 class="mb-4">Edit Profile</h6>
-
-                                        <form class="custom-form profile-form" action="#" method="post" role="form">
-                                            <input class="form-control" type="text" name="profile-name" id="profile-name" placeholder="edit your name" required>
-
-                                            <input class="form-control" type="email" name="profile-email" id="profile-email" placeholder="@gmail.com" required>
-
-                                            <div class="input-group mb-1">
-                                                <img src="images/profile/1.png" class="profile-image img-fluid" alt="">
-
-                                                <input type="file" class="form-control" id="inputGroupFile02">
-                                            </div>
-
-                                            <div class="d-flex">
-                                                <button type="reset" class="form-control me-3">
-                                                    Reset
-                                                </button>
-
-                                                <button type="submit" class="form-control ms-2">
-                                                    Update
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
-                                        <h6 class="mb-4">Password</h6>
-
-                                        <form class="custom-form password-form" action="#" method="post" role="form">
-                                            <input type="password" name="password" id="password" pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="Current Password" required="">
-
-                                            <input type="password" name="new_Password" id="new_Password" pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="New Password" required="">
-
-                                            <input type="password" name="confirm_Password" id="confirm_Password" pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="Confirm Password" required="">
-
-                                            <div class="d-flex">
-                                                <button type="button" class="form-control me-3">
-                                                    Reset
-                                                </button>
-
-                                                <button type="submit" class="form-control ms-2">
-                                                    Update 
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-
-
-
-
-
-
-
-                                    <div class="tab-pane fade" id="notification-tab-pane" role="tabpanel" aria-labelledby="notification-tab" tabindex="0">
-                                        <h6 class="mb-4">Notification</h6>
-
-                                        <form class="custom-form notification-form" action="#" method="post" role="form">
-
-                                            <div class="form-check form-switch d-flex mb-3 ps-0">
-                                                <label class="form-check-label" for="flexSwitchCheckCheckedOne">Phone Number</label>
-
-                                                <input class="form-check-input ms-auto" type="checkbox" name="form-check-input" role="switch" id="flexSwitchCheckCheckedOne" checked>
-                                            </div>
-                                            <div class="form-check form-switch d-flex mb-3 ps-0">
-                                                <label class="form-check-label" for="flexSwitchCheckCheckedOne">Chatting</label>
-
-                                                <input class="form-check-input ms-auto" type="checkbox" name="form-check-input" role="switch" id="flexSwitchCheckCheckedOne" checked>
-                                            </div>
-
-                                            <div class="form-check form-switch d-flex mb-3 ps-0">
-                                                <label class="form-check-label" for="flexSwitchCheckCheckedTwo">What's app</label>
-
-                                                <input class="form-check-input ms-auto" type="checkbox" name="form-check-input" role="switch" id="flexSwitchCheckCheckedTwo" checked>
-                                            </div>
-
-                                            <div class="d-flex mt-4">
-                                                <button type="reset" class="form-control me-3">
-                                                    Reset
-                                                </button>
-
-                                                <button type="submit" class="form-control ms-2">
-                                                    Update
-                                                </button>
-                                                <li><a href="password"></a></li>
-                                            </div>
-
-
-
-
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/custom.js"></script>
-
-    </body>
-</html>
+{% endblock %}

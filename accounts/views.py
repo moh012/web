@@ -2,6 +2,7 @@ from urllib import request
 from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+
 from django.contrib import  auth
 from property.models import *
 from accounts.models import *
@@ -36,20 +37,12 @@ def signup(request):
     return render(request, 'accounts/signup.html')
 
 
-def logout(request):
-     
-     if request.user.is_authenticated:
-          auth.logout(request)
-
-     return redirect('index')
-
-
 
 
 def profile(request):
     if request.method == 'POST' and 'btnprof' in request.POST:
         # متغيرات لحقول profil  من الخاصية name
-        # profil_photo = None
+        # user_photo = None
         fname = None
         last_name = None
         password = None
@@ -132,14 +125,14 @@ def profile(request):
                             user = User.objects.create_user(first_name=fname, last_name=last_name,
                                                             email=email, password=password, username=username)
                             user.save()
-                            if ser == 'on':
+                            # if ser == 'on':
                                 # إنشاء بروفايل للوكيل Agent
-                                agent_profile = Agent(user=user, phone=phone   )
-                                agent_profile.save()
-                            else:
-                                  # إنشاء بروفايل  للباحث عن عقار
-                                customer_profile = Customer(user=user, phone=phone   )
-                                customer_profile.save()
+                            agent_profile = Agent(user=user, phone=phone   )
+                            agent_profile.save()
+                            # else:
+                            #       # إنشاء بروفايل  للباحث عن عقار
+                            #     customer_profile = Customer(user=user, phone=phone   )
+                            #     customer_profile.save()
                             # تفريغ القيم من الحقول
                             fname = ''
                             last_name = ''
@@ -181,6 +174,14 @@ def profile(request):
 
 
 
+def logout(request):
+     
+     if request.user.is_authenticated:
+          auth.logout(request)
+
+     return redirect('index')
+
+
 def userdata(request):
     if request.method == 'POST' and 'btncreate' in request.POST:
 
@@ -189,6 +190,8 @@ def userdata(request):
         email = None
         password = None
         accepted = None
+        account_type= request.POST.get('account_type', None)
+ 
 
 
         # if 'user_photo' in request.POST: user_photo = request.POST['user_photo']
@@ -198,20 +201,25 @@ def userdata(request):
 
         if 'user' in request.POST: username = request.POST['user']
         else:
-            messages.error(request, ' user name يوجد خطأ في  ')
+            messages.error(request, '   يوجد خطأ في اسم المستخدم  ')
 
         if 'pass' in request.POST: password = request.POST['pass']
         else:
-            messages.error(request, ' password  يوجد خطأ في  ')
+            messages.error(request, '   يوجد خطأ في كلمة المرور  ')
 
         if 'email' in request.POST: email = request.POST['email']
         else:
-            messages.error(request, 'email  يوجد خطأ في  ')
-            
+            messages.error(request, '  يوجد خطأ في البريد الالكتروني  ')
+
+        if 'account_type' in request.POST: account_type = request.POST['account_type']
+        else:
+            messages.error(request, '   يوجد خطأ في نوع الحساب  ')
+
+
         if 'accepted' in request.POST: accepted = request.POST['accepted']
 
         #التحقق من القيم
-        if username and password and email:
+        if username and password and email and account_type:
             #الموافقة على الشروط 
             if accepted == 'on':
                 # التحقق من وجود المستخدم
@@ -222,35 +230,59 @@ def userdata(request):
                      if User.objects.filter(email = email).exists():
                          messages.error(request, 'ايميل موجود')
                      else:
-                         patt = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+                         patt =  r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
                          if re.match(patt , email):
                              #  اضافة للمستخدم في جانغو
+
                              user = User.objects.create_user(username = username, password = password, email = email)
                              user.save()
-                             #اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
-                             agent = Agent(user = user )
-                             agent.save()
+
+                             # هذا الكد الصحيح 
+                            #  اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
+
+                             if account_type == 'agent':
+                                Agent.objects.create(user=user)
+                                messages.success(request,'مرحبا وكيلنا العزيز ')
+                                return redirect('index')
+
+                             elif account_type == 'customer':
+                                Customer.objects.create(user=user)
+                                messages.success(request,'مرحبا عميلنا العزيز ')
+                                return redirect('index')
+                                
+                          
+
+
+                            #  if 'agent'in request.POST:
+                            #     agent_profile = Agent(user = user)
+                            #     agent_profile.save()
+                            #  elif 'customer' in request.POST:
+                            #      customer_profile = Customer(user = user) 
+                            #      customer_profile.save()
 
                             #  user_photo=''
                              username = ''
                              password = ''
                              email = ''
                              accepted = None
+                             account_type = None
 
-                             messages.success(request,'تم انشاء حسابك')
                          else:
-                             messages.error(request, 'خطأ بالايميل')
+                             messages.error(request, ' هناك خطأ في البريد الالكتروني')
             else:
-                messages.error(request, 'يجب عليك الموافقة ')
+                messages.error(request, 'يجب الموافقة على الشروط وسياسة الاستخدام  ')
         else:
-            messages.error(request, 'تحقق من الحقول') 
-   
+            messages.error(request, 'تحقق من الحقول المدخلة') 
+     
         return render(request, 'accounts/userdata.html', {
             # 'user_photo': user_photo,
             'user': username,
             'pass': password,
-            'email': email
+            'email': email,
+           
         })
+        
+            
     else:
         return render(request, 'accounts/userdata.html')
 
