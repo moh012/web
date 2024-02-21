@@ -12,6 +12,7 @@
   <div class="my-form container p-5 my-5 rounded border border-warning">
 
     {% include 'parts/alerts.html' %}
+    <br><br>
     <h2 class="text-center">الملف الشخصي </h2>
     <hr>  
   {% if is_add == True %}
@@ -60,28 +61,27 @@
         
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="fname"> اسمك الأول</label>
+                <label for="fname"> الإسم الأول</label>
                 <input type="text" class="form-control" id="fname" name="fname" required value="{{fname}}">
-              </div>
+              </div><br>
               <div class="form-group col-md-6">
-                <label for="last_name"> الاسم الأخير (اللقب)</label>
+                <label for="last_name"> الإسم الأخير </label>
                 <input type="text" class="form-control" id="last_name" name="last_name" required value="{{last_name}}">
-              </div>
+              </div><br>
               <div class="form-group col-md-6">
-                <label for="username">اسم المستخدم</label>
+                <label for="username">إسم المستخدم</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="" required value="{{username}}">
-              </div>
-           
+              </div><br>
             </div>
-      
+
             <div class="form-group">
               <label for="password">كلمة المرور</label>
               <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  بكتابة كلمة المرور" required >
-            </div>
+            </div><br>
             <div class="form-group">
               <label for="password_confirm">تأكيد كلمة المرور</label>
               <input type="password" name="password_confirm" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required >
-            </div>
+            </div><br>
             <div id="divCheckPasswordMatch"></div>
               <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
               <script>
@@ -106,7 +106,7 @@
                 <input type="text" class="form-control" id="phone" name="phone" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " 
                   placeholder="967+" required value="{{phone}}" >
               </div>
-            </div>
+            </div><br>
       
             <div class="col-md-12 mb-3">
               <div class="form-group">
@@ -114,10 +114,8 @@
                 <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
                               required value="{{email}}">
               </div>
-          
             <div class-row>
-           
-            </div>
+            </div><br>
 
                  
                             <div class="col-md-12 mb-3">
