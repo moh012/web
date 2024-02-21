@@ -57,27 +57,10 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
-            <select class="form-control form-select form-control-a" name="city" id="bathrooms" title="المحافظة" style="line-height: 2;">
-              <option>الأمانة</option>
-              <option>صنعاء</option>
-              <option>عدن</option>
-              <option>تعز</option>
-              <option>إب</option>
-              <option>الحديدة</option>
-              <option>حجة</option>
-              <option>عمران</option>
-              <option>البيضاء</option>
-              <option>الجوف</option>
-              <option>ذمار</option>
-              <option>شبوة</option>
-              <option>مأرب</option>
-              <option>المهرة</option>
-              <option>أبين</option>
-              <option>لحج</option>
-              <option>المحويت</option>
-              <option>الضالع</option>
-              <option>صعدة</option>
-              <option>ريمة</option>
+            <select class="form-control form-select form-control-a" name="city" id="area" title="المحافظة" style="line-height: 2;">
+              {% for city in city %}
+              <option value="{{city.id}}">{{city.city_name}}</option>
+              {% endfor %}
             </select>
           </div>
         </div>
@@ -85,17 +68,10 @@
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
-            <select class="form-control form-select form-control-a" name="area" id="bathrooms" title="المديرية" style="line-height: 2;">
-              <option>الوحدة</option>
-              <option>معين</option>
-              <option>صنعاء القديمة</option>
-              <option>شعوب</option>
-              <option>اّزال</option>
-              <option>الصافية</option>
-              <option>السبعين</option>
-              <option>التحرير</option>
-              <option>الثورة</option>
-              <option>بني حارث</option>
+            <select class="form-control form-select form-control-a" name="area" id="area" title="المديرية" style="line-height: 2;">
+              {% for area in area %}
+              <option value="{{area.id}}">{{area.area_name}}</option>
+              {% endfor %}
             </select>
           </div>
         </div>

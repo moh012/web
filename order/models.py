@@ -26,14 +26,14 @@ class Order(models.Model):
     street_number = models.CharField(max_length=100, null=True)
     housetype = models.CharField(max_length=100, null=True)
     space = models.IntegerField(null=True)
-    basement = models.BooleanField(default=False)
-    pool = models.BooleanField(default=False)
-    kitchen = models.BooleanField(default=False)
-    furnished = models.BooleanField(default=False)
-    elevator = models.BooleanField(default=False)
-    appendix = models.BooleanField(default=False)
-    roof = models.BooleanField(default=False)
-    modern = models.BooleanField(default=False)
+    basement = models.BooleanField(default=False, null=True)
+    pool = models.BooleanField(default=False, null=True)
+    kitchen = models.BooleanField(default=False, null=True)
+    furnished = models.BooleanField(default=False, null=True)
+    elevator = models.BooleanField(default=False, null=True)
+    appendix = models.BooleanField(default=False, null=True)
+    roof = models.BooleanField(default=False, null=True)
+    modern = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.title
