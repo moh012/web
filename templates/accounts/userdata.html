@@ -15,18 +15,26 @@
   <br>
   <br>
 
-  <center>
+ <center>
   <div class="col-md-7">
-    {% include 'parts/alerts.html' %} 
-      <form method="POST" enctype="multipart/form-data">                  
+  {% include 'parts/alerts.html' %} 
+ {% if is_added == True %}
+   <form method="POST" style="display:none;">    
+ {% else %}
+ 
+     <form method="POST">
+ {% endif %}
+   
+                    
         <div class="row">
         
           {% csrf_token %} 
         
-          <h1>أدخل بياناتك</h1>
+          <h1> إنشاء حساب</h1>
+
           <br>
           <br>
-          <br>
+         
           <br>
         <!-- <div class="col-md-12 mb-3">
             <div class="form-group; roundees-circle ">
@@ -55,25 +63,26 @@
           <br>  
           <div class="col-md-12 mb-3">
             <div class="form-group">
-              <input type="password" name="pass2" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  value="{{email}}">
+              <input type="password" name="pass2" onkeyup='checkPasswordMatch();' id ="pass2"class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  value="{{email}}">
               <div id="divCheckPasswordMatch"></div>
               
               <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
                  
-              <script>
-                var password = document.getElementById("password");
-                var pass2 = document.getElementById("pass2");
-                
-                function validatePassword(){
-                  if(password.value != pass2.value) {
-                    pass2.setCustomValidity("كلمة المرور غير متطابقة!");
-                  } else {
-                    pass2.setCustomValidity('');
+                <script>
+                  var password = document.getElementById("password");
+                  var pass2 = document.getElementById("pass2");
+                  
+                  function validatePassword(){
+                    if(password.value != pass2.value) {
+                      pass2.setCustomValidity("كلمة المرور غير متطابقة!");
+                    } else {
+                      pass2.setCustomValidity('');
+                    }
                   }
-                }
-                password.onchange = validatePassword;
-                pass2.onkeyup = validatePassword;
-              </script>
+
+                  password.onchange = validatePassword;
+                  pass2.onkeyup = validatePassword;
+                </script>
 
 
             </div>
@@ -111,17 +120,21 @@
           <br>
           <hr>
 
-          <div class="form-group">
-            <input type="checkbox"  id="checkbox"  name="accepted" class=""  style="width: 20px; height: 20px;" >
-            <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
-          </div>
 
+          <div class="form-group">
+            <input type="checkbox" id="checkbox" name="accepted" class="" style="width: 20px; height: 20px;" required>
+            <label for="checkbox" style="font-size: 20px;">
+              أوافق على 
+              <a href="{% url 'privacy_policy' %}" target="_blank">شروط الخصوصية والأحكام</a>
+            </label>
+          </div>
         <div class="col-md-12 text-center">
           <br>
           <button type="submit" class="btn btn-a" name="btncreate">إنشاء حساب</button>
         </div>
       </div>
     </form>
+    
   </div>
 </center>
 {% endblock %}

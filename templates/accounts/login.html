@@ -27,12 +27,13 @@
 
   {% if request.user.is_authenticated %}
         <h4 class="alert alert-secondoery">
-          أهلا وسهلاً , {{request.user.username}} , أنت الان قمت بتسجيل الدخول
-          <a class="text-dark" href="{% url 'logout' %}"  > تسجيل الخروج</a>
+          أهلا وسهلاً , {{request.user.username}} ، أنت الان قمت بتسجيل الدخول
+          <a class="text-dark" href="{% url 'logout' %}"  > ـــ هل تريد تسجيل الخروج  </a>
         </h4>
 
 
 {% else %}
+
   <form method="POST" >
     {% csrf_token %}
       
@@ -65,7 +66,7 @@
 
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="checkbox" checked  name="rememberme" class=""  style="width: 20px; height: 20px;">
+            <input type="checkbox"   name="rememberme" class=""  style="width: 20px; height: 20px;">
             <label for="checkbox" style="font-size: 20px;"  >  تذكرني</label>
           </div>
         </div>
@@ -79,7 +80,7 @@
         
           <p>ليس لدي حساب...
             <br>
-            <a href="{% url 'signup' %}">إنشاء حساب</a></p>
+            <a href="{% url 'userdata' %}">إنشاء حساب</a></p>
         </div>
       </div>
   </form>
