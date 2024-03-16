@@ -2,43 +2,38 @@ from django.shortcuts import render
 from chatting.models import Comment
 from accounts.models import Customer, Agent
 from django.contrib.auth.models import User
-from property.models import Area
+from property.models import Area, Property
 
 # Create your views here.
 
 
 def property(request):
-
-    return render(request, 'property/property.html')
-
-
-def property_grid(request):
     if request.method == 'POST':
-        type = type.Post.get('type')
         agent = Agent(id=1)
-        title = request.POST.get('title')
+        title = request.POST.get('property')
         propertyType = request.POST.get('propertyType')
         area = Area(id=1)
-        location = request.POST.get('location')
-        appendix = request.POST.get('appendix')
-        price = request.POST.get('price')
-        room_number = request.POST.get('room_number')
-        hall_room = request.POST.get('hall_room')
-        bathrooms = request.POST.get('bathroom')
-        floor = request.POST.get('floor')
-        street_number = request.POST.get('street_number')
-        space = request.POST.get('space')
+        location = request.POST.get('location_property')
+        img = request.POST.get('image_property')
         description = request.POST.get('description')
-        pool = request.POST.get('pool')
-        kitchen = request.POST.get('kitchen')
-        roof = request.POST.get('roof')
-        elevator = request.POST.get('elevator')
-        basement = request.POST.get('basement')
-        furnished = request.POST.get('furnished')
-        build_year = request.POST.get('build_year')
-        details = request.POST.get('details')
-        type_name = request.POST.get('type_name')
-        data = property(
+        price = request.POST.get('price_property')
+        room_number = request.POST.get('room_property')
+        hall_room = request.POST.get('hall_property')
+        bathrooms = request.POST.get('bathroom_property')
+        floor = request.POST.get('floor_property')
+        street_number = request.POST.get('street_property')
+        build_year = request.POST.get('propertyAge')
+        house_type = request.POST.get('AccommodationType')
+        space = request.POST.get('space')
+        pool = request.POST.get('pool_property')
+        kitchen = request.POST.get('kitchen_property')
+        roof = request.POST.get('Roof_property')
+        modern = request.POST.get('new_property')
+        yard = request.POST.get('yard_property')
+        elevator = request.POST.get('elevator_property')
+        basement = request.POST.get('basement_property')
+        furnished = request.POST.get('Furnished_property')
+        data = Property(
             agent=agent,
             title=title,
             property_type=propertyType,
@@ -48,24 +43,34 @@ def property_grid(request):
             room_number=room_number,
             floor=floor,
             location=location,
-            details=description,
-            build_year=propertyAge,
-            bathrooms=bathroom,
-            hall_room=hall,
-            floor_room=floor,
-            housetype=houseType,
+            img=img,
+            description=description,
+            build_year=build_year,
+            bathrooms=bathrooms,
+            hall_room=hall_room,
+            house_type=house_type,
             basement=basement,
             pool=pool,
             kitchen=kitchen,
-            furnished=furnish,
-            elevator=elev,
-            street_number=street,
+            furnished=furnished,
+            elevator=elevator,
+            street_number=street_number,
             appendix=yard,
             roof=roof,
             modern=modern,
             space=space)
         data.save()
-    return render(request, 'property/property_grid.html')
+
+    return render(request, 'property/property.html')
+
+
+def property_grid(request):
+
+    context = {
+        'properties': Property.objects.all(),
+    }
+
+    return render(request, 'property/property_grid.html', context)
 
 
 def property_single(request):

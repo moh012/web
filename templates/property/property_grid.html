@@ -40,18 +40,18 @@
           </div>
         
 
-        {% for property in property %}
+        {% for property in properties %}
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="{% static 'assets/img/property-3.jpg' %}" alt="" class="img-a img-fluid">
+                <img src="{{property.img.url}}" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="{% url 'property_single' %}">فله
-                        <br /> ثلاثة أدوار</a>
+                      <a href="{% url 'property_single' %}">{{property.title}}
+                        <br>{{property.property_type}}</a>
                     </h2>
                   </div>
                   <div class="card-body-a">
@@ -65,25 +65,25 @@
                   <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
-                        <h4 class="card-info-title">{{property.space}}:المساحة</h4>
-                        <span>340m
+                        <h4 class="card-info-title">المساحة</h4>
+                        <span>{{property.space}}m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">{{property.room_number}}:الغرف</h4>
-                        <span>2</span>
+                        <h4 class="card-info-title">الغرف</h4>
+                        <span>{{property.room_number}}</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">{{property.bathrooms}}:دورات المياه</h4>
-                        <span>4</span>
+                        <h4 class="card-info-title">دورات المياه</h4>
+                        <span>{{property.bathrooms}}</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title"> {{property.hall_room}}:الصالات</h4>
-                        <span>1</span>
+                        <h4 class="card-info-title">الصالات</h4>
+                        <span>{{property.hall_room}}</span>
                       </li>
                       <li>
-                        <h4 class="card-info-title">{{favorite}} :مفضلة</h4>
+                        <h4 class="card-info-title">مفضلة</h4>
                         <span><input type="checkbox"></span>
                       </li>
                     </ul>

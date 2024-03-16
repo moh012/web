@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Type, City, Area, Property, Photo_Property, Comparison, Favorite, ADS, Photo_ADS
+from .models import City, Area, Property, Photo_Property, Comparison, Favorite, ADS, Photo_ADS
 
 # Register your models here.
 
@@ -8,7 +8,7 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ['id', 'city_name']
 
 
-admin.site.register(Type)
+# admin.site.register(Type)
 admin.site.register(City, ContactAdmin)
 admin.site.register(Area)
 admin.site.register(Property)

@@ -1,12 +1,18 @@
 from django.shortcuts import render
 from order.models import Order
 from accounts.models import Customer
-from property.models import Area
+from property.models import Area, City
 
 # Create your views here.
 
 
 def order(request):
+
+    context = {
+        'city': City.objects.all(),
+        'area': Area.objects.all(),
+    }
+
     if request.method == 'POST':
         customer = Customer(id=1)
         title = request.POST.get('orderTitle')
@@ -60,7 +66,7 @@ def order(request):
             modern=modern,
             space=space)
         data.save()
-    return render(request, 'order/order.html')
+    return render(request, 'order/order.html', context)
 
 
 def fave(request):
