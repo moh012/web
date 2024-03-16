@@ -2,138 +2,139 @@
 {% load static %}
 
 {% block title %}
-إنشاء حساب
+الملف الشخصي
 {% endblock %}
 
 {% block content %}
 
-<!-- <link rel="stylesheet" href="{% static 'alwi.css' %}"> -->
-
-<div class="my-form container p-5 my-5 rounded border border-warning">
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+<div class="col-md-7">
 
 
-    {% include 'parts/alerts.html' %}
-    <h2 class="text-center">الملف الشخصي </h2>
-    <hr>  
-  {% if is_add == True %}
-  <form method="POST" style="display: none;">
-  {% else %}
+  {% if request.user.is_authenticated %}
+
   <form method="POST">
+  {% csrf_token %}
+    {% include 'parts/alerts.html' %}   
+      <div class="row">
+ 
+        <h1> اعدادات الحساب</h1>
 
-  {% endif %}
-    
-        {% csrf_token %} 
-
-        
-        <!-- {% if book.photo_book %}
+        <br>
+        <br>
+       
+        <br>
+      <!-- <div class="col-md-12 mb-3">
+          <div class="form-group; roundees-circle ">
+            <label for="" style="display: flex;">أضف صورة</label>
+            <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required >
+          </div>
+      </div> -->
+      <br>
+      <br>
+      <br>
+      <div class="col-md-12 mb-3">
         <div class="form-group">
-          <label for="profil_photo" style="display: flex;">أضف صورة</label>
-          <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.profil_photo.url}}" required >
+          <input type="text" name="user" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required value="{{user}}">
         </div>
-        <img style="height: 120px; width: 120px;"  src="{{book.photo_book.url}}" alt="" class="img-circle img-fluid">
-    {% else %}
-        <img style="height: 120px; width: 120px;"  src="{%static 'assets/img/1.png'%}" alt="" class="img-circle img-fluid">
-    {% endif %} -->
-      
-<!-- 
-            <div class="col-md-12 mb-3">
-              <div class="form-group">
-                <label for="profil_photo" style="display: flex;">أضف صورة</label>
-                <input type="file" name="profil_photo" accept="image/*"  class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="{{user.Agent.profil_photo.url}}" required >
-              </div>
-          </div> -->
-          
-          
-
-          <h4>نوع الحساب</h4>
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-                <input type="radio"  name="exit" class="checkmark"  style="width: 20px; height: 20px;"  value="on" >
-                <label for="" style="font-size: 20px;">وكيل عقاري</label>
-            </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <input type="password" name="pass" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور"  value="{{pass}}" >
           </div>
-          <!-- <div class="col-md-6 mb-3">
-            <div class="form-group"> 
-                <input type="radio" name="exit" class="checkmark"  style="width: 20px; height: 20px;"  valeu="{{cust}}" >
-                <label for="" style="font-size: 20px;">باحث عن عقار</label>
-            </div>
-          </div>  -->
-        
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="fname"> اسمك الأول</label>
-                <input type="text" class="form-control" id="fname" name="fname" required value="{{fname}}">
-              </div>
-              
-              <div class="form-group col-md-6">
-                <label for="last_name"> الاسم الأخير (اللقب)</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" required value="{{last_name}}">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="username">اسم المستخدم</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="" required value="{{username}}">
-              </div>
-           
-            </div>
-      
-            <div class="form-group">
-              <label for="password">كلمة المرور</label>
-              <input type="password" name="password" id="password" class="form-control form-control-lg form-control-a" placeholder=" كلمة المرور" title="قم  بكتابة كلمة المرور" required >
-            </div>
-            <div class="form-group">
-              <label for="password_confirm">تأكيد كلمة المرور</label>
-              <input type="password" name="password_confirm" id="confirm-password" onkeyup='checkPasswordMatch();' class="form-control form-control-lg form-control-a" placeholder=" تأكيد كلمة المرور" title="قم بإدخال تأكيد كلمة المرور" required value="{{password_confirm}}">
-            </div>
+        </div>
+        <br>
+        <br>
+        <br>  
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <input type="password" name="pass2" onkeyup='checkPasswordMatch();' id ="pass2"class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  value="{{pass}}">
             <div id="divCheckPasswordMatch"></div>
-              <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
-              <script>
-                var password = document.getElementById("password");
-                var confirm_password = document.getElementById("confirm-password");
-                
-                function validatePassword(){
-                  if(password.value != confirm_password.value) {
-                    confirm_password.setCustomValidity("كلمة المرور غير متطابقة!");
-                  } else {
-                    confirm_password.setCustomValidity('');
-                  }
+            
+            <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
+               
+            <script>
+              var password = document.getElementById("password");
+              var pass2 = document.getElementById("pass2");
+              
+              function validatePassword(){
+                if(password.value != pass2.value) {
+                  pass2.setCustomValidity("كلمة المرور غير متطابقة!");
+                } else {
+                  pass2.setCustomValidity('');
                 }
-                password.onchange = validatePassword;
-                confirm_password.onkeyup = validatePassword;
-              </script>
-              <!-- نهاية الكود -->
+              }
+              password.onchange = validatePassword;
+              pass2.onkeyup = validatePassword;
+            </script>
 
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                <label for="phone">رقم الهاتف </label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{0,}"  autocomplete="off" title=" يجب أن يبتدئ الرقم ب 7 وان لا يحتوي على حروف " 
-                  placeholder="967+" required value="{{phone}}" >
-              </div>
-            </div>
-      
-            <div class="col-md-12 mb-3">
-              <div class="form-group">
-                <label for="email"> البريد الإلكتروني </label>
-                <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
-                              required value="{{email}}">
-              </div>
-            <div class-row>
-            </div>
-            <div class="col-md-12 mb-3">
-              <div class="form-group">
-                <input type="checkbox"  id="inputTerms"  name="terms" class=""  style="width: 20px; height: 20px;">
-                <label for="checkbox" style="font-size: 20px;"  >  الموافقة على سياسة الخصوصية وشروط الاحكام</label>
-              </div>
-            </div>
-          
-      </div>
-          <button type="submit"  name="btnprof" class="btn btn-a"> تسجيل</button>
-      </div>
-                
-              </form>
 
           </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+         
+            <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
+                   required value="{{email}}">
+            
+          </div>
+        </div>
+        <br>
 
+        <br>
+        <br>
+        <!-- <h4>نوع الحساب</h4>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;" value="agent" required >
+              <label for="" style="font-size: 20px;">وكيل عقاري</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;"  value="customer"  required >
+              <label for="" style="font-size: 20px;">باحث عن عقار</label>
+          </div>
+        </div> -->
+        <br>
+        <br>
+        <br>
+        <hr>
+
+      <div class="col-md-12 text-center">
+        <br>
+        <button type="submit" class="btn btn-a" name="btnsave"> حفظ </button>
+      </div>
+    </div>
+  </form>
+  {% else %}
+
+  <h1> اعدادات الحساب</h1>
+  <h4 class="alert alert-danger">
+     يجب عليك
+     <a href="{% url 'login' %}" class="text-dark">
+      تسجيل الدخول
+
+     </a>
+
+  </h4>
+  {% endif %}
+      
+  
+</div>
+</center>
 {% endblock %}

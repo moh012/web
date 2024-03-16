@@ -1,3 +1,4 @@
+from collections import UserDict
 from urllib import request
 from django.shortcuts import render , redirect
 from django.contrib import messages
@@ -20,6 +21,7 @@ def login(request):
             user = auth.authenticate(username =username , password =password )
 
             if user is not None:
+                 #خدمة تذكرني 
                  if 'rememberme' not in request.POST:
                       request.session.set_expiry(0)
                  auth.login(request,user)
@@ -37,6 +39,14 @@ def signup(request):
     return render(request, 'accounts/signup.html')
 
 
+def logout(request):
+     
+     if request.user.is_authenticated:
+          auth.logout(request)
+
+     return redirect('index')
+
+
 
 
 def profile(request):
@@ -52,7 +62,7 @@ def profile(request):
         username = None
         terms = None
         is_add= None
-        ser = None
+      
         
 
 
@@ -142,7 +152,7 @@ def profile(request):
                             email = ''
                             username = ''
                             terms = None
-                            ser = None
+                          
 
                             #  للتأكد من    العملية
                             messages.success(request, 'تم انشاء الحساب بنجاح')
@@ -172,16 +182,6 @@ def profile(request):
         return render(request, 'accounts/profile.html')
 
 
-
-
-def logout(request):
-     
-     if request.user.is_authenticated:
-          auth.logout(request)
-
-     return redirect('index')
-
-
 def userdata(request):
     if request.method == 'POST' and 'btncreate' in request.POST:
 
@@ -191,7 +191,8 @@ def userdata(request):
         password = None
         accepted = None
         account_type= request.POST.get('account_type', None)
- 
+        is_added = None
+        
 
 
         # if 'user_photo' in request.POST: user_photo = request.POST['user_photo']
@@ -239,16 +240,16 @@ def userdata(request):
 
                              # هذا الكد الصحيح 
                             #  اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
-
+                             
                              if account_type == 'agent':
                                 Agent.objects.create(user=user)
                                 messages.success(request,'مرحبا وكيلنا العزيز ')
-                                return redirect('index')
+                                return redirect('userdata')
 
                              elif account_type == 'customer':
                                 Customer.objects.create(user=user)
                                 messages.success(request,'مرحبا عميلنا العزيز ')
-                                return redirect('index')
+                                return redirect('userdata')
                                 
                           
 
@@ -266,6 +267,7 @@ def userdata(request):
                              email = ''
                              accepted = None
                              account_type = None
+                             is_added = True
 
                          else:
                              messages.error(request, ' هناك خطأ في البريد الالكتروني')
@@ -273,16 +275,14 @@ def userdata(request):
                 messages.error(request, 'يجب الموافقة على الشروط وسياسة الاستخدام  ')
         else:
             messages.error(request, 'تحقق من الحقول المدخلة') 
-     
+   
         return render(request, 'accounts/userdata.html', {
             # 'user_photo': user_photo,
             'user': username,
             'pass': password,
             'email': email,
-           
+            'is_added': is_added
         })
-        
-            
     else:
         return render(request, 'accounts/userdata.html')
 
@@ -315,14 +315,63 @@ def verification(request):
 
         return render(request, 'accounts/verification.html')
 
+# def edit_profile(request):
+#     if request.method == 'POST' and 'btnsave' in request.POST:
+#         return redirect('edit_profile')
+#     else:
+#         if request.user.is_anonymous: return redirect ('index')
+#         if request.user is not None:
+            
+#             if request.user.is_agent:
+#                  agentprofile = Agent.objects.get(pk=request.user.pk)
+#             elif request.user.is_customer:
+#                 customerprofile = Customer.objects.get(pk=request.user.pk)
+
+#             context = {
+#                 'user': request.user.username,
+#                 'pass': request.user.password,
+#                 'email': request.user.email,
+#             }
+
+#             return render(request, 'accounts/edit_profile.html', context)
+            
+#         else:
+#             return render('accounts/index.html')
+
+
 def edit_profile(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and 'btnsave' in request.POST:
+        if request.user is not None and not request.user.id is not None:
+            agrent_profile= Agent.objects.get(user=request.user)
 
-        return render(request, 'accounts/edit_profile.html')
+            if request.POST['user'] and request.POST ['pass'] and request.POST['email']:
+                # request.user.username = request.POST['user']
+                # request.user.email = request.POST['email']
+                if not request.POST['pass'].startswith('pbkdf2_sha256$'):
+                    request.user.set_password(request.POST['pass'])
+
+                #حفظ 
+                request.user.save()
+                agrent_profile.save()
+                auth.login(request, request.user)
+                messages.success(request, 'قمت بحفظ لتغييرات')  
+            else:
+                messages.error(request, 'تحقق من ادخال الحقول المعدلة')
+
+        return redirect('edit_profile')
     else:
-
-        return render(request, 'accounts/edit_profile.html')
-
+        if request.user is not None:
+            context = None
+            if not request.user.is_anonymous:
+                agrent_profile= Agent.objects.get(user=request.user)
+                context = {
+                    'user': request.user.username,
+                    'pass': request.user.password, 
+                    'email': request.user.email
+                }
+            return render(request, 'accounts/edit_profile.html', context)
+        else:
+            return redirect('edit_profile')
 
 
 def privacy_policy(request):

@@ -354,7 +354,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إضافة</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item {% if request.resolver_match.url_name == 'property' %}active{% endif %}" href="{% url 'property' %}">إضافة عقار</a>
+              <a class="dropdown-item {% if request.resolver_match.url_name == 'property' %}active{% endif %}" href="{% url 'property' %}" >إضافة عقار</a>
               <a class="dropdown-item {% if request.resolver_match.url_name == 'order' %}active{% endif %}" href="{% url 'order' %}">إضافة طلب</a>
             </div>
           </li>
@@ -394,8 +394,7 @@
             {% else %}
 
                 <li class="nav-item">
-                  <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">تسجيل</a>
-                </li>
+                  <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'login' %}"> تسجيل الدخول</a>        </li>
 
             {% endif %}
 
