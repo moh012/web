@@ -15,25 +15,35 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">304 Blaster Up</h1>
-              <span class="color-text-a">Chicago, IL 606543</span>
+              <h1 class="title-single">تفاصيل العقار</h1>
+              <h4 class="color-text-a">{{prop.title}} {{prop.property_type}}</h4>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="{% url 'index' %}">Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="property-grid">Properties</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  304 Blaster Up
+                  <button type="submit" class="btn btn-warning">حجز العقار</button>
                 </li>
               </ol>
             </nav>
           </div>
+          <!-- <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      خيارات
+                  </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                      <a class="dropdown-item" href="#">تعديل</a>
+                      <a class="dropdown-item" href="{% url 'contact' %}">حذف</a>
+                    </div>
+                </li>
+              </ul>
+            </nav>
+          </div> -->
         </div>
       </div>
     </section><!-- End Intro Single-->
@@ -46,15 +56,15 @@
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
                 <div class="carousel-item-b swiper-slide">
-                  <a href="{% static 'assets/img/slide-1.jpg' %}" class="image-link">
-                    <img src="{% static 'assets/img/slide-1.jpg' %}" alt="">
+                  <a href="{{prop.img.url}}" class="image-link">
+                    <img src="{{prop.img.url}}" alt="image here" class="img-a img-fluid">
                   </a>
                 </div>
-                <div class="carousel-item-b swiper-slide">
+                <!-- <div class="carousel-item-b swiper-slide">
                   <a href="{% static 'assets/img/slide-2.jpg' %}" class="image-link">
                   <img src="{% static 'assets/img/slide-2.jpg' %}" alt="">
                 </a>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="property-single-carousel-pagination carousel-pagination"></div>
@@ -69,10 +79,10 @@
                 <div class="property-price d-flex justify-content-center foo">
                   <div class="card-header-c d-flex">
                     <div class="card-box-ico">
-                      <span class="bi bi-cash">$</span>
+                      <span class="bi bi-cash">R.Y</span>
                     </div>
                     <div class="card-title-c align-self-center">
-                      <h5 class="title-c">15000</h5>
+                      <h5 class="title-c">{{prop.price}}</h5>
                     </div>
                   </div>
                 </div>
@@ -80,7 +90,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="title-box-d1 section-t4">
-                        <h3 class="title-d1">Quick Summary</h3>
+                        <h3 class="title-d1">تفاصيل العقار</h3>
                       </div>
                     </div>
                   </div>
@@ -88,37 +98,49 @@
                     <ul class="list">
                       <li class="d-flex justify-content-between">
                         <strong>رقم العقار:</strong>
-                        <span>1134</span>
+                        <span>{{prop.id}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>الموقع:</strong>
-                        <span> الحي السياسي بغداد </span>
+                        <span>{{prop.location}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>نوع العقد:</strong>
-                        <span>شقة</span>
+                        <strong>نوع العقار:</strong>
+                        <span>{{prop.property_type}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>حالة العقار</strong>
-                        <span>بناء حديث</span>
+                        <strong>حالة العقار:</strong>
+                        <span>{{prop.build_year}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>نوع السكن:</strong>
+                        <span>{{prop.house_type}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>الشوارع:</strong>
+                        <span>{{prop.street_number}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>المساحة:</strong>
-                        <span>340m
+                        <span>{{prop.space}}m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>غرف:</strong>
-                        <span>4</span>
+                        <span>{{prop.room_number}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>حمام:</strong>
-                        <span>2</span>
+                        <strong>دورات المياه:</strong>
+                        <span>{{prop.bathrooms}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong> كراج </strong>
-                        <span>1</span>
+                        <strong>الصالات:</strong>
+                        <span>{{prop.hall_room}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>الادوار:</strong>
+                        <span>{{prop.floor}}</span>
                       </li>
                     </ul>
                   </div>
@@ -134,24 +156,7 @@
                 </div>
                 <div class="property-description">
                   <p class="description color-text-a">
-                   
-                        عقار فريد من نوعه ينتظرك!
-                        هل تبحث عن ملاذ هادئ بعيد عن صخب المدينة؟
-
-                        هل تحلم بمنزل فسيح يوفر لك كل ما تحتاجه من راحة ورفاهية؟
-
-                        لا تبحث أكثر، لقد وجدنا لك العقار المثالي!
-
-                        يقدم لك هذا العقار الفريد من نوعه:
-                  </p>
-                  <p class="description color-text-a no-margin">
-                    موقع متميز: يقع العقار في منطقة هادئة وراقية، محاطة بالطبيعة الخلابة، وبعيد عن ضجيج المدينة.
-                    مساحة واسعة: يتميز العقار بمساحته الواسعة التي توفر لك كل ما تحتاجه من راحة وحرية.
-                    تصميم أنيق: تم تصميم العقار بأسلوب عصري وأنيق، مع لمسات من الدفء والراحة.
-                    مرافق متكاملة: يوفر العقار جميع المرافق التي تحتاجها لحياة كريمة، مثل حمام سباحة، وصالة ألعاب رياضية، وحديقة جميلة.
-                    أمان وراحة: يتمتع العقار بنظام أمان متطور يضمن لك راحة البال، بالإضافة إلى خدمات صيانة ممتازة.
-                    لا تفوت هذه الفرصة الاستثنائية! تواصل معنا اليوم لمعرفة المزيد عن هذا العقار المميز.
-
+                    {{prop.details}}
                   </p>
                 </div>
                 <div class="row section-t3">
@@ -162,14 +167,31 @@
                   </div>
                 </div>
                 <div class="amenities-list color-text-a">
-                  <ul class="list-a no-margin">
-                    <li>بلوكن</li>
-                    <li>مطبخ </li>
-                    <li>تلفزيون </li>
-                    <li>كنب</li>
-                    <li>Tennis Courts</li>
-                    <li>انترنت</li>
-                   
+                  <ul class="no-margin">
+                    {% if prop.pool == True %}
+                    <li>مسبح</li>
+                    {% endif %}
+                    {% if prop.kitchen == True %}
+                    <li>مطبخ راكب</li>
+                    {% endif %}
+                    {% if prop.roof == True %}
+                    <li>مع سطح</li>
+                    {% endif %}
+                    {% if prop.modern == True %}
+                    <li>جديدة</li>
+                    {% endif %}
+                    {% if prop.appendix == True %}
+                    <li>حوش</li>
+                    {% endif %}
+                    {% if prop.elevator == True %}
+                    <li>مصعد</li>
+                    {% endif %}
+                    {% if prop.basement == True %}
+                    <li>بدروم</li>
+                    {% endif %}
+                    {% if prop.furnished == True %}
+                    <li>مفروشة</li>
+                    {% endif %}
                   </ul>
                 </div>
               </div>
@@ -209,13 +231,17 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <a href="{% url 'agent_single' %}">
-                <img src="{% static 'assets/img/agent-4.jpg' %}" alt="" class="img-fluid">
+                <a href="{% url 'agent_single' id=prop.agent.id %}">
+                  {% if prop.agent.profil_photo %}
+                    <img src="{{prop.agent.profil_photo.url}}" alt="" class="img-fluid">
+                    {% else %}
+                    <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="img-fluid">
+                    {% endif %}
               </a>
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
-                  <h4 class="title-agent"> شكيب شرارة </h4>
+                  <h4 class="title-agent">{{prop.agent.user.username}}</h4>
                   <p class="color-text-a">
                                             نص مقتبص من عمنا Bard
                                             <br>
@@ -227,18 +253,13 @@
                   </p>
                   <ul class="list-unstyled">
                     <li class="d-flex justify-content-between">
-                      <strong>تلفون:</strong>
-                      <span class="color-text-a"> 01 480 450 </span>
-                    </li>
-                    <li class="d-flex justify-content-between">
                       <strong>جوال:</strong>
-                      <span class="color-text-a"> 773324281 </span>
+                      <span class="color-text-a">{{prop.agent.phone}}</span>
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>البريد الالكتروني:</strong>
-                      <span class="color-text-a"> alwi773324281@gmail.com </span>
+                      <span class="color-text-a">{{prop.agent.user.email}}</span>
                     </li>
-                
                   </ul>
                   <div class="socials-a">
                     <ul class="list-inline">
@@ -327,19 +348,17 @@
               <ul class="list-comments">
                 {% for comment in cuscomment %}
                 <li style="padding-bottom: 0.5rem;">
-                  {% for cus in cust %}
                   <div class="comment-avatar">
-                    <img src="{{cus.photo.url}}" alt="">
+                    <img src="{{comment.customer.photo.url}}" alt="">
                   </div>
                   <div class="comment-details" style="padding-right: 25px;">
-                    <h4 class="comment-author">{{cus.user.username}}</h4>
+                    <h4 class="comment-author">{{comment.customer.user.username}}</h4>
                     <span>{{comment.date}}</span>
                     <p class="comment-description">
                       {{comment.comment}}
                     </p>
                     <a href="#">Reply</a>
                   </div>
-                  {% endfor %}
                 </li>
                 <hr>
                 {% endfor %}
@@ -351,7 +370,7 @@
               <div class="title-box-d1">
                 <h3 class="title-d1" style="direction: rtl;"> اترك تعليقك هنا</h3>
               </div>
-              <form class="form-a" action="{% url "property_single" %}" method="POST">
+              <form class="form-a" action="" method="POST">
                 {% csrf_token %}
                 <div class="row">
                   <div class="col-md-12 mb-3">

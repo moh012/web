@@ -16,9 +16,30 @@
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
               <h1 class="title-single">تفاصيل الطلب</h1>
-              <h4 class="color-text-a">طلب جاد</h4>
+              <h4 class="color-text-a">{{ord.title}} {{ord.order_type}}</h4>
             </div>
           </div>
+          {% if ord.state == True %}
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <span class="color-text-a">طلب جاد</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          {% else %}
+          <div class="col-md-12 col-lg-4">
+            <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="{% url 'serious_order' ord.id %}" class="btn btn-success">ترقية إلى طلب جاد</a>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          {% endif %}
         </div>
       </div>
     </section><!-- End Intro Single-->
@@ -31,7 +52,7 @@
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
                 <div class="carousel-item-b swiper-slide">
-                  <img src="{% static 'assets/img/about-2.jpg' %}" alt="">
+                  <img src="{% static 'assets/img/about-2.jpg' %}"alt="image here" class="img-a img-fluid">
                 </div>
               </div>
             </div>
@@ -47,12 +68,12 @@
                 <div class="property-price d-flex justify-content-center foo">
                   <div class="card-header-c d-flex">
                     <div class="card-box-ico">
-                      <span class="bi bi-cash">$</span>
+                      <span class="bi bi-cash">R.Y</span>
                     </div>
                     <div class="card-title-c align-self-center">
-                      <h5 class="title-c">15000</h5>
+                      <h5 class="title-c">{{ord.start_price}}</h5>
                       <h4>&</h4>
-                      <h5 class="title-c">20000</h5>
+                      <h5 class="title-c">{{ord.end_price}}</h5>
                     </div>
                   </div>
                 </div>
@@ -60,45 +81,57 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="title-box-d1 section-t4">
-                        <h3 class="title-d1">Quick Summary</h3>
+                        <h3 class="title-d1">تفاصيل الطلب</h3>
                       </div>
                     </div>
                   </div>
                   <div class="summary-list">
                     <ul class="list">
                       <li class="d-flex justify-content-between">
-                        <strong>Property ID:</strong>
-                        <span>1134</span>
+                        <strong>رقم الطلب:</strong>
+                        <span>{{ord.id}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Location:</strong>
-                        <span>Chicago, IL 606543</span>
+                        <strong>الموقع:</strong>
+                        <span>{{ord.location}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Property Type:</strong>
-                        <span>House</span>
+                        <strong>نوع الطلب:</strong>
+                        <span>{{ord.order_type}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Status:</strong>
-                        <span>Sale</span>
+                        <strong>حالة الطلب:</strong>
+                        <span>{{ord.build_year}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Area:</strong>
-                        <span>340m
+                        <strong>نوع السكن:</strong>
+                        <span>{{ord.housetype}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>الشوارع:</strong>
+                        <span>{{ord.street_number}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>المساحة:</strong>
+                        <span>{{ord.space}}m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Beds:</strong>
-                        <span>4</span>
+                        <strong>غرف:</strong>
+                        <span>{{ord.room_number}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Baths:</strong>
-                        <span>2</span>
+                        <strong>دورات المياه:</strong>
+                        <span>{{ord.hall_room}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
-                        <strong>Garage:</strong>
-                        <span>1</span>
+                        <strong>الصالات:</strong>
+                        <span>{{ord.bathrooms}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>الادوار:</strong>
+                        <span>{{ord.floor}}</span>
                       </li>
                     </ul>
                   </div>
@@ -108,42 +141,48 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="title-box-d1">
-                      <h3 class="title-d1">مطلوب</h3>
+                      <h3 class="title-d1">وصف الطلب</h3>
                     </div>
                   </div>
                 </div>
                 <div class="property-description">
                   <p class="description color-text-a">
-                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-                    neque, auctor sit amet
-                    aliquam vel, ullamcorper sit amet ligula. Cras ultricies ligula sed magna dictum porta.
-                    Curabitur aliquet quam id dui posuere blandit. Mauris blandit aliquet elit, eget tincidunt
-                    nibh pulvinar quam id dui posuere blandit.
-                  </p>
-                  <p class="description color-text-a no-margin">
-                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
-                    malesuada. Quisque velit nisi,
-                    pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+                    {{ord.details}}
                   </p>
                 </div>
                 <div class="row section-t3">
                   <div class="col-sm-12">
                     <div class="title-box-d1">
-                      <h3 class="title-d1">بيانات اضافية</h3>
+                      <h3 class="title-d1">ملحقات وتفصايل أكثر </h3>
                     </div>
                   </div>
                 </div>
                 <div class="amenities-list color-text-a">
-                  <ul class="list-a no-margin">
-                    <li>Balcony</li>
-                    <li>Outdoor Kitchen</li>
-                    <li>Cable Tv</li>
-                    <li>Deck</li>
-                    <li>Tennis Courts</li>
-                    <li>Internet</li>
-                    <li>Parking</li>
-                    <li>Sun Room</li>
-                    <li>Concrete Flooring</li>
+                  <ul class="no-margin">
+                    {% if ord.pool == True %}
+                    <li>مسبح</li>
+                    {% endif %}
+                    {% if ord.kitchen == True %}
+                    <li>مطبخ راكب</li>
+                    {% endif %}
+                    {% if ord.roof == True %}
+                    <li>مع سطح</li>
+                    {% endif %}
+                    {% if ord.modern == True %}
+                    <li>جديدة</li>
+                    {% endif %}
+                    {% if ord.appendix == True %}
+                    <li>حوش</li>
+                    {% endif %}
+                    {% if ord.elevator == True %}
+                    <li>مصعد</li>
+                    {% endif %}
+                    {% if ord.basement == True %}
+                    <li>بدروم</li>
+                    {% endif %}
+                    {% if ord.furnished == True %}
+                    <li>مفروشة</li>
+                    {% endif %}
                   </ul>
                 </div>
               </div>
@@ -183,11 +222,11 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <img src="{% static 'assets/img/agent-4.jpg' %}" alt="" class="img-fluid">
+                <img src="{{ord.customer.photo.url}}" alt="" class="img-fluid">
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
-                  <h4 class="title-agent">Anabella Geller</h4>
+                  <h4 class="title-agent">{{ord.customer.user.username}}</h4>
                   <p class="color-text-a">
                     Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
                     dui. Quisque velit nisi,
@@ -195,20 +234,12 @@
                   </p>
                   <ul class="list-unstyled">
                     <li class="d-flex justify-content-between">
-                      <strong>Phone:</strong>
-                      <span class="color-text-a">(222) 4568932</span>
+                      <strong>جوال:</strong>
+                      <span class="color-text-a">{{ord.customer.phone}}</span>
                     </li>
                     <li class="d-flex justify-content-between">
-                      <strong>Mobile:</strong>
-                      <span class="color-text-a">777 287 378 737</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Email:</strong>
-                      <span class="color-text-a">annabella@example.com</span>
-                    </li>
-                    <li class="d-flex justify-content-between">
-                      <strong>Skype:</strong>
-                      <span class="color-text-a">Annabela.ge</span>
+                      <strong>البريد الالكتروني:</strong>
+                      <span class="color-text-a">{{ord.customer.user.email}}</span>
                     </li>
                   </ul>
                   <div class="socials-a">

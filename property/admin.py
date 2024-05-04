@@ -8,10 +8,15 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ['id', 'city_name']
 
 
+class ContactAdmin1(admin.ModelAdmin):
+    list_display = ['id', 'agent', 'title', 'property_type']
+    list_display_links = ['id', 'agent', 'title', 'property_type']
+
+
 # admin.site.register(Type)
 admin.site.register(City, ContactAdmin)
 admin.site.register(Area)
-admin.site.register(Property)
+admin.site.register(Property, ContactAdmin1)
 admin.site.register(Photo_Property)
 admin.site.register(Comparison)
 admin.site.register(Favorite)

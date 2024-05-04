@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+حذف العقار
+{% endblock %}
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">حذف العقار</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Blog Single ======= -->
+    <section class="news-single nav-arrow-b">
+        <form action="{% url "delete_property" prop.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                    <div class="post-content color-text-a">
+                    <p class="post-intro">
+                        هل انت متأكد من <span class="color-b">حذف</span> العقار؟
+                    </p>
+                    <input type="hidden" value="delete">
+                    <hr>
+                    <div class="col-md-12 text-center">
+                        <br>
+                        <button type="submit" class="btn btn-danger">حذف العقار</button>
+                        <a href="{% url 'property_grid' %}" class="btn btn-success">التراجع للخلف</a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </section><!-- End Blog Single-->
+
+  </main><!-- End #main -->
+  {% endblock %}

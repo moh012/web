@@ -1,0 +1,360 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+تعديل الطلب
+{% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+<div class="col-md-7">
+    <form action="" method="POST" enctype="multipart/form-data">                  
+      {% csrf_token %}
+      <div class="row">
+      
+        <h1>تعديل الطلب</h1>
+        
+
+        <br>
+        <br>
+        <br>
+          
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="orderTitle" class="" value="إيجار" {% if ord.title == 'إيجار' %}checked{% endif %}  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">إيجار</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="orderTitle" class="" value="شراء" {% if ord.title == 'شراء' %}checked{% endif %}  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">شراء</label>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
+            <select class="form-control form-select form-control-a" name="orderType" id="bathrooms" title="نوع العقار" style="line-height: 2;">
+              <option>{{ord.order_type}}</option>
+              <option>شقة</option>
+              <option>فيلا</option>
+              <option>أرض</option>
+              <option>محل</option>
+              <option>شاليهات</option>
+              <option>غرفة</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
+            <select class="form-control form-select form-control-a" name="city" id="area" title="المحافظة" style="line-height: 2;">
+                <option>{{ord.area.city}}</option>
+                <option>الأمانة</option>
+                <option>صنعاء</option>
+                <option>عدن</option>
+                <option>تعز</option>
+                <option>إب</option>
+                <option>الحديدة</option>
+                <option>حجة</option>
+                <option>عمران</option>
+                <option>البيضاء</option>
+                <option>الجوف</option>
+                <option>ذمار</option>
+                <option>شبوة</option>
+                <option>مأرب</option>
+                <option>المهرة</option>
+                <option>أبين</option>
+                <option>لحج</option>
+                <option>المحويت</option>
+                <option>الضالع</option>
+                <option>صعدة</option>
+                <option>ريمة</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
+            <select class="form-control form-select form-control-a" name="area" id="area" title="المديرية" style="line-height: 2;">
+                <option>{{ord.area}}</option>
+                <option>الوحدة</option>
+                <option>معين</option>
+                <option>صنعاء القديمة</option>
+                <option>شعوب</option>
+                <option>اّزال</option>
+                <option>الصافية</option>
+                <option>السبعين</option>
+                <option>التحرير</option>
+                <option>الثورة</option>
+                <option>بني حارث</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <label for="" style="display: flex;">الموقع</label>
+            <input type="text" name="location" value="{{ord.location}}" class="form-control form-control-lg form-control-a" placeholder="بجانب..." title="قم بإدخال موقع العقار" >
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <label for="" style="display: flex;">السعر</label>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input type="text" name="minPrice" value="{{ord.start_price}}" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" >
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <input type="text" name="maxPrice" value="{{ord.end_price}}" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" >
+          </div>
+          <script>
+            function checkPriceRange() {
+                 const priceLow = document.getElementById("priceLow");
+                 const priceHigh = document.getElementById("priceHigh");
+         
+                 if (parseInt(priceLow.value) > parseInt(priceHigh.value)) {
+                     priceLow.value = priceHigh.value;
+                 }
+            }
+         </script>
+        </div>
+       
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">الغرف</label>
+            <select class="form-control form-select form-control-a" name="room" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+              <option>{{ord.room_number}}</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>+7</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">الصالات</label>
+            <select class="form-control form-select form-control-a" name="hall" id="hall" title="عدد الصالات" style="line-height: 2;">
+              <option>{{ord.hall_room}}</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>+7</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">دورات المياه</label>
+            <select class="form-control form-select form-control-a" name="bathroom" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+              <option>{{ord.bathrooms}}</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>+7</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">الادوار</label>
+            <select class="form-control form-select form-control-a" name="floor" id="floor" title="عدد الادوار" style="line-height: 2;">
+              <option>{{ord.floor}}</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>+7</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">الشوارع</label>
+            <select class="form-control form-select form-control-a" name="street" id="street" title="عدد الشوارع المطلة" style="line-height: 2;">
+              <option>{{ord.street_number}}</option>
+              <option>شارع</option>
+              <option>شارعين (زاوية)</option>
+              <option>3 شوارع</option>
+              <option>4 شوارع</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">عمر العقار</label>
+            <select class="form-control form-select form-control-a" name="propertyAge" id="bathrooms" title="أضف عمر العقار" style="line-height: 2;">
+              <option>{{ord.build_year}}</option>
+              <option>جديد</option>
+              <option>أقل من سنه</option>
+              <option>أقل من سنتين</option>
+              <option>أقل من 3 سنوات</option>
+              <option>أقل من 4 سنوات</option>
+              <option>أقل من 5 سنوات</option>
+              <option>أقل من 6 سنوات</option>
+              <option>أقل من 7 سنوات</option>
+              <option>أقل من 8 سنوات</option>
+              <option>أقل من 9 سنوات</option>
+              <option>أقل من 10 سنوات</option>
+              <option>أقل من 11 سنه</option>
+              <option>أقل من 12 سنه</option>
+              <option>أقل من 13 سنه</option>
+              <option>أقل من 14 سنه</option>
+              <option>أقل من 15 سنه</option>
+              <option>أقل من 16 سنه</option>
+              <option>أقل من 17 سنه</option>
+              <option>أقل من 18 سنه</option>
+              <option>أقل من 19 سنه</option>
+              <option>أقل من 20 سنه</option>
+              <option>أكبر من 21 سنه</option>
+            </select>
+            <br>
+          </div>
+        </div>
+        <br>
+        <label for="" style="display: flex;">نوع السكن</label>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="houseType" class="" value="عزبة" {% if ord.housetype == 'عزبة' %}checked{% endif %} style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">عزبة</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+              <input type="radio" name="houseType" class="" value="عوائل" {% if ord.housetype == 'عوائل' %}checked{% endif %}  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">عوائل</label>
+          </div>
+        </div>        
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <label for="" style="display: flex;">المساحة</label>
+            <input type="text" name="space" value="{{ord.space}}" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
+          </div>
+          <script>
+            function checkInput() {
+              const numberInput = document.getElementById("numberInput");
+              const value = numberInput.value;
+          
+              if (value != "" && isNaN(value)) {
+                numberInput.value = "";
+                alert("يسمح بالأرقام فقط!");
+                return;
+              }
+            }
+          </script>
+        </div>
+        <br>
+        <br>
+        <br> 
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="" style="display: flex;">الوصف</label>
+            <textarea name="description"  class="form-control" cols="45" rows="8" placeholder="وصف الطلب" title="اضف وصف للطلب" >{{ord.details}}</textarea>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h5>بيانات اضافية</h5>
+        <br>
+        <br>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="pool" {% if ord.pool == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">مسبح</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="kitchen" {% if ord.kitchen == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">مطبخ راكب</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="roof" {% if ord.roof == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">مع سطح</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="modern" {% if ord.modern == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">حديثة</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="yard" {% if ord.appendix == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">حوش</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="elev" {% if ord.elevator == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">مصعد</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="basement" {% if ord.basement == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">بدروم</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3" style="width: 25%;">
+          <div class="form-group">
+              <input type="checkbox" value="True" name="furnish" {% if ord.furnished == True %}checked{% endif %} class=""  style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">مفروشة</label>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <hr>
+        
+
+        <div class="col-md-12 text-center">
+          <br>
+          <button type="submit" class="btn btn-warning">تعديل الطلب</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</center>
+{% endblock %}
