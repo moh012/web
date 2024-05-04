@@ -39,12 +39,19 @@
             </div>
           </div>
 
+          {% for msg in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>اهلا، </strong>{{msg}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+        {% endfor %}
+
 
           {% for order in orders %}
           <!-- بداية الطلب -->
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
-              <a href="{% url 'order_single' %}">
+              <a href="{% url 'order_single' order.id %}">
               <div class="img-box-a">
                 <img src="{% static 'assets/img/about-2.jpg' %}" alt="" class="img-a img-fluid">
               </div>
@@ -68,7 +75,7 @@
                     <div class="price-box d-flex">
                       <span class="price-a">وبين | {{order.end_price}} ريال</span>
                     </div>
-                    <a href="{% url 'order_single' %}" class="link-a">{{order.order_date}}
+                    <a href="{% url 'order_single' order.id %}" class="link-a">{{order.order_date}}
                       <!-- <span class="bi bi-chevron-left"></span> -->
                     </a>
                   </div>
@@ -92,6 +99,19 @@
                         <h4 class="card-info-title">الصالات</h4>
                         <span>{{order.hall_room}}</span>
                       </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                            خيارات
+                        </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            {% if user.is_authenticated and user.customer %}
+                            <a class="dropdown-item" href="{% url 'edit_order' order.id %}">تعديل</a>
+                            <a class="dropdown-item" href="{% url 'delete_order' order.id %}">حذف</a>
+                            {% endif %}
+                          </div>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -104,36 +124,6 @@
 
 
 
-        </div>
-
-
-        
-        <div class="row">
-          <div class="col-sm-12">
-            <nav class="pagination-a">
-              <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">
-                    <span class="bi bi-chevron-left"></span>
-                  </a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item next">
-                  <a class="page-link" href="#">
-                    <span class="bi bi-chevron-right"></span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
       </div>
     </section><!-- End Property Grid Single-->

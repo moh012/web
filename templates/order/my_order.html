@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+بياناتي
+{% endblock %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">بياناتي</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Intro Single -->
+
+    <!-- ======= Agent Single ======= -->
+    <section class="agent-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="agent-avatar-box">
+                  <img src="{{cust.photo.url}}" alt="" class="agent-avatar img-fluid">
+                </div>
+              </div>
+              <div class="col-md-5 section-md-t3">
+                <div class="agent-info-box">
+                  <div class="agent-title">
+                    <div class="title-box-d1">
+                      <h3 class="title-d1">{{cust.user.username}}</h3>
+                      <h5 class="color-text-a bi bi-patch-check-fill"> حساب موثق</h5>
+                    </div>
+                  </div>
+                  <div class="agent-content mb-3">
+                    <p class="content-d color-text-a">
+                      صنعاء
+                    </p>
+                    <div class="info-agents color-a">
+                      <p>
+                        <strong>الهاتف: </strong>
+                        <span class="color-text-a">{{cust.phone}}</span>
+                      </p>
+                      <p>
+                        <strong>البريد الإلكتروني: </strong>
+                        <span class="color-text-a">{{cust.user.email}}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="socials-footer">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a href="#" class="link-one">
+                          <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#" class="link-one">
+                          <i class="bi bi-twitter" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#" class="link-one">
+                          <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#" class="link-one">
+                          <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 section-t8">
+            <div class="title-box-d1">
+              <h3 class="title-d1">الطلبات ({{num_orders}})</h3>
+            </div>
+          </div>
+          <div class="row property-grid grid">
+            <div class="col-sm-12">
+              <div class="grid-option">
+                <form>
+                  <select class="custom-select">
+                    <option selected>All</option>
+                    <option value="1">New to Old</option>
+                    <option value="2">For Rent</option>
+                    <option value="3">For Sale</option>
+                  </select>
+                </form>
+              </div>
+            </div>
+
+            {% for order in orders %}
+          <!-- بداية الطلب -->
+          <div class="col-md-4">
+            <div class="card-box-a card-shadow">
+              <a href="{% url 'order_single' order.id %}">
+              <div class="img-box-a">
+                <img src="{% static 'assets/img/about-2.jpg' %}" alt="" class="img-a img-fluid">
+              </div>
+              <div class="card-overlay">
+                {% if order.state == True %}
+                <div class="price-box d-flex" style="margin: 20px;">
+                  <span class="price-a">طلب جاد</span>
+                </div>
+                {% endif %}
+                <div class="card-overlay-a-content">
+                  <div class="card-header-a">
+                    <h2 class="card-title-a">
+                      مطلوب
+                        <br />{{order.title}} {{order.order_type}}
+                    </h2>
+                  </div>
+                  <div class="card-body-a">
+                    <div class="price-box d-flex">
+                      <span class="price-a">بين | {{order.start_price}} ريال</span>
+                    </div>
+                    <div class="price-box d-flex">
+                      <span class="price-a">وبين | {{order.end_price}} ريال</span>
+                    </div>
+                    <a href="{% url 'order_single' order.id %}" class="link-a">{{order.order_date}}
+                      <!-- <span class="bi bi-chevron-left"></span> -->
+                    </a>
+                  </div>
+                  <div class="card-footer-a">
+                    <ul class="card-info d-flex justify-content-around">
+                      <li>
+                        <h4 class="card-info-title">المساحة</h4>
+                        <span>{{order.space}}m
+                          <sup>2</sup>
+                        </span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">الغرف</h4>
+                        <span>{{order.room_number}}</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">دورات المياه</h4>
+                        <span>{{order.bathrooms}}</span>
+                      </li>
+                      <li>
+                        <h4 class="card-info-title">الصالات</h4>
+                        <span>{{order.hall_room}}</span>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                            خيارات
+                        </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            {% if user.is_authenticated and user.customer %}
+                            <a class="dropdown-item" href="{% url 'edit_order' order.id %}">تعديل</a>
+                            <a class="dropdown-item" href="{% url 'delete_order' order.id %}">حذف</a>
+                            {% endif %}
+                          </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </a>
+            </div>
+          </div>
+          <!-- نهاية الطلب -->
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section><!-- End Agent Single -->
+
+  </main><!-- End #main -->
+  {% endblock %}

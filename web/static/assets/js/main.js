@@ -1,3 +1,32 @@
+// popup messege
+
+document.addEventListener("DOMContentLoaded", function() {
+  var popup = document.getElementById("login-popup");
+  var closeButton = document.getElementById("close-button");
+
+  // إظهار واجهة المنبثقة
+  function showPopup() {
+    popup.style.display = "flex";
+  }
+
+  // إخفاء واجهة المنبثقة
+  function hidePopup() {
+    popup.style.display = "none";
+  }
+
+  // ربط زر الإغلاق بدالة إخفاء واجهة المنبثقة
+  closeButton.addEventListener("click", hidePopup);
+
+  // إخفاء واجهة المنبثقة عند النقر خارج الحدود
+  window.addEventListener("click", function(event) {
+    if (event.target === popup) {
+      hidePopup();
+    }
+  });
+});
+
+// end popup messege
+
 /* هذا الكود  وظيفته عندما يضغط المستخدم على الصورة تفتح في نفس الصفحه وعندما يضغط خارج اطار الصورة 
  يغلق الصورة ويضل في نفس الصفحة 
 */
@@ -31,6 +60,7 @@ imageLinks.forEach(function(imageLink) {
     });
   });
 });
+
 
 /* نهاية الكود  */
 

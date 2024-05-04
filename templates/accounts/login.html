@@ -13,7 +13,6 @@
 <br>
 <br>
 <br>
-<br>
 
 
 
@@ -27,8 +26,8 @@
 
   {% if request.user.is_authenticated %}
         <h4 class="alert alert-secondoery">
-          أهلا وسهلاً , {{request.user.username}} ، أنت الان قمت بتسجيل الدخول
-          <a class="text-dark" href="{% url 'logout' %}"  > ـــ هل تريد تسجيل الخروج  </a>
+          أهلا وسهلاً {{request.user.username}} ، لقد قمت بتسجيل الدخول.
+          <a class="text-dark" href="{% url 'index' %}"  ><br> الذهاب الى <span class="color-b">الصفحة الرئيسية</span></a>
         </h4>
 
 
@@ -75,7 +74,6 @@
         <div class="col-md-12 text-center">
         
           <button type="submit" name="btnlogin"  class="btn btn-a">تسجيل الدخول</button>
-          <br>
           <br>
         
           <p>ليس لدي حساب...

@@ -105,7 +105,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="{% url 'property_single' %}">{{city.city_name}}
+                        <a href="{% url 'property_grid' %}">{{city.city_name}}
                           <br /></a>
                       </h2>
                     </div>
@@ -157,7 +157,7 @@
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="{% url 'property_single' %}">فله
+                        <a href="#">فله
                           <br /> ثلاثة ادوار</a>
                       </h2>
                     </div>
@@ -165,7 +165,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">السعر | $ 12.000</span>
                       </div>
-                      <a href="{% url 'property_single' %}" class="link-a">مزيد من التفاصيل
+                      <a href="#" class="link-a">مزيد من التفاصيل
                         <span class="bi bi-chevron-left"></span>
                       </a>
                     </div>
@@ -186,12 +186,17 @@
                           <span>4</span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">الكراج</h4>
+                          <h4 class="card-info-title">الصالات</h4>
                           <span>1</span>
                         </li>
-                        <li>
-                          <h4 class="card-info-title">مفضلة</h4>
-                          <span><input type="checkbox"></span>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                              خيارات
+                          </a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                              <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            </div>
                         </li>
                       </ul>
                     </div>

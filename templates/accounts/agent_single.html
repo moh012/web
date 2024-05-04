@@ -30,14 +30,18 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="agent-avatar-box">
-                  <img src="{% static 'assets/img/alwi.jpg' %}" alt="" class="agent-avatar img-fluid">
+                  {% if agt.profil_photo %}
+                      <img src="{{agt.profil_photo.url}}" alt="" class="agent-avatar img-fluid">
+                  {% else %}
+                    <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid">
+                  {% endif %}
                 </div>
               </div>
               <div class="col-md-5 section-md-t3">
                 <div class="agent-info-box">
                   <div class="agent-title">
                     <div class="title-box-d1">
-                      <h3 class="title-d1">الوكيل علوي</h3>
+                      <h3 class="title-d1">الوكيل {{agt.user.username}}</h3>
                       <h5 class="color-text-a bi bi-patch-check-fill"> حساب موثق</h5>
                     </div>
                   </div>
@@ -47,12 +51,12 @@
                     </p>
                     <div class="info-agents color-a">
                       <p>
-                        <strong>الهاتف: </strong>
-                        <span class="color-text-a"> 967771689496+ </span>
+                        <strong>جوال: </strong>
+                        <span class="color-text-a">{{agt.phone}}</span>
                       </p>
                       <p>
                         <strong>البريد الإلكتروني: </strong>
-                        <span class="color-text-a"> agents@example.com</span>
+                        <span class="color-text-a">{{agt.user.email}}</span>
                       </p>
                     </div>
                   </div>
@@ -86,7 +90,7 @@
           </div>
           <div class="col-md-12 section-t8">
             <div class="title-box-d1">
-              <h3 class="title-d1">عقاراتي (1)</h3>
+              <h3 class="title-d1">العقارات ({{num_properties}})</h3>
             </div>
           </div>
           <div class="row property-grid grid">
@@ -102,46 +106,63 @@
                 </form>
               </div>
             </div>
+            {% for property in properties %}
             <div class="col-md-4">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="{% static 'assets/img/property-1.jpg' %}" alt="" class="img-a img-fluid">
+                  {% if property.img %}
+                  <img src="{{property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                  {% else %}
+                  <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid">
+                  {% endif %}
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="#">204 Mount
-                          <br /> Olive Road Two</a>
+                        <a href="{% url 'property_single' property.id %}">{{property.title}}
+                          <br>{{property.property_type}}</a>
                       </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">السعر | {{property.price}} ريال</span>
                       </div>
-                      <a href="#" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
+                      <a href="{% url 'property_single' property.id %}" class="link-a">{{property.property_date}}
                       </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
+                          <h4 class="card-info-title">المساحة</h4>
+                          <span>{{property.space}}m
                             <sup>2</sup>
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
+                          <h4 class="card-info-title">الغرف</h4>
+                          <span>{{property.room_number}}</span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
+                          <h4 class="card-info-title">دورات المياه</h4>
+                          <span>{{property.bathrooms}}</span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <h4 class="card-info-title">الصالات</h4>
+                          <span>{{property.hall_room}}</span>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                              خيارات
+                          </a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                              <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                              {% if user.is_authenticated and user.agent %}
+                              <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
+                              <a class="dropdown-item" href="{% url 'delete_property' property.id %}">حذف</a>
+                              {% endif %}
+                            </div>
                         </li>
                       </ul>
                     </div>
@@ -149,6 +170,7 @@
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>

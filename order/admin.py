@@ -5,8 +5,8 @@ from .models import Order, Booking
 
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'order_type']
-    list_display_links = ['id', 'title', 'order_type']
+    list_display = ['id', 'customer', 'title', 'order_type']
+    list_display_links = ['id', 'customer', 'title', 'order_type']
 
 
 admin.site.register(Order, ContactAdmin)

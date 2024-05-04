@@ -16,7 +16,7 @@
 
 <center>
 <div class="col-md-7">
-    <form action="{% url "property" %}" method="POST">                  
+    <form action="{% url "property" %}" method="POST" enctype="multipart/form-data">                  
       {% csrf_token %}
       <div class="row">
        
@@ -26,6 +26,14 @@
         <br>
         <br>
         <br>
+
+        <!-- {% for msg in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>اهلا، </strong>{{msg}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+        {% endfor %} -->
+
           <div class="col-md-6 mb-3">
             <div class="form-group">
                 <input type="radio" name="property" value="إيجار" class="" required style="width: 20px; height: 20px;">
@@ -48,7 +56,7 @@
               <option>أرض</option>
               <option>محل</option>
               <option>شاليهات</option>
-              <option>غرف</option>
+              <option>غرفة</option>
             </select>
           </div>
         </div>

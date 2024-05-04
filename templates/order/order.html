@@ -29,8 +29,8 @@
           
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="orderTitle" class="" value="تأجير" required style="width: 20px; height: 20px;">
-              <label for="" style="font-size: 20px;"></label>
+              <input type="radio" name="orderTitle" class="" value="إيجار" required style="width: 20px; height: 20px;">
+              <label for="" style="font-size: 20px;">إيجار</label>
           </div>
         </div>
         <div class="col-md-6 mb-3">
@@ -99,16 +99,6 @@
           <div class="form-group">
             <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" required>
           </div>
-          <script>
-            function checkPriceRange() {
-                 const priceLow = document.getElementById("priceLow");
-                 const priceHigh = document.getElementById("priceHigh");
-         
-                 if (parseInt(priceLow.value) > parseInt(priceHigh.value)) {
-                     priceLow.value = priceHigh.value;
-                 }
-            }
-         </script>
         </div>
        
         <div class="col-md-6 mb-2" style="width: 100%;">
@@ -330,5 +320,33 @@
       </div>
     </form>
   </div>
+
+  <script>
+    function checkPriceRange() {
+      var minPrice = document.getElementById('priceLow').value;
+      var maxPrice = document.getElementById('priceHigh').value;
+  
+      if (parseInt(minPrice) > parseInt(maxPrice)) {
+        alert('الحد الأدنى يجب أن يكون أقل من الحد الأعلى');
+        return false; // إيقاف إرسال البيانات
+      }
+      return true; // متابعة إرسال البيانات
+    }
+  </script>
+
+  <div id="login-popup" class="popup">
+    <div class="popup-content">
+      <button id="close-button" class="bi bi-x" style="color: white;"></button>
+      <h3>يجب عليك اولاً</h3>
+      <h5>تسجيل الدخول</h5>
+      <br>
+      <br>
+      <a href="{% url 'login' %}" class="btn btn-a">تسجيل الدخول</a>
+      <br>
+      <br>
+      <a href="{% url 'userdata' %}">إنشاء حساب</a>
+    </div>
+  </div>
+
 </center>
 {% endblock %}

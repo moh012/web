@@ -1,6 +1,8 @@
 from django.db import models
 from accounts.models import Agent, Customer
 from django.utils import timezone
+import datetime
+import os
 
 # Create your models here.
 # class Type(models.Model):
@@ -26,18 +28,27 @@ class Area(models.Model):
         return self.area_name
 
 
+def filepath(request, filename):
+    old_filename = filename
+    timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('uploads/', filename)
+
+
 class Property(models.Model):
     # type = models.ForeignKey(Type, on_delete=models.DO_NOTHING, null=True)
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, null=True)
-    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
+    agent = models.ForeignKey(Agent,
+                              on_delete=models.DO_NOTHING,
+                              null=True,
+                              related_name='properties')
     title = models.CharField(max_length=50, null=True)
     property_type = models.CharField(max_length=100, null=True)
     location = models.CharField(max_length=100, null=True)
-    img = models.ImageField(upload_to='propertyPhoto/%Y/%m/%d/', blank=True)
-    description = models.CharField(max_length=100, null=True)
+    img = models.ImageField(upload_to=filepath, blank=True)
     details = models.TextField(null=True)
     price = models.IntegerField(null=True)
-    room_number = models.IntegerField(null=True)
+    room_number = models.CharField(max_length=100, null=True)
     hall_room = models.CharField(max_length=100, null=True)
     bathrooms = models.CharField(max_length=100, null=True)
     floor = models.CharField(max_length=100, null=True)
