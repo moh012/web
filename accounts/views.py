@@ -341,42 +341,68 @@ def verification(request):
 #         else:
 #             return render('accounts/index.html')
 
+# Thr old Code
+# def edit_profile(request):
+#     if request.method == 'POST' and 'btnsave' in request.POST:
+#         if request.user is not None and not request.user.id is not None:
+#             agrent_profile = Agent.objects.get(user=request.user)
 
-def edit_profile(request):
-    if request.method == 'POST' and 'btnsave' in request.POST:
-        if request.user is not None and not request.user.id is not None:
-            agrent_profile = Agent.objects.get(user=request.user)
+#             if request.POST['user'] and request.POST['pass'] and request.POST[
+#                     'email']:
+#                 # request.user.username = request.POST['user']
+#                 # request.user.email = request.POST['email']
+#                 if not request.POST['pass'].startswith('pbkdf2_sha256$'):
+#                     request.user.set_password(request.POST['pass'])
 
-            if request.POST['user'] and request.POST['pass'] and request.POST[
-                    'email']:
-                # request.user.username = request.POST['user']
-                # request.user.email = request.POST['email']
-                if not request.POST['pass'].startswith('pbkdf2_sha256$'):
-                    request.user.set_password(request.POST['pass'])
+#                 #حفظ
+#                 request.user.save()
+#                 agrent_profile.save()
+#                 auth.login(request, request.user)
+#                 messages.success(request, 'قمت بحفظ لتغييرات')
+#             else:
+#                 messages.error(request, 'تحقق من ادخال الحقول المعدلة')
 
-                #حفظ
-                request.user.save()
-                agrent_profile.save()
-                auth.login(request, request.user)
-                messages.success(request, 'قمت بحفظ لتغييرات')
-            else:
-                messages.error(request, 'تحقق من ادخال الحقول المعدلة')
-
-        return redirect('edit_profile')
-    else:
-        if request.user is not None:
-            context = None
-            if not request.user.is_anonymous:
-                agrent_profile = Agent.objects.get(user=request.user)
-                context = {
-                    'user': request.user.username,
-                    'pass': request.user.password,
-                    'email': request.user.email
-                }
-            return render(request, 'accounts/edit_profile.html', context)
-        else:
-            return redirect('edit_profile')
+#         return redirect('edit_profile')
+#     else:
+#         if request.user is not None:
+#             context = None
+#             if not request.user.is_anonymous:
+#                 agrent_profile = Agent.objects.get(user=request.user)
+#                 context = {
+#                     'user': request.user.username,
+#                     'pass': request.user.password,
+#                     'email': request.user.email
+#                 }
+#             return render(request, 'accounts/edit_profile.html', context)
+#         else:
+#             return redirect('edit_profile')
 
 
 def privacy_policy(request):
     return render(request, 'accounts/privacy_policy.html')
+
+
+
+@login_required(login_url='login')
+def edit_profile(request):
+    if request.method == 'POST':
+    
+        if request.POST.get('user') and request.POST.get('pass') and request.POST.get('email'):
+
+            request.user.username = request.POST['user']
+            request.user.email = request.POST['email']
+            request.user.set_password(request.POST['pass'])
+            request.user.save()
+            messages.success(request, 'تم تحديث الملف الشخصي بنجاح.')
+            return redirect('edit_profile')
+        else:
+            messages.error(request, 'يرجى ملئ جميع الحقول بشكل صحيح.')
+
+    context = {
+        'user': request.user.username,
+        'email': request.user.email,
+        'pass': '',
+    }
+    return render(request, 'accounts/edit_profile.html', context)
+
+
