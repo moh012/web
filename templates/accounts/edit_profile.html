@@ -59,7 +59,7 @@
         <br>  
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <input type="password" name="pass2" onkeyup='checkPasswordMatch();' id ="pass2"class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  value="{{pass}}">
+            <input type="password" name="pass2" onkeyup='checkPasswordMatch();' id ="pass2"class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  >
             <div id="divCheckPasswordMatch"></div>
             
             <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
@@ -92,28 +92,10 @@
                    required value="{{email}}">
             
           </div>
-        </div>
-        <br>
 
         <br>
         <br>
-        <!-- <h4>نوع الحساب</h4>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-              <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;" value="agent" required >
-              <label for="" style="font-size: 20px;">وكيل عقاري</label>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="form-group">
-              <input type="radio" name="account_type" class="radio"  style="width: 20px; height: 20px;"  value="customer"  required >
-              <label for="" style="font-size: 20px;">باحث عن عقار</label>
-          </div>
-        </div> -->
-        <br>
-        <br>
-        <br>
-        <hr>
+  
 
       <div class="col-md-12 text-center">
         <br>
@@ -130,11 +112,8 @@
       تسجيل الدخول
 
      </a>
-
   </h4>
   {% endif %}
-      
-  
 </div>
 </center>
 {% endblock %}

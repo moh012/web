@@ -387,11 +387,11 @@
             
               </a>
                 <div class="dropdown-menu">
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">حسابك </a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' %}">حسابي </a>
                 {% if user.is_authenticated and user.customer %}
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'my_order' user.customer.id %}">طلباتي </a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'my_order' %}active{% endif %}" href="{% url 'my_order' user.customer.id %}">طلباتي </a>
                 {% elif user.is_authenticated and user.agent %}
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'my_property' user.agent.id %}">عقاراتي </a>
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'my_property' %}active{% endif %}" href="{% url 'my_property' user.agent.id %}">عقاراتي </a>
                 {% endif %}
                 <a class="dropdown-item {% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">تسجيل الخروج </a>
                 </div>
