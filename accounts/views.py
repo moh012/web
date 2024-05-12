@@ -183,7 +183,8 @@ def profile(request):
 def userdata(request):
     if request.method == 'POST' and 'btncreate' in request.POST:
 
-        # user_photo=None
+        if len(request.FILES) != 0:
+            user_photo = request.FILES['user_photo']
         username = None
         email = None
         password = None
@@ -191,7 +192,8 @@ def userdata(request):
         account_type = request.POST.get('account_type', None)
         is_added = None
 
-        # if 'user_photo' in request.POST: user_photo = request.POST['user_photo']
+        # if 'user_photo' in request.POST:
+        #     user_photo = request.POST['user_photo']
         # else:
         #     messages.error(request, ' يوجد خطأ في صورة المستخدم')
 
@@ -233,21 +235,24 @@ def userdata(request):
                             user = User.objects.create_user(username=username,
                                                             password=password,
                                                             email=email)
-                            user.save()
 
                             # هذا الكد الصحيح
                             #  اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
 
                             if account_type == 'agent':
-                                Agent.objects.create(user=user)
+                                Agent.objects.create(user=user,
+                                                     profil_photo=user_photo)
                                 messages.success(request,
                                                  'مرحبا وكيلنا العزيز ')
+                                user.save()
                                 return redirect('userdata')
 
                             elif account_type == 'customer':
-                                Customer.objects.create(user=user)
+                                Customer.objects.create(user=user,
+                                                        photo=user_photo)
                                 messages.success(request,
                                                  'مرحبا عميلنا العزيز ')
+                                user.save()
                                 return redirect('userdata')
 
                         #  if 'agent'in request.POST:
@@ -257,7 +262,7 @@ def userdata(request):
                         #      customer_profile = Customer(user = user)
                         #      customer_profile.save()
 
-                        #  user_photo=''
+                        # user_photo = ''
                             username = ''
                             password = ''
                             email = ''
@@ -382,16 +387,14 @@ def privacy_policy(request):
     return render(request, 'accounts/privacy_policy.html')
 
 
-
 @login_required(login_url='login')
 def edit_profile(request):
     if request.method == 'POST':
-    
-        if request.POST.get('user') and request.POST.get('pass') and request.POST.get('email'):
+
+        if request.POST.get('user') and request.POST.get('email'):
 
             request.user.username = request.POST['user']
             request.user.email = request.POST['email']
-            request.user.set_password(request.POST['pass'])
             request.user.save()
             messages.success(request, 'تم تحديث الملف الشخصي بنجاح.')
             return redirect('edit_profile')
@@ -401,8 +404,7 @@ def edit_profile(request):
     context = {
         'user': request.user.username,
         'email': request.user.email,
-        'pass': '',
+        'cust': Customer.objects.all(),
+        'agt': Agent.objects.all(),
     }
     return render(request, 'accounts/edit_profile.html', context)
-
-
