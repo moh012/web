@@ -46,42 +46,6 @@
           <input type="text" name="user" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required value="{{user}}">
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <div class="col-md-12 mb-3">
-          <div class="form-group">
-            <input type="password" name="pass" id="password" class="form-control form-control-lg form-control-a" placeholder="كلمة المرور" title="قم بإدخال كلمة المرور"  value="{{pass}}" >
-          </div>
-        </div>
-        <br>
-        <br>
-        <br>  
-        <div class="col-md-12 mb-3">
-          <div class="form-group">
-            <input type="password" name="pass2" onkeyup='checkPasswordMatch();' id ="pass2"class="form-control form-control-lg form-control-a" placeholder="تأكيد كلمة المرور" title="قم بإعادة كتابة كلمة المرور"  >
-            <div id="divCheckPasswordMatch"></div>
-            
-            <!-- أكواد جافا سكربت الخاصة بتطابق كلمات المرور -->
-               
-            <script>
-              var password = document.getElementById("password");
-              var pass2 = document.getElementById("pass2");
-              
-              function validatePassword(){
-                if(password.value != pass2.value) {
-                  pass2.setCustomValidity("كلمة المرور غير متطابقة!");
-                } else {
-                  pass2.setCustomValidity('');
-                }
-              }
-              password.onchange = validatePassword;
-              pass2.onkeyup = validatePassword;
-            </script>
-
-
-          </div>
-        </div>
         <br>
         <br>
         <br>
@@ -92,11 +56,12 @@
                    required value="{{email}}">
             
           </div>
-
-        <br>
-        <br>
-  
-
+          <br>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="" style="font-size: 20px;"><a href="{% url 'change_password' %}">تغيير كلمة المرور</a></label>
+            </div>
+          </div>
       <div class="col-md-12 text-center">
         <br>
         <button type="submit" class="btn btn-a" name="btnsave"> حفظ </button>
