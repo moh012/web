@@ -11,7 +11,6 @@ import re
 from django.core.files.storage import default_storage
 
 
-
 def login(request):
     if request.method == 'POST' and 'btnlogin' in request.POST:
 
@@ -196,7 +195,6 @@ def userdata(request):
         is_added = None
         usernum = request.GET.get('numberInput')
 
-
         if 'user' in request.POST: username = request.POST['user']
         else:
             messages.error(request, '   يوجد خطأ في اسم المستخدم  ')
@@ -373,7 +371,7 @@ def verification(request):
 #                 agrent_profile = Agent.objects.get(user=request.user)
 #                 context = {
 #                     'user': request.user.username,
-#       
+#
 #                     'email': request.user.email
 #                 }
 #             return render(request, 'accounts/edit_profile.html', context)
@@ -405,8 +403,7 @@ def privacy_policy(request):
 #     }
 #     return render(request, 'accounts/edit_profile.html', context)
 
-
-# لا يلمس عشوائي 
+# لا يلمس عشوائي
 # @login_required(login_url='login')
 # def edit_profile(request):
 #     if request.method == 'POST'and 'btnsave' in request.POST:
@@ -425,9 +422,9 @@ def privacy_policy(request):
 #                     cust.save()
 #                 elif agt:
 #                     agt.save()
-                
+
 #                 auth.login(request , request.user)
-#                 messages.success(request, 'تم حفظ التعديلات  ')      
+#                 messages.success(request, 'تم حفظ التعديلات  ')
 #             else:
 #                 messages.error(request, 'تحقق من كتابتك للقيم')
 #     else:
@@ -442,7 +439,6 @@ def privacy_policy(request):
 #                 'agt': Agent.objects.all(),
 #             }
 #     return render(request, 'accounts/edit_profile.html', context)
-
 
 
 @login_required
