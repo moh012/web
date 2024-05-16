@@ -36,8 +36,9 @@ def login(request):
 
 
 def signup(request):
-
-    return render(request, 'accounts/signup.html')
+    if request.method == 'GET':
+        userNum = request.GET.get('numberInput')
+    return render(request, 'accounts/signup.html', context=userNum)
 
 
 def logout(request):
@@ -193,6 +194,7 @@ def userdata(request):
         accepted = None
         account_type = request.POST.get('account_type', None)
         is_added = None
+        usernum = request.GET.get('numberInput')
 
 
         if 'user' in request.POST: username = request.POST['user']
@@ -215,7 +217,7 @@ def userdata(request):
         if 'accepted' in request.POST: accepted = request.POST['accepted']
 
         #التحقق من القيم
-        if username and password and email and account_type:
+        if username and password and email and account_type and user_photo:
             #الموافقة على الشروط
             if accepted == 'on':
                 # التحقق من وجود المستخدم
@@ -238,7 +240,8 @@ def userdata(request):
 
                             if account_type == 'agent':
                                 Agent.objects.create(user=user,
-                                                     profil_photo=user_photo)
+                                                     profil_photo=user_photo,
+                                                     phone=usernum)
                                 messages.success(request,
                                                  'مرحبا وكيلنا العزيز ')
                                 user.save()
@@ -246,13 +249,21 @@ def userdata(request):
 
                             elif account_type == 'customer':
                                 Customer.objects.create(user=user,
-                                                        photo=user_photo)
+                                                        photo=user_photo,
+                                                        phone=usernum)
                                 messages.success(request,
                                                  'مرحبا عميلنا العزيز ')
                                 user.save()
                                 return redirect('userdata')
 
-                            user_photo = ''
+                        #  if 'agent'in request.POST:
+                        #     agent_profile = Agent(user = user)
+                        #     agent_profile.save()
+                        #  elif 'customer' in request.POST:
+                        #      customer_profile = Customer(user = user)
+                        #      customer_profile.save()
+
+                        # user_photo = ''
                             username = ''
                             password = ''
                             email = ''
@@ -270,15 +281,12 @@ def userdata(request):
             messages.error(request, 'تحقق من الحقول المدخلة')
 
         return render(
-            request,
-            'accounts/userdata.html',
-            {
-                # 'user_photo': user_photo,
+            request, 'accounts/userdata.html', {
+                'user_photo': user_photo,
                 'user': username,
                 'pass': '',
                 'email': email,
-                'is_added': is_added,
-                'user_photo': user_photo ,
+                'is_added': is_added
             })
     else:
         return render(request, 'accounts/userdata.html')

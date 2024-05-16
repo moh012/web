@@ -349,7 +349,11 @@
                 {% for comment in cuscomment %}
                 <li style="padding-bottom: 0.5rem;">
                   <div class="comment-avatar">
+                    {% if comment.customer.photo %}
                     <img src="{{comment.customer.photo.url}}" alt="">
+                    {% else %}
+                    <img src="{% static 'assets/img/avatar1.png' %}" alt="">
+                    {% endif %}
                   </div>
                   <div class="comment-details" style="padding-right: 25px;">
                     <h4 class="comment-author">{{comment.customer.user.username}}</h4>
@@ -366,6 +370,7 @@
             </div>
             <br>
             <br>
+            {% if request.user.customer %}
             <div class="form-comments">
               <div class="title-box-d1">
                 <h3 class="title-d1" style="direction: rtl;"> اترك تعليقك هنا</h3>
@@ -384,6 +389,7 @@
                 </div>
               </form>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
