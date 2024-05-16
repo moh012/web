@@ -8,6 +8,8 @@ from property.models import *
 from accounts.models import *
 from django.contrib.auth.decorators import login_required
 import re
+from django.core.files.storage import default_storage
+
 
 
 def login(request):
@@ -185,7 +187,7 @@ def userdata(request):
     if request.method == 'POST' and 'btncreate' in request.POST:
         user_photo = None
         if len(request.FILES) != 0:
-            user_photo = request.FILES['user_photo']
+            user_photo = request.FILES.get('user_photo', None)
         username = None
         email = None
         password = None
@@ -194,10 +196,6 @@ def userdata(request):
         is_added = None
         usernum = request.GET.get('numberInput')
 
-        # if 'user_photo' in request.POST:
-        #     user_photo = request.POST['user_photo']
-        # else:
-        #     messages.error(request, ' يوجد خطأ في صورة المستخدم')
 
         if 'user' in request.POST: username = request.POST['user']
         else:
@@ -238,7 +236,6 @@ def userdata(request):
                                                             password=password,
                                                             email=email)
 
-                            # هذا الكد الصحيح
                             #  اضافة المستخدم بالحقول الخاصة فيه في ملف المودل مع الذي أنشأناه مع جانغو
 
                             if account_type == 'agent':
@@ -266,7 +263,7 @@ def userdata(request):
                         #      customer_profile = Customer(user = user)
                         #      customer_profile.save()
 
-                            user_photo = ''
+                        # user_photo = ''
                             username = ''
                             password = ''
                             email = ''
@@ -287,9 +284,9 @@ def userdata(request):
             request, 'accounts/userdata.html', {
                 'user_photo': user_photo,
                 'user': username,
-                'pass': password,
+                'pass': '',
                 'email': email,
-                'is_added': is_added,
+                'is_added': is_added
             })
     else:
         return render(request, 'accounts/userdata.html')
@@ -354,8 +351,7 @@ def verification(request):
 #         if request.user is not None and not request.user.id is not None:
 #             agrent_profile = Agent.objects.get(user=request.user)
 
-#             if request.POST['user'] and request.POST['pass'] and request.POST[
-#                     'email']:
+#             if request.POST['user']  and request.POST['email']:
 #                 # request.user.username = request.POST['user']
 #                 # request.user.email = request.POST['email']
 #                 if not request.POST['pass'].startswith('pbkdf2_sha256$'):
@@ -377,7 +373,7 @@ def verification(request):
 #                 agrent_profile = Agent.objects.get(user=request.user)
 #                 context = {
 #                     'user': request.user.username,
-#                     'pass': request.user.password,
+#       
 #                     'email': request.user.email
 #                 }
 #             return render(request, 'accounts/edit_profile.html', context)
@@ -389,24 +385,87 @@ def privacy_policy(request):
     return render(request, 'accounts/privacy_policy.html')
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
+# def edit_profile(request):
+#     if request.method == 'POST':
+
+#         if request.POST.get('user') and request.POST.get('email'):
+
+#             request.user.username = request.POST['user']
+#             request.user.email = request.POST['email']
+#             request.user.save()
+#             messages.success(request, 'تم تحديث الملف الشخصي بنجاح.')
+#             return redirect('edit_profile')
+#         else:
+#             messages.error(request, 'يرجى ملئ جميع الحقول بشكل صحيح.')
+
+#     context = {
+#         'user': request.user.username,
+#         'email': request.user.email,
+#     }
+#     return render(request, 'accounts/edit_profile.html', context)
+
+
+# لا يلمس عشوائي 
+# @login_required(login_url='login')
+# def edit_profile(request):
+#     if request.method == 'POST'and 'btnsave' in request.POST:
+
+#             cust = Customer.objects.filter(user=request.user).first()
+
+#             agt = Agent.objects.filter(user=request.user).first()
+
+#             if request.POST.get('user') and request.POST.get('email'):
+#                 request.user.username = request.POST['user']
+#                 request.user.email = request.POST['email']
+
+#                 request.user.save()
+
+#                 if cust:
+#                     cust.save()
+#                 elif agt:
+#                     agt.save()
+                
+#                 auth.login(request , request.user)
+#                 messages.success(request, 'تم حفظ التعديلات  ')      
+#             else:
+#                 messages.error(request, 'تحقق من كتابتك للقيم')
+#     else:
+#         if request.user is not None:
+#             cust = Customer.objects.filter(user=request.user).first()
+#             agt = Agent.objects.filter(user=request.user).first()
+
+#             context = {
+#                 'user': request.user.username,
+#                 'email': request.user.email,
+#                 'cust': Customer.objects.all(),
+#                 'agt': Agent.objects.all(),
+#             }
+#     return render(request, 'accounts/edit_profile.html', context)
+
+
+
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
+        user = request.user
 
-        if request.POST.get('user') and request.POST.get('email'):
+        if request.POST.get('user'):
+            user.username = request.POST['user']
 
-            request.user.username = request.POST['user']
-            request.user.email = request.POST['email']
-            request.user.save()
-            messages.success(request, 'تم تحديث الملف الشخصي بنجاح.')
-            return redirect('edit_profile')
-        else:
-            messages.error(request, 'يرجى ملئ جميع الحقول بشكل صحيح.')
+        if request.POST.get('email'):
+            user.email = request.POST['email']
+
+        user.save()
+
+        messages.success(request, 'تم تحديث ملف التعريف بنجاح')
+
+        return redirect('edit_profile')
 
     context = {
         'user': request.user.username,
         'email': request.user.email,
-        'cust': Customer.objects.all(),
-        'agt': Agent.objects.all(),
     }
+
+    # Render edit profile template
     return render(request, 'accounts/edit_profile.html', context)

@@ -24,8 +24,12 @@ class Agent(models.Model):
     def __str__(self):
         return self.user.username
 
+    def save(self, *args, **kwargs):
+        if not self.profil_photo:
+            self.profil_photo = 'uploads/avatar.png'
+        super().save(*args, **kwargs)
 
-#extend Customer class form User class
+
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
@@ -35,3 +39,11 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    
+    def save(self, *args, **kwargs):
+        # التحقق مما إذا كانت الصورة محددة
+        if not self.photo:  
+            # في حالة عدم تحديد الصورة، استخدم الصورة الافتراضية
+            self.photo = 'uploads/avatar.png'
+        super().save(*args, **kwargs)
