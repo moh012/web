@@ -18,8 +18,7 @@
 
 <center>
 <div class="col-md-7">
-    <form method ="POST" action="{% url 'verification' %}">                  
-      {% csrf_token %} 
+    <form method ="GET" action="{% url 'userdata' %}">
         <h2>رقم الهاتف</h2>
         <br>
       <div class="row">
@@ -27,7 +26,7 @@
 
         <div class="col-md-6 mb-3" style="width: 75%; direction: ltr;">
           <div class="form-group">
-          <input type="text" name="numberInput"   id="numberInput"  class="form-control form-control-lg form-control-a"  placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{8}"  oninput="checkInput()" title=" يجب أن لا يقل طول السلسلة عن 9 ارقام" required>
+          <input type="text" name="numberInput"  id="numberInput"  class="form-control form-control-lg form-control-a"  placeholder=" 7xxxxxxxx"   minlength="9" maxlength="9" pattern="7\d{8}"  oninput="checkInput()" title=" يجب أن لا يقل طول السلسلة عن 9 ارقام" required>
           </div>
           
 <script>
@@ -57,7 +56,7 @@
         </div>
         <div class="col-md-6 mb-3" style="width: 150px;">
           <div class="form-group">
-            <input  type="email" class="form-control form-control-lg form-control-a"  name="countryCode" placeholder="967+" readonly required>
+            <input  type="text" class="form-control form-control-lg form-control-a"  name="countryCode" placeholder="967+" readonly required>
           </div>
         </div>
 
