@@ -377,31 +377,33 @@
                 <a class="dropdown-item {% if request.resolver_match.url_name == 'blog_grid' %}active{% endif %}" href="{% url 'blog_grid' %}">مدونة</a>
               </div>
           </li>
+            
+
             <!-- تسجيل الدخول والخروج -->
             {% if request.user.is_authenticated %}
-            <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                {% if request.user.is_authenticated %}
-                مرحبا {{ request.user.username }}
-                {% endif %}
-            
-              </a>
-                <div class="dropdown-menu">
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' %}">حسابي </a>
-                {% if user.is_authenticated and user.customer %}
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'my_order' %}active{% endif %}" href="{% url 'my_order' user.customer.id %}">طلباتي </a>
-                {% elif user.is_authenticated and user.agent %}
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'my_property' %}active{% endif %}" href="{% url 'my_property' user.agent.id %}">عقاراتي </a>
-                {% endif %}
-                <a class="dropdown-item {% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">تسجيل الخروج </a>
-                </div>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                      مرحبا {{ request.user.username }}
+                      
+                  </a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' %}">حسابي </a>
+                      {% if request.user.customer %}
+                          <a class="dropdown-item {% if request.resolver_match.url_name == 'my_order' %}active{% endif %}" href="{% url 'my_order' request.user.customer.id %}">طلباتي </a>
+                      {% endif %}
+                      {% if request.user.agent %}
+                          <a class="dropdown-item {% if request.resolver_match.url_name == 'my_property' %}active{% endif %}" href="{% url 'my_property' request.user.agent.id %}">عقاراتي </a>
+                      {% endif %}
+                      <a class="dropdown-item {% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">تسجيل الخروج </a>
+                  </div>
               </li>
             {% else %}
-
                 <li class="nav-item">
-                  <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'login' %}"> تسجيل الدخول</a>        </li>
-
+                  <a class="nav-link {% if request.resolver_match.url_name == 'signup' %}active{% endif %}" href="{% url 'login' %}"> تسجيل الدخول</a>
+                </li> 
             {% endif %}
+
+
 
               </ul>
               </div>
