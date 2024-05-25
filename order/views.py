@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from order.models import Order
 from accounts.models import Customer
-from property.models import Area, City
+from property.models import Area
+from property.models import City
+from property.models import Favorite
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import os
@@ -75,7 +77,28 @@ def order(request):
 
 
 def fave(request):
-    return render(request, 'order/fave.html')
+
+    context = {
+        'fave': Favorite.objects.all(),
+    }
+
+    return render(request, 'order/fave.html', context)
+
+
+def add_fave(request, id):
+    fave = Favorite.objects.get()
+    fave.property = Favorite.objects.filter(id=id)
+    fave.customer = request.user.customer
+    fave.status = True
+    messages.success(request, "تم إضافة العقار إلى المفضلة!")
+    return redirect('fave')
+
+
+def rm_fave(request, id):
+    fave = Favorite.objects.filter(id=id)
+    fave.delete()
+    messages.success(request, "تم إزالة العقار من المفضلة!")
+    return redirect('fave')
 
 
 def order_grid(request):
