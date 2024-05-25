@@ -121,7 +121,7 @@ def userdata(request):
                                 messages.success(request,
                                                  'مرحبا عميلنا العزيز ')
                                 user.save()
-                                return redirect('userdata')
+                                return redirect('login')
 
                             username = ''
                             password = ''
