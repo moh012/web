@@ -19,7 +19,8 @@
   <div class="col-md-7">
   {% include 'parts/alerts.html' %} 
  {% if is_added == True %}
-   <form method="POST" style="display:none;">    
+   <form method="POST" style="display:none;">  
+    {% csrf_token %}   
  {% else %}
  
      <form method="POST" enctype="multipart/form-data">

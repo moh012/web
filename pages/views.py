@@ -18,4 +18,4 @@ def index(request):
     }
 
     return render(request, 'pages/index.html', context)
-    #template = loader.get_template('index.html')
+   
