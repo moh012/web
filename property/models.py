@@ -95,7 +95,7 @@ class Favorite(models.Model):
     customer = models.ForeignKey(Customer,
                                  on_delete=models.DO_NOTHING,
                                  null=True)
-    status = models.CharField(max_length=100)
+    status = models.BooleanField(default=False, null=True)
 
 
 class ADS(models.Model):

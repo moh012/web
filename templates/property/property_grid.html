@@ -53,7 +53,7 @@
                 {% if property.img %}
                 <img src="{{property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
                 {% else %}
-                <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid">
+                <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
                 {% endif %}
               </div>
               <div class="card-overlay">
@@ -98,6 +98,7 @@
                           <div class="dropdown-menu">
                             <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
                             <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            <a class="dropdown-item" style="color: #2eca6a;" href="#">إضافة الى المفضلة</a>
                             {% if user.is_authenticated and user.agent %}
                             {% if request.user.agent == property.agent %}
                             <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
