@@ -40,52 +40,77 @@
           </div>
 
 
+        {% for msg in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>اهلا، </strong>{{msg}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+        {% endfor %}
 
 
+          {% if user.is_authenticated and user.customer %}
+          {% for fave in fave %}
+          {% if request.user.customer == fave.customer %}
+          {% if fave.status == True %}
           <div class="col-md-4">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
-                <img src="{% static 'assets/img/property-1.jpg' %}" alt="" class="img-a img-fluid">
+                {% if fave.property.img %}
+                <img src="{{fave.property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                {% else %}
+                <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                {% endif %}
               </div>
               <div class="card-overlay">
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">فله
-                        <br /> ثلاثة أدوار</a>
+                      <a href="{% url 'property_single' fave.property.id %}">{{fave.property.title}}
+                        <br>{{fave.property.property_type}}</a>
                     </h2>
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">السعر | 12.000 ريال</span>
+                      <span class="price-a">السعر | {{fave.property.price}} ريال</span>
                     </div>
-                    <a href="property-single" class="link-a">المزيد من التفاصيل
-                      <span class="bi bi-chevron-left"></span>
+                    <a href="{% url 'property_single' fave.property.id %}" class="link-a">{{fave.property.property_date}}
                     </a>
                   </div>
                   <div class="card-footer-a">
                     <ul class="card-info d-flex justify-content-around">
                       <li>
                         <h4 class="card-info-title">المساحة</h4>
-                        <span>340m
+                        <span>{{fave.property.space}}m
                           <sup>2</sup>
                         </span>
                       </li>
                       <li>
                         <h4 class="card-info-title">الغرف</h4>
-                        <span>2</span>
+                        <span>{{fave.property.room_number}}</span>
                       </li>
                       <li>
                         <h4 class="card-info-title">دورات المياه</h4>
-                        <span>4</span>
+                        <span>{{fave.property.bathrooms}}</span>
                       </li>
                       <li>
                         <h4 class="card-info-title">الصالات</h4>
-                        <span>1</span>
+                        <span>{{fave.property.hall_room}}</span>
                       </li>
-                      <li>
-                        <h4 class="card-info-title">مقارنة</h4>
-                        <span><input type="checkbox"></span>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                            خيارات
+                        </a>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            <a class="dropdown-item" href="{% url 'rm_fave' fave.id %}" style="color: red;">إزالة من المفضلة!</a>
+                            {% if user.is_authenticated and user.agent %}
+                            {% if request.user.agent == property.agent %}
+                            <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
+                            <a class="dropdown-item" href="{% url 'delete_property' property.id %}">حذف</a>
+                            {% endif %}
+                            {% endif %}
+                          </div>
                       </li>
                     </ul>
                   </div>
@@ -93,36 +118,12 @@
               </div>
             </div>
           </div>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+          {% endif %}
 
 
-
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <nav class="pagination-a">
-              <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">
-                    <span class="bi bi-chevron-left"></span>
-                  </a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item next">
-                  <a class="page-link" href="#">
-                    <span class="bi bi-chevron-right"></span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
       </div>
     </section><!-- End Property Grid Single-->
