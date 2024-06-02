@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import Customer, Agent
 from order.models import Order
+from property.models import Property
 from property.models import ADS
 from django.conf import settings
 from django.utils import timezone
@@ -55,13 +56,26 @@ class Contact(models.Model):
     def __str__(self):
         return self.username
 
-
+#التعليقات
 class Comment(models.Model):
-    customer = models.ForeignKey(Customer,
-                                 on_delete=models.DO_NOTHING,
-                                 null=True)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='comments' ,null=True)
+    agent = models.ForeignKey(Agent, related_name='comments', on_delete=models.DO_NOTHING, null=True)
+    customer = models.ForeignKey(Customer, related_name='comments', on_delete=models.DO_NOTHING, null=True)
     comment = models.TextField()
-    date = models.DateField(default=timezone.now, null=True)
+    date = models.DateTimeField(auto_now_add=True ,null=True)
+    is_reply = models.BooleanField(default=False) 
+    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
 
     def __str__(self):
-        return self.comment
+        return self.comment[:20]
+    
+
+#chat
+class Message(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='received_messages')
+    message = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"From: {self.sender.username} - To: {self.receiver.username} - {self.timestamp}"

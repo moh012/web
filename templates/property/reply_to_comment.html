@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}الرد على التعليق{% endblock %}
+
+{% block content %}
+
+<br><br><br><br><br><br><br><br>
+
+
+
+
+<div class="form-comments">
+    <div class="title-box-d1">
+        <h3 class="title-d1" style="direction: rtl;"> الرد على: {{ parent_comment.comment }} </h3>
+    </div>
+    <form class="form-a" action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}       
+            </div>
+          </div>
+          <div class="col-md-12">
+        <button type="submit" class="btn btn-a">ارسال الرد  </button>
+    </form>
+</div>
+            
+
+{% endblock %}

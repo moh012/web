@@ -28,19 +28,29 @@
  
         <h1> اعدادات الحساب</h1>
 
-        <br>
-        <br>
-       
-        <br>
-      <!-- <div class="col-md-12 mb-3">
-          <div class="form-group; roundees-circle ">
-            <label for="" style="display: flex;">أضف صورة</label>
-            <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required >
-          </div>
+        <br><br> <br>
+       <!-- <div class="col-md-12 mb-3">
+            <div class="form-group; roundees-circle ">
+              <label for="" style="display: flex;">أضف صورة</label>
+              <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required >
+            </div>
+        </div>
       </div> -->
-      <br>
-      <br>
-      <br>
+      <div class="col-md-12 mb-3 text-center">
+        {% if user_profile %}
+          <img src="{{ user_profile.photo.url }}" alt="صورة المستخدم" class="rounded-circle" width="150" height="150">
+        {% else %}
+          <img src="{% static 'uploads/avatar.png' %}" alt="الصورة الافتراضية" class="rounded-circle" width="150" height="150">
+        {% endif %}
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="form-group">
+          <label for="" style="display: flex;">أضف صورة</label>
+          <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة">
+        </div>
+      </div>
+      <br> <br> <br>
+     
       <div class="col-md-12 mb-3">
         <div class="form-group">
           <input type="text" name="user" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required value="{{user}}">
@@ -49,6 +59,7 @@
         <br>
         <br>
         <br>
+        
         <div class="col-md-12 mb-3">
           <div class="form-group">
          
