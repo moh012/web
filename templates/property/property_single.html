@@ -66,7 +66,7 @@
           <div class="col-lg-8">
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
-                {% if prop.img %}
+                {% if property.img %}
                 <div class="carousel-item-b swiper-slide">
                   <a href="{{property.img.url}}" class="image-link">
                     <img src="{{property.img.url}}" alt="image here" class="img-a img-fluid">
@@ -125,7 +125,7 @@
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>المديرية:</strong>
-                        <span>{{prop.area}} , {{prop.area.city}}</span>
+                        <span>{{property.area}} , {{property.area.city}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>الموقع:</strong>
