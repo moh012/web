@@ -209,3 +209,7 @@ def edit_profile(request):
 
     # Render edit profile template
     return render(request, 'accounts/edit_profile.html', context)
+
+
+def pyment(request):
+    return render(request , 'accounts/pyment.html')

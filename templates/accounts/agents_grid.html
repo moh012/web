@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load social_share %}
 {% block title %}
 الوكلاء المميزين
 {% endblock %}
@@ -107,6 +107,8 @@
                       <a href="agent-single.html" class="link-two">محمد الخولاني
                         <br>
                         <br> الرئيس التنفيذي</a>
+                        {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+
                     </h3>
                   </div>
                 </div>

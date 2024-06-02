@@ -1,7 +1,17 @@
 from django.contrib import admin
 from .models import Chat, Report_Agent, Report_Customer, Evaluation, Contact, Comment
-
+from .models import Message
 # Register your models here.
+
+#خاص برسائل الدردشة
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['sender', 'receiver', 'message', 'timestamp']
+    search_fields = ['sender__username', 'receiver__username']
+    list_filter = ['timestamp']
+
+admin.site.register(Message, MessageAdmin)
+
+
 
 
 class ContactAdmin(admin.ModelAdmin):
