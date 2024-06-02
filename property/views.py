@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect ,get_object_or_404
 from chatting.models import Comment
+from chatting.forms  import CommentForm
 from accounts.models import Customer, Agent
 from django.contrib.auth.models import User
 from property.models import Area, Property
@@ -79,22 +80,143 @@ def property_grid(request):
     return render(request, 'property/property_grid.html', context)
 
 
-def property_single(request, id):
-    prop = Property.objects.get(id=id)
+# def property_single(request, property_id):
+#     property = get_object_or_40   4(Property, id=property_id)
+#     comments = property.comments.filter(parent_comment__isnull=True)  # فقط التعليقات الرئيسية
+
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.customer = request.user.customer
+#             comment.property = property
+#             comment.save()
+#             return redirect('property_single', property_id=property.id)
+#     else:
+#         form = CommentForm()
+    
+#     context = {
+#         'comment_num': Comment.objects.all().count(),
+#         'property': property,
+#         'comments': comments,
+#         'form': form
+#     }
+#     return render(request, 'property/property_single.html', context)
+
+
+
+
+# @login_required
+# def reply_to_comment(request, comment_id):
+#     parent_comment = get_object_or_404(Comment, id=comment_id)
+#     property = parent_comment.property
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             reply = form.save(commit=False)
+#             reply.customer = request.user.customer
+#             reply.property = property
+#             reply.parent_comment = parent_comment
+#             reply.is_reply = True
+#             reply.save()
+#             return redirect('property_single', property_id=property.id)
+#     else:
+#         form = CommentForm()
+    
+#     context = {
+#         'form': form,
+#         'property': property,
+#         'parent_comment': parent_comment
+#     }
+#     return render(request, 'property/reply_to_comment.html', context)
+
+
+@login_required
+def property_single(request, property_id):
+    property = get_object_or_404(Property, id=property_id)
+    comments = property.comments.filter(parent_comment__isnull=True) 
+
     if request.method == 'POST':
-        customer = request.user.customer
-        comment = request.POST.get('message')
-        data = Comment(customer=customer, comment=comment)
-        data.save()
-
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            if hasattr(request.user, 'customer'):
+                comment.customer = request.user.customer
+            elif hasattr(request.user, 'agent'):
+                comment.agent = request.user.agent
+            comment.property = property
+            comment.save()
+            return redirect('property_single', property_id=property.id)
+    else:
+        form = CommentForm()
+    
     context = {
-        'cuscomment': Comment.objects.all(),
-        'commentnum': Comment.objects.all().count(),
-        'cust': Customer.objects.all(),
-        'prop': prop,
+        'comment_num': Comment.objects.filter(property_id=property_id).count(),
+        'property': property,
+        'comments': comments,
+        'form': form
     }
-
     return render(request, 'property/property_single.html', context)
+
+
+@login_required
+def reply_to_comment(request, comment_id):
+    parent_comment = get_object_or_404(Comment, id=comment_id)
+    property = parent_comment.property
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)    
+        if form.is_valid():
+            reply = form.save(commit=False)
+            if hasattr(request.user, 'customer'):
+                reply.customer = request.user.customer
+            elif hasattr(request.user, 'agent'):
+                reply.agent = request.user.agent
+            reply.property = property
+            reply.parent_comment = parent_comment
+            reply.is_reply = True
+            reply.save()
+            return redirect('property_single', property_id=property.id)
+    else:
+        form = CommentForm()
+    
+    context = {
+        'form': form,
+        'property': property,
+        'parent_comment': parent_comment
+    }
+    return render(request, 'property/reply_to_comment.html', context)
+
+
+# @login_required
+# def reply_to_comment(request, comment_id):
+#     parent_comment = get_object_or_404(Comment, id=comment_id)
+#     property = parent_comment.property
+
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             reply = form.save(commit=False)
+#             if hasattr(request.user, 'customer'):
+#                 reply.customer = request.user.customer
+#             elif hasattr(request.user, 'agent'):
+#                 reply.agent = request.user.agent
+#             reply.property = property
+#             reply.parent_comment = parent_comment
+#             reply.is_reply = True
+#             reply.save()
+#             return redirect('property_single', property_id=property.id)
+#     else:
+#         form = CommentForm()
+    
+#     context = {
+#         'form': form,
+#         'property': property,
+#         'parent_comment': parent_comment
+#     }
+#     return render(request, 'property/reply_to_comment.html', context)
+
+
 
 
 @login_required(login_url='login')

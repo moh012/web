@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'chatting.apps.ChattingConfig',
-    'fm.apps.FmConfig',
+    # 'fm.apps.FmConfig',
     'order.apps.OrderConfig',
     'pages.apps.PagesConfig',
     'property.apps.PropertyConfig',
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_social_share',
-    # 'chat',
+    'fm',
 ]
 
 MIDDLEWARE = [
