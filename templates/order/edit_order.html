@@ -119,12 +119,12 @@
         <label for="" style="display: flex;">السعر</label>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="minPrice" value="{{ord.start_price}}" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" >
+            <input type="text" name="minPrice" value="{{ord.start_price}}" class="form-control form-control-lg form-control-a" id="editPriceLow" pattern="\d+" oninput="checkInput7()" placeholder="الحد الأدنى" >
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="maxPrice" value="{{ord.end_price}}" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" >
+            <input type="text" name="maxPrice" value="{{ord.end_price}}" class="form-control form-control-lg form-control-a" id="editPriceHigh" pattern="\d+" oninput="checkInput8()" placeholder="الحد الأعلى" >
           </div>
           <script>
             function checkPriceRange() {
@@ -243,6 +243,7 @@
         </div>
         <br>
         <label for="" style="display: flex;">نوع السكن</label>
+        <input type="hidden" name="houseType" value="">
         <div class="col-md-6 mb-3">
           <div class="form-group">
               <input type="radio" name="houseType" class="" value="عزبة" {% if ord.housetype == 'عزبة' %}checked{% endif %} style="width: 20px; height: 20px;">
@@ -258,20 +259,8 @@
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="space" value="{{ord.space}}" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
+            <input type="text" name="space" value="{{ord.space}}" id="orderSpaceEdit" pattern="\d+" oninput="checkInput9()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
           </div>
-          <script>
-            function checkInput() {
-              const numberInput = document.getElementById("numberInput");
-              const value = numberInput.value;
-          
-              if (value != "" && isNaN(value)) {
-                numberInput.value = "";
-                alert("يسمح بالأرقام فقط!");
-                return;
-              }
-            }
-          </script>
         </div>
         <br>
         <br>

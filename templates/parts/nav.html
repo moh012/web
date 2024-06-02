@@ -351,17 +351,27 @@
             <a class="nav-link {% if request.resolver_match.url_name == 'property_grid' %}active{% endif %}" href="{% url 'property_grid' %}">العقارات</a>
           </li>
           
+          {% if request.user.is_authenticated %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إضافة</a>
             <div class="dropdown-menu">
+          {% if request.user.agent %}
               <a class="dropdown-item {% if request.resolver_match.url_name == 'property' %}active{% endif %}" href="{% url 'property' %}" >إضافة عقار</a>
+              {% endif %}
+              {% if request.user.customer %}
               <a class="dropdown-item {% if request.resolver_match.url_name == 'order' %}active{% endif %}" href="{% url 'order' %}">إضافة طلب</a>
+              {% endif %}
             </div>
           </li>
+          {% endif %}
 
+          {% if request.user.is_authenticated %}
+          {% if request.user.customer %}
           <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'fave' %}active{% endif %}" href="{% url 'fave' %}">المفضلة</a>
           </li>
+          {% endif %}
+          {% endif %}
 
           <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="{% url 'chat' %}">الدردشة</a>

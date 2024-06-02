@@ -47,68 +47,70 @@
             </div>
           </div>
 
+          <div class="col-md-6 mb-2" style="width: 100%;">
+            <div class="form-group mt-3">
+                <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
+          <select id="mySelect" class="form-control form-select form-control-a" name="propertyType" title="نوع العقار" style="line-height: 2;">
+            <option value="{{prop.property_type}}">إختر نوع العقار</option>
+            <option value="شقة">شقة</option>
+            <option value="فيلا">فيلا</option>
+            <option value="أرض">أرض</option>
+            <option value="محل">محل</option>
+            <option value="شاليهات">شاليهات</option>
+            <option value="غرفة">غرفة</option>
+          </select>
+        </div>
+      </div>
+        <br>
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
-            <select class="form-control form-select form-control-a" name="propertyType" id="bathrooms" title="نوع العقار" style="line-height: 2;">
-              <option>{{prop.property_type}}</option>
-              <option>شقة</option>
-              <option>فيلا</option>
-              <option>أرض</option>
-              <option>محل</option>
-              <option>شاليهات</option>
-              <option>غرفة</option>
+            <label class="pb-2" for="city-select" style="display: flex;">المحافظة</label>
+            <select class="form-control form-select form-control-a" name="city" id="city-select" title="المحافظة" style="line-height: 2;">
+              <option value="">إختر محافظة</option>
+              {% for city in city %}
+                  <option value="{{ city.id }}">{{ city.city_name }}</option>
+              {% endfor %}
             </select>
           </div>
         </div>
         <br>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="area-div">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
-            <select class="form-control form-select form-control-a" name="area_property" id="bathrooms" title="المحافظة" style="line-height: 2;">
-              <option>{{prop.area.city}}</option>
-              <option>الأمانة</option>
-              <option>صنعاء</option>
-              <option>عدن</option>
-              <option>تعز</option>
-              <option>إب</option>
-              <option>الحديدة</option>
-              <option>حجة</option>
-              <option>عمران</option>
-              <option>البيضاء</option>
-              <option>الجوف</option>
-              <option>ذمار</option>
-              <option>شبوة</option>
-              <option>مأرب</option>
-              <option>المهرة</option>
-              <option>أبين</option>
-              <option>لحج</option>
-              <option>المحويت</option>
-              <option>الضالع</option>
-              <option>صعدة</option>
-              <option>ريمة</option>
+            <label class="pb-2" for="area-select" style="display: flex;">المديرية</label>
+            <select class="form-control form-select form-control-a" name="area" id="area-select" title="المديرية" style="line-height: 2;">
+                <option value="{{prop.area}}">إختر مديرية</option>
+                {% for area in area %}
+                    <option value="{{ area.id }}" data-city-id="{{ area.city.id }}">{{ area.area_name }}</option>
+                {% endfor %}
             </select>
           </div>
         </div>
-        <br>
-        <div class="col-md-6 mb-2" style="width: 100%;">
-          <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
-            <select class="form-control form-select form-control-a" name="Directorate_property" id="bathrooms" title="المديرية" style="line-height: 2;">
-              <option>{{prop.area}}</option>
-              <option>الوحدة</option>
-              <option>معين</option>
-              <option>صنعاء القديمة</option>
-              <option>شعوب</option>
-              <option>اّزال</option>
-              <option>الصافية</option>
-              <option>السبعين</option>
-              <option>التحرير</option>
-              <option>الثورة</option>
-              <option>بني حارث</option>
-            </select>
-          </div>
-        </div>
+
+        <script>
+          const citySelect = document.getElementById('city-select');
+          const areaSelect = document.getElementById('area-select');
+          const areaDiv = document.getElementById('area-div');
+
+          // Initially hide the area-select element
+          areaDiv.style.display = 'none';
+
+          citySelect.addEventListener('change', function() {
+              const selectedCityId = this.value;
+
+              // Show the area-select element when a city is selected
+              if (selectedCityId !== '') {
+                  areaDiv.style.display = 'block';
+              } else {
+                  areaSelect.style.display = 'none';
+              }
+
+              // Filter areas based on selected city
+              Array.from(areaSelect.options).forEach(option => {
+                  const cityId = option.dataset.cityId;
+                  option.style.display = selectedCityId === '' || cityId === selectedCityId ? 'block' : 'none';
+              });
+          });
+        </script>
         <br>
         <br>
         <br>
@@ -137,8 +139,13 @@
         <br>
         <div class="col-md-12 mb-3">
           <div class="form-group">
-            <label for="" style="display: flex;">صور اضافية للعقار</label>
-            <input type="file" name="addImage_property" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة عدة صور">
+            {% for photo in photo %}
+            {% if photo.photo %}
+              <img src="{{photo.photo.url}}" alt="image here" class="img-a img-fluid">
+            {% endif %}
+            {% endfor %}
+            <!-- <label for="" style="display: flex;">صور اضافية للعقار</label>
+            <input type="file" multiple name="files" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة عدة صور"> -->
           </div>
       </div>
       <br>
@@ -147,7 +154,7 @@
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">السعر</label>
-            <input type="text" name="price_property" value="{{prop.price}}" class="form-control form-control-lg form-control-a" placeholder="السعر" title="قم بإدخال سعر العقار" >
+            <input type="text" name="price_property" id="priceEdit" value="{{prop.price}}" oninput="checkInput5()" class="form-control form-control-lg form-control-a" placeholder="السعر" title="قم بإدخال سعر العقار" >
           </div>
         </div>
         <br>
@@ -262,6 +269,7 @@
         <br>
         <br>
         <label for="" style="display: flex;">نوع السكن</label>
+        <input type="hidden" name="AccommodationType" value="">
         <div class="col-md-6 mb-3">
           <div class="form-group">
               <input type="radio" name="AccommodationType" {% if prop.house_type == 'عزبة' %}checked{% endif %} class="" value="{{prop.house_type}}"  style="width: 20px; height: 20px;">
@@ -274,10 +282,48 @@
               <label for="" style="font-size: 20px;">عوائل</label>
           </div>
         </div>
+        <script>
+          const selectElement = document.getElementById('mySelect');
+          const myRoom = document.getElementById('myRoom');
+          const myHall = document.getElementById('myHall');
+          const myBathroom = document.getElementById('myBathroom');
+          const myFloor = document.getElementById('myFloor');
+          const myPlace = document.getElementById('myPlace');
+
+          myRoom.style.display = 'none';
+          myHall.style.display = 'none';
+          myBathroom.style.display = 'none';
+          myFloor.style.display = 'none';
+          myPlace.style.display = 'none';
+        
+          selectElement.addEventListener('change', function() {
+            const selectElement = this.value;
+
+            if (selectElement === '') {
+              myRoom.style.display = 'none';
+              myHall.style.display = 'none';
+              myBathroom.style.display = 'none';
+              myFloor.style.display = 'none';
+              myPlace.style.display = 'none';
+            } else if (selectElement === 'أرض') {
+              myRoom.style.display = 'none';
+              myHall.style.display = 'none';
+              myBathroom.style.display = 'none';
+              myFloor.style.display = 'none';
+              myPlace.style.display = 'none';
+            } else {
+              myRoom.style.display = 'block';
+              myHall.style.display = 'block';
+              myBathroom.style.display = 'block';
+              myFloor.style.display = 'block';
+              myPlace.style.display = 'block';
+            }
+          });
+        </script>
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="space" value="{{prop.space}}" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
+            <input type="text" name="space" value="{{prop.space}}" id="spaceEdit" pattern="\d+" oninput="checkInput6()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
           </div>
           <script>
             function checkInput() {
