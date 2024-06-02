@@ -42,7 +42,9 @@
                   <div class="agent-title">
                     <div class="title-box-d1">
                       <h3 class="title-d1">الوكيل {{agt.user.username}}</h3>
+                      {% if agt.state == True %}
                       <h5 class="color-text-a bi bi-patch-check-fill"> حساب موثق</h5>
+                      {% endif %}
                     </div>
                   </div>
                   <div class="agent-content mb-3">

@@ -40,12 +40,8 @@
             </div>
           </div>
 
-          {% for msg in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>اهلا، </strong>{{msg}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-        </div>
-        {% endfor %}
+          
+          {% include 'parts/alerts.html' %}
 
 
           {% for order in orders %}

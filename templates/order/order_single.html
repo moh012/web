@@ -30,6 +30,8 @@
             </nav>
           </div>
           {% else %}
+          {% if user.is_authenticated and user.customer %}
+          {% if request.user.customer == ord.customer %}
           <div class="col-md-12 col-lg-4">
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
@@ -39,6 +41,8 @@
               </ol>
             </nav>
           </div>
+          {% endif %}
+          {% endif %}
           {% endif %}
         </div>
       </div>
@@ -90,6 +94,10 @@
                       <li class="d-flex justify-content-between">
                         <strong>رقم الطلب:</strong>
                         <span>{{ord.id}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between">
+                        <strong>المديرية:</strong>
+                        <span>{{ord.area}} , {{ord.area.city}}</span>
                       </li>
                       <li class="d-flex justify-content-between">
                         <strong>الموقع:</strong>
@@ -227,11 +235,6 @@
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
                   <h4 class="title-agent">{{ord.customer.user.username}}</h4>
-                  <p class="color-text-a">
-                    Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                    dui. Quisque velit nisi,
-                    pretium ut lacinia in, elementum id enim.
-                  </p>
                   <ul class="list-unstyled">
                     <li class="d-flex justify-content-between">
                       <strong>جوال:</strong>

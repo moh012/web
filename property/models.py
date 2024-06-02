@@ -21,7 +21,11 @@ class City(models.Model):
 
 
 class Area(models.Model):
-    city = models.ForeignKey(City, on_delete=models.DO_NOTHING, null=True)
+
+    city = models.ForeignKey(City,
+                             on_delete=models.DO_NOTHING,
+                             null=True,
+                             related_name='areas')
     area_name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -48,13 +52,13 @@ class Property(models.Model):
     img = models.ImageField(upload_to=filepath, blank=True)
     details = models.TextField(null=True)
     price = models.IntegerField(null=True)
-    room_number = models.CharField(max_length=100, null=True)
-    hall_room = models.CharField(max_length=100, null=True)
-    bathrooms = models.CharField(max_length=100, null=True)
-    floor = models.CharField(max_length=100, null=True)
+    room_number = models.CharField(max_length=100, null=True, blank=True)
+    hall_room = models.CharField(max_length=100, null=True, blank=True)
+    bathrooms = models.CharField(max_length=100, null=True, blank=True)
+    floor = models.CharField(max_length=100, null=True, blank=True)
     street_number = models.CharField(max_length=100, null=True)
     build_year = models.CharField(max_length=100, null=True)
-    house_type = models.CharField(max_length=100, null=True)
+    house_type = models.CharField(max_length=100, null=True, blank=True)
     space = models.IntegerField(null=True)
     pool = models.BooleanField(default=False, null=True)
     kitchen = models.BooleanField(default=False, null=True)
@@ -65,7 +69,9 @@ class Property(models.Model):
     basement = models.BooleanField(default=False, null=True)
     furnished = models.BooleanField(default=False, null=True)
     property_date = models.DateField(default=timezone.now)
-    state = models.BooleanField(default=False, null=True)
+    state = models.SmallIntegerField(default=0,
+                                     choices=[(0, 'inactive'), (1, 'banned'),
+                                              (2, 'active')])
 
     def __str__(self):
         return self.title
@@ -73,10 +79,11 @@ class Property(models.Model):
 
 class Photo_Property(models.Model):
     property = models.ForeignKey(Property,
-                                 on_delete=models.DO_NOTHING,
-                                 null=True)
-    description = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to='propertyPhoto/%Y/%m/%d/', blank=True)
+                                 on_delete=models.CASCADE,
+                                 null=True,
+                                 related_name='photos')
+    description = models.CharField(max_length=100, null=True, blank=True)
+    photo = models.FileField(upload_to=filepath, blank=True)
 
 
 class Comparison(models.Model):

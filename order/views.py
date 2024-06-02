@@ -4,6 +4,7 @@ from accounts.models import Customer
 from property.models import Area
 from property.models import City
 from property.models import Favorite
+from property.models import Property
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import os
@@ -11,6 +12,7 @@ import os
 # Create your views here.
 
 
+@login_required(login_url='login')
 def order(request):
 
     context = {
@@ -22,7 +24,7 @@ def order(request):
         customer = request.user.customer
         title = request.POST.get('orderTitle')
         orderType = request.POST.get('orderType')
-        area = Area(id=1)
+        area = Area(id=request.POST.get('area'))
         location = request.POST.get('location')
         minPrice = request.POST.get('minPrice')
         maxPrice = request.POST.get('maxPrice')
@@ -85,19 +87,28 @@ def fave(request):
     return render(request, 'order/fave.html', context)
 
 
-def add_fave(request, id):
-    fave = Favorite.objects.get()
-    fave.property = Favorite.objects.filter(id=id)
-    fave.customer = request.user.customer
-    fave.status = True
-    messages.success(request, "تم إضافة العقار إلى المفضلة!")
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+
+
+def add_fave(request, id_property):
+    try:
+        property_obj = get_object_or_404(Property, id=id_property)
+        fave, created = Favorite.objects.get_or_create(
+            property=property_obj, customer=request.user.customer, status=True)
+        if created:
+            messages.success(request, "تم إضافة العقار إلى المفضلة!")
+        else:
+            messages.info(request, "العقار موجود بالفعل في المفضلة!")
+    except Exception as e:
+        messages.error(request, f"حدث خطأ: {e}")
     return redirect('fave')
 
 
 def rm_fave(request, id):
     fave = Favorite.objects.filter(id=id)
     fave.delete()
-    messages.success(request, "تم إزالة العقار من المفضلة!")
+    messages.error(request, "تم إزالة العقار من المفضلة!")
     return redirect('fave')
 
 
@@ -162,7 +173,7 @@ def edit_order(request, id):
         ord.basement = request.POST.get('furnish')
         ord.furnished = request.POST.get('modern')
         ord.save()
-        messages.success(request, "تم تعديل الطلب بنجاح!")
+        messages.warning(request, "تم تعديل الطلب بنجاح!")
         return redirect('order_grid')
     context = {'ord': ord}
     return render(request, 'order/edit_order.html', context)
@@ -173,7 +184,7 @@ def delete_order(request, id):
     ord = Order.objects.get(id=id)
     if request.method == "POST":
         ord.delete()
-        messages.success(request, "تم حذف الطلب بنجاح!")
+        messages.error(request, "تم حذف الطلب بنجاح!")
         return redirect('order_grid')
     context = {'ord': ord}
     return render(request, 'order/delete_order.html', context)
