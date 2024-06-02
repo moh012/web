@@ -40,12 +40,12 @@
           </div>
 
 
-        {% for msg in messages %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>اهلا، </strong>{{msg}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-        </div>
-        {% endfor %}
+          {% for msg in messages %}
+          <div class="alert {% if 'error' in msg.tags %}alert-danger{% else %}alert-success{% endif %} {% if 'info' in msg.tags %}alert-warning{% endif %} alert-dismissible fade show" role="alert">
+            <strong>اهلا، </strong>{{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+          </div>
+          {% endfor %}
 
 
           {% if user.is_authenticated and user.customer %}

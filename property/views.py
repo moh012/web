@@ -3,7 +3,7 @@ from chatting.models import Comment
 from chatting.forms  import CommentForm
 from accounts.models import Customer, Agent
 from django.contrib.auth.models import User
-from property.models import Area, Property
+from property.models import Area, Property, Favorite, City, Photo_Property
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import os
@@ -11,12 +11,19 @@ import os
 # Create your views here.
 
 
+@login_required(login_url='login')
 def property(request):
+
+    context = {
+        'city': City.objects.all(),
+        'area': Area.objects.all(),
+    }
+
     if request.method == 'POST':
         agent = request.user.agent
         title = request.POST.get('property')
         propertyType = request.POST.get('propertyType')
-        area = Area(id=1)
+        area = Area(id=request.POST.get('area'))
         location = request.POST.get('location_property')
         if len(request.FILES) != 0:
             img = request.FILES['image_property']
@@ -38,103 +45,61 @@ def property(request):
         elevator = request.POST.get('elevator_property')
         basement = request.POST.get('basement_property')
         furnished = request.POST.get('Furnished_property')
-        data = Property(
-            agent=agent,
-            title=title,
-            property_type=propertyType,
-            #  city=city,
-            area=area,
-            price=price,
-            room_number=room_number,
-            floor=floor,
-            location=location,
-            img=img,
-            details=description,
-            build_year=build_year,
-            bathrooms=bathrooms,
-            hall_room=hall_room,
-            house_type=house_type,
-            basement=basement,
-            pool=pool,
-            kitchen=kitchen,
-            furnished=furnished,
-            elevator=elevator,
-            street_number=street_number,
-            appendix=yard,
-            roof=roof,
-            modern=modern,
-            space=space)
+        data = Property(agent=agent,
+                        title=title,
+                        property_type=propertyType,
+                        area=area,
+                        price=price,
+                        room_number=room_number,
+                        floor=floor,
+                        location=location,
+                        img=img,
+                        details=description,
+                        build_year=build_year,
+                        bathrooms=bathrooms,
+                        hall_room=hall_room,
+                        house_type=house_type,
+                        basement=basement,
+                        pool=pool,
+                        kitchen=kitchen,
+                        furnished=furnished,
+                        elevator=elevator,
+                        street_number=street_number,
+                        appendix=yard,
+                        roof=roof,
+                        modern=modern,
+                        space=space)
         data.save()
+        files = request.FILES.getlist('files')
+        for file in files:
+            new_file = Photo_Property(
+                property=data,
+                photo=file,
+            )
+            new_file.save()
         messages.success(request, "تم إضافة العقار بنجاح!")
         return redirect('property_grid')
 
-    return render(request, 'property/property.html')
+    return render(request, 'property/property.html', context)
 
 
 def property_grid(request):
 
     context = {
         'properties': Property.objects.all(),
+        'fave': Favorite.objects.all()
     }
 
     return render(request, 'property/property_grid.html', context)
 
-
-# def property_single(request, property_id):
-#     property = get_object_or_40   4(Property, id=property_id)
-#     comments = property.comments.filter(parent_comment__isnull=True)  # فقط التعليقات الرئيسية
-
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.customer = request.user.customer
-#             comment.property = property
-#             comment.save()
-#             return redirect('property_single', property_id=property.id)
-#     else:
-#         form = CommentForm()
-    
-#     context = {
-#         'comment_num': Comment.objects.all().count(),
-#         'property': property,
-#         'comments': comments,
-#         'form': form
-#     }
-#     return render(request, 'property/property_single.html', context)
-
-
-
-
-# @login_required
-# def reply_to_comment(request, comment_id):
-#     parent_comment = get_object_or_404(Comment, id=comment_id)
-#     property = parent_comment.property
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             reply = form.save(commit=False)
-#             reply.customer = request.user.customer
-#             reply.property = property
-#             reply.parent_comment = parent_comment
-#             reply.is_reply = True
-#             reply.save()
-#             return redirect('property_single', property_id=property.id)
-#     else:
-#         form = CommentForm()
-    
-#     context = {
-#         'form': form,
-#         'property': property,
-#         'parent_comment': parent_comment
-#     }
-#     return render(request, 'property/reply_to_comment.html', context)
 
 
 @login_required
 def property_single(request, property_id):
     property = get_object_or_404(Property, id=property_id)
     comments = property.comments.filter(parent_comment__isnull=True) 
+    photos = list(Photo_Property.objects.filter(property=property)) + [property.img]
+
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -154,10 +119,10 @@ def property_single(request, property_id):
         'comment_num': Comment.objects.filter(property_id=property_id).count(),
         'property': property,
         'comments': comments,
-        'form': form
+        'form': form,
+        'photos': photos,
     }
     return render(request, 'property/property_single.html', context)
-
 
 @login_required
 def reply_to_comment(request, comment_id):
@@ -183,7 +148,8 @@ def reply_to_comment(request, comment_id):
     context = {
         'form': form,
         'property': property,
-        'parent_comment': parent_comment
+        'parent_comment': parent_comment,
+        
     }
     return render(request, 'property/reply_to_comment.html', context)
 
@@ -222,6 +188,7 @@ def reply_to_comment(request, comment_id):
 @login_required(login_url='login')
 def edit_property(request, id):
     prop = Property.objects.get(id=id)
+    photo = Photo_Property.objects.filter(property=prop)
 
     if request.method == "POST":
         if len(request.FILES) != 0:
@@ -230,6 +197,7 @@ def edit_property(request, id):
             prop.img = request.FILES['image_property']
         prop.title = request.POST.get('property')
         prop.property_type = request.POST.get('propertyType')
+        prop.area = Area(id=request.POST.get('area'))
         prop.location = request.POST.get('location_property')
         prop.details = request.POST.get('description')
         prop.price = request.POST.get('price_property')
@@ -250,9 +218,14 @@ def edit_property(request, id):
         prop.basement = request.POST.get('basement_property')
         prop.furnished = request.POST.get('Furnished_property')
         prop.save()
-        messages.success(request, "تم تعديل العقار بنجاح!")
+        messages.warning(request, "تم تعديل العقار بنجاح!")
         return redirect('property_grid')
-    context = {'prop': prop}
+    context = {
+        'prop': prop,
+        'photo': photo,
+        'city': City.objects.all(),
+        'area': Area.objects.all(),
+    }
     return render(request, 'property/edit_property.html', context)
 
 
@@ -263,7 +236,7 @@ def delete_property(request, id):
         if len(prop.img) > 0:
             os.remove(prop.img.path)
         prop.delete()
-        messages.success(request, "تم حذف العقار بنجاح!")
+        messages.error(request, "تم حذف العقار بنجاح!")
         return redirect('property_grid')
     context = {'prop': prop}
     return render(request, 'property/delete_property.html', context)

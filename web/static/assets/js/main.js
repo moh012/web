@@ -307,6 +307,86 @@ imageLinks.forEach(function(imageLink) {
 
 })()
 
+// بداية فلترة نوع العقار في الطلبات والعقارات
+        const propertyTypeSelect = document.getElementById('property-type-select');
+        const orderSection = document.getElementById('order-section');
+        const floorSection = document.getElementById('floor-section');
+        const roomSection = document.getElementById('room-section');
+        const hallSection = document.getElementById('hall-section');
+        const bathroomSection = document.getElementById('bathroom-section');
+        const placeSection = document.getElementById('place-section');
+
+        floorSection.style.display = 'none';
+        roomSection.style.display = 'none';
+        hallSection.style.display = 'none';
+        bathroomSection.style.display = 'none';
+        placeSection.style.display = 'none';
+
+        propertyTypeSelect.addEventListener('change', function() {
+            const selectedPropertyType = this.value;
+
+            if (selectedPropertyType === 'order-section') {
+              floorSection.style.display = 'none';
+              roomSection.style.display = 'none';
+              hallSection.style.display = 'none';
+              bathroomSection.style.display = 'none';
+              placeSection.style.display = 'none';
+            } else if (selectedPropertyType === 'أرض') {
+              floorSection.style.display = 'none';
+              roomSection.style.display = 'none';
+              hallSection.style.display = 'none';
+              bathroomSection.style.display = 'none';
+              placeSection.style.display = 'none';
+            } else {
+              floorSection.style.display = 'block';
+              roomSection.style.display = 'block';
+              hallSection.style.display = 'block';
+              bathroomSection.style.display = 'block';
+              placeSection.style.display = 'block';
+            }
+        });
+// نهاية فلترة نوع العقار في الطلبات والعقارات
+
+// بداية ارقام فقط
+function checkInput0() {
+  var input = document.getElementById("priceLow0");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput1() {
+  var input = document.getElementById("priceHigh1");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput2() {
+  var input = document.getElementById("mySpace");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput3() {
+  var input = document.getElementById("myPrice");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput4() {
+  var input = document.getElementById("spaceProp");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput5() {
+  var input = document.getElementById("priceEdit");
+  input.value = input.value.replace(/\D/g, '');
+}
+function checkInput6() {
+  var input = document.getElementById("spaceEdit");
+  input.value = input.value.replace(/\D/g, '');
+}function checkInput7() {
+  var input = document.getElementById("editPriceLow");
+  input.value = input.value.replace(/\D/g, '');
+}function checkInput8() {
+  var input = document.getElementById("editPriceHigh");
+  input.value = input.value.replace(/\D/g, '');
+}function checkInput9() {
+  var input = document.getElementById("orderSpaceEdit");
+  input.value = input.value.replace(/\D/g, '');
+}
+// نهاية ارقام فقط
+
 // start login pages js
 
 // (function ($) {

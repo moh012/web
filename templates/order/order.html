@@ -17,7 +17,7 @@
 <center>
 <div class="col-md-7">
   {% if request.user.is_authenticated and user.customer %}
-    <form action="{% url "order" %}" method="POST">
+    <form action="{% url "order" %}" method="POST" id="form">
   {% else %}
     <div id="login-popup" class="popup">
       <div class="popup-content">
@@ -58,39 +58,69 @@
 
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
-            <select class="form-control form-select form-control-a" name="orderType" id="bathrooms" title="نوع العقار" style="line-height: 2;">
-              <option>شقة</option>
-              <option>فيلا</option>
-              <option>أرض</option>
-              <option>محل</option>
-              <option>شاليهات</option>
-              <option>غرفة</option>
-            </select>
+              <label class="pb-2" for="propertyType" style="display: flex;">نوع العقار</label>
+              <select class="form-control form-select form-control-a" name="orderType" id="property-type-select" title="نوع العقار" style="line-height: 2;">
+                <option value="order-section">إختر نوع العقار</option>
+                  <option value="شقة">شقة</option>
+                  <option value="فيلا">فيلا</option>
+                  <option value="أرض">أرض</option>
+                  <option value="محل">محل</option>
+                  <option value="شاليهات">شاليهات</option>
+                  <option value="غرفة">غرفة</option>
+              </select>
           </div>
-        </div>
+      </div>
         <br>
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
-            <select class="form-control form-select form-control-a" name="city" id="area" title="المحافظة" style="line-height: 2;">
+            <label class="pb-2" for="city-select" style="display: flex;">المحافظة</label>
+            <select class="form-control form-select form-control-a" name="city" id="city-select" title="المحافظة" style="line-height: 2;">
+              <option value="">إختر محافظة</option>
               {% for city in city %}
-              <option value="{{city.id}}">{{city.city_name}}</option>
+                  <option value="{{ city.id }}">{{ city.city_name }}</option>
               {% endfor %}
             </select>
           </div>
         </div>
         <br>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="area-div">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
-            <select class="form-control form-select form-control-a" name="area" id="area" title="المديرية" style="line-height: 2;">
-              {% for area in area %}
-              <option value="{{area.id}}">{{area.area_name}}</option>
-              {% endfor %}
+            <label class="pb-2" for="area-select" style="display: flex;">المديرية</label>
+            <select class="form-control form-select form-control-a" name="area" id="area-select" title="المديرية" style="line-height: 2;">
+                <option value="">إختر مديرية</option>
+                {% for area in area %}
+                    <option value="{{ area.id }}" data-city-id="{{ area.city.id }}">{{ area.area_name }}</option>
+                {% endfor %}
             </select>
           </div>
         </div>
+
+        <script>
+          const citySelect = document.getElementById('city-select');
+          const areaSelect = document.getElementById('area-select');
+          const areaDiv = document.getElementById('area-div');
+
+          // Initially hide the area-select element
+          areaDiv.style.display = 'none';
+
+          citySelect.addEventListener('change', function() {
+              const selectedCityId = this.value;
+
+              // Show the area-select element when a city is selected
+              if (selectedCityId !== '') {
+                  areaDiv.style.display = 'block';
+              } else {
+                  areaSelect.style.display = 'none';
+              }
+
+              // Filter areas based on selected city
+              Array.from(areaSelect.options).forEach(option => {
+                  const cityId = option.dataset.cityId;
+                  option.style.display = selectedCityId === '' || cityId === selectedCityId ? 'block' : 'none';
+              });
+          });
+        </script>
+
         <br>
         <br>
         <br>
@@ -108,19 +138,21 @@
         <label for="" style="display: flex;">السعر</label>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="minPrice" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" required>
+            <input type="text" name="minPrice" id="priceLow0" class="form-control form-control-lg form-control-a" pattern="\d+" oninput="checkInput0()" placeholder="الحد الأدنى" required>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-            <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" required>
+            <input type="text" name="maxPrice" id="priceHigh1" class="form-control form-control-lg form-control-a" pattern="\d+" oninput="checkInput1()" placeholder="الحد الأعلى" required>
           </div>
         </div>
+
        
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="room-section">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الغرف</label>
-            <select class="form-control form-select form-control-a" name="room" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="room" id="room-section" title="عدد الغرف" style="line-height: 2;">
+              <option value="">إختر عدد الغرف</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -131,10 +163,11 @@
             </select>
           </div>
         </div>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="hall-section">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الصالات</label>
-            <select class="form-control form-select form-control-a" name="hall" id="hall" title="عدد الصالات" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="hall" id="hall-section" title="عدد الصالات" style="line-height: 2;">
+              <option value="">إختر عدد الصالات</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -145,10 +178,11 @@
             </select>
           </div>
         </div>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="bathroom-section">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">دورات المياه</label>
-            <select class="form-control form-select form-control-a" name="bathroom" id="bathrooms" title="عدد الغرف" style="line-height: 2;">
+            <select class="form-control form-select form-control-a" name="bathroom" id="bathroom-section" title="عدد الغرف" style="line-height: 2;">
+              <option value="">إختر عدد دورات المياة</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -159,20 +193,21 @@
             </select>
           </div>
         </div>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="floor-section">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">الادوار</label>
-            <select class="form-control form-select form-control-a" name="floor" id="floor" title="عدد الادوار" style="line-height: 2;">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>+7</option>
-            </select>
+              <label class="pb-2" for="propertyType" style="display: flex;">الادوار</label>
+              <select class="form-control form-select form-control-a" name="floor" id="floor-select" title="عدد الادوار" style="line-height: 2;">
+                  <option value="">إختر عدد الادوار</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>+7</option>
+              </select>
           </div>
-        </div>
+      </div>
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
             <label class="pb-2" for="propertyType" style="display: flex;">الشوارع</label>
@@ -189,7 +224,6 @@
             <label class="pb-2" for="propertyType" style="display: flex;">عمر العقار</label>
             <select class="form-control form-select form-control-a" name="propertyAge" id="bathrooms" title="أضف عمر العقار" style="line-height: 2;">
               <option>جديد</option>
-              <br>
               <option>أقل من سنه</option>
               <option>أقل من سنتين</option>
               <option>أقل من 3 سنوات</option>
@@ -216,36 +250,27 @@
           </div>
         </div>
         <br>
+        <div id="place-section">
         <label for="" style="display: flex;">نوع السكن</label>
+        <input type="hidden" name="houseType" id="place-section" value="">
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="houseType" class="" value="عزبة" required style="width: 20px; height: 20px;">
+              <input type="radio" name="houseType" class="" value="عزبة" style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عزبة</label>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <div class="form-group">
-              <input type="radio" name="houseType" class="" value="عوائل" required style="width: 20px; height: 20px;">
+              <input type="radio" name="houseType" class="" value="عوائل" style="width: 20px; height: 20px;">
               <label for="" style="font-size: 20px;">عوائل</label>
           </div>
-        </div>        
+        </div>
+      </div>
         <div class="col-md-12 mb-3">
           <div class="form-group">
             <label for="" style="display: flex;">المساحة</label>
-            <input type="text" name="space" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
+            <input type="text" name="space" id="mySpace" pattern="\d+" oninput="checkInput2()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
           </div>
-          <script>
-            function checkInput() {
-              const numberInput = document.getElementById("numberInput");
-              const value = numberInput.value;
-          
-              if (value != "" && isNaN(value)) {
-                numberInput.value = "";
-                alert("يسمح بالأرقام فقط!");
-                return;
-              }
-            }
-          </script>
         </div>
         <br>
         <br>
@@ -336,19 +361,5 @@
       </div>
     </form>
   </div>
-
-  <script>
-    function checkPriceRange() {
-      var minPrice = document.getElementById('priceLow').value;
-      var maxPrice = document.getElementById('priceHigh').value;
-  
-      if (parseInt(minPrice) > parseInt(maxPrice)) {
-        alert('الحد الأدنى يجب أن يكون أقل من الحد الأعلى');
-        return false; // إيقاف إرسال البيانات
-      }
-      return true; // متابعة إرسال البيانات
-    }
-  </script>
-
 </center>
 {% endblock %}
