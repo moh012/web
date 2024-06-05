@@ -1,14 +1,53 @@
-from django.shortcuts import render, redirect ,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from chatting.models import Comment
-from chatting.forms  import CommentForm
+from chatting.forms import CommentForm
 from accounts.models import Customer, Agent
 from django.contrib.auth.models import User
-from property.models import Area, Property, Favorite, City, Photo_Property
+from property.models import Area, Property, Favorite, City, Photo_Property, Comparison
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import os
 
 # Create your views here.
+
+
+def comparison(request):
+    context = {
+        'comp':
+        Comparison.objects.all(),
+        'countComp':
+        Comparison.objects.filter(customer=request.user.customer).count()
+    }
+    return render(request, 'property/comparison.html', context)
+
+
+def add_comp(request, id_property):
+    try:
+        property_obj = get_object_or_404(Property, id=id_property)
+        user_comparisons = Comparison.objects.filter(
+            customer=request.user.customer)
+        if user_comparisons.count() >= 3:
+            messages.warning(
+                request,
+                "لقد أضفت بالفعل 3 عقارات للمقارنة. يرجى إزالة واحد قبل إضافة واحد جديد."
+            )
+            return redirect('comparison')
+        fave, created = Comparison.objects.get_or_create(
+            property=property_obj, customer=request.user.customer)
+        if created:
+            messages.success(request, "تم إضافة العقار إلى المقارنة!")
+        else:
+            messages.info(request, "العقار موجود بالفعل في المقارنة!")
+    except Exception as e:
+        messages.error(request, f"حدث خطأ: {e}")
+    return redirect('comparison')
+
+
+def rm_comp(request, id):
+    comp = Comparison.objects.filter(id=id)
+    comp.delete()
+    messages.error(request, "تم إزالة العقار من المقارنة!")
+    return redirect('comparison')
 
 
 @login_required(login_url='login')
@@ -84,22 +123,37 @@ def property(request):
 
 
 def property_grid(request):
+    try:
+        search = Property.objects.all()
+        title = None
+        if 'search_name' and 'search_type' and 'search_bathroom' in request.GET:
+            title = request.GET['search_name']
+            property_type = request.GET['search_type']
+            search_room = request.GET['search_room']
+            search_bathroom = request.GET['search_bathroom']
+            if title:
+                search = search.filter(
+                    title__icontains=title,
+                    property_type__icontains=property_type,
+                    room_number__icontains=search_room,
+                    bathrooms__icontains=search_bathroom,
+                )
+    except Exception as e:
+        messages.error(request, f"حدث خطأ: {e}")
 
     context = {
-        'properties': Property.objects.all(),
-        'fave': Favorite.objects.all()
+        'properties': search,
+        'fave': Favorite.objects.all(),
     }
-
     return render(request, 'property/property_grid.html', context)
 
 
-
-@login_required
+@login_required(login_url='login')
 def property_single(request, property_id):
     property = get_object_or_404(Property, id=property_id)
-    comments = property.comments.filter(parent_comment__isnull=True) 
-    photos = list(Photo_Property.objects.filter(property=property)) + [property.img]
-
+    comments = property.comments.filter(parent_comment__isnull=True)
+    photos = list(
+        Photo_Property.objects.filter(property=property)) + [property.img]
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -114,7 +168,7 @@ def property_single(request, property_id):
             return redirect('property_single', property_id=property.id)
     else:
         form = CommentForm()
-    
+
     context = {
         'comment_num': Comment.objects.filter(property_id=property_id).count(),
         'property': property,
@@ -124,13 +178,14 @@ def property_single(request, property_id):
     }
     return render(request, 'property/property_single.html', context)
 
+
 @login_required
 def reply_to_comment(request, comment_id):
     parent_comment = get_object_or_404(Comment, id=comment_id)
     property = parent_comment.property
 
     if request.method == 'POST':
-        form = CommentForm(request.POST)    
+        form = CommentForm(request.POST)
         if form.is_valid():
             reply = form.save(commit=False)
             if hasattr(request.user, 'customer'):
@@ -144,12 +199,11 @@ def reply_to_comment(request, comment_id):
             return redirect('property_single', property_id=property.id)
     else:
         form = CommentForm()
-    
+
     context = {
         'form': form,
         'property': property,
         'parent_comment': parent_comment,
-        
     }
     return render(request, 'property/reply_to_comment.html', context)
 
@@ -174,15 +228,13 @@ def reply_to_comment(request, comment_id):
 #             return redirect('property_single', property_id=property.id)
 #     else:
 #         form = CommentForm()
-    
+
 #     context = {
 #         'form': form,
 #         'property': property,
 #         'parent_comment': parent_comment
 #     }
 #     return render(request, 'property/reply_to_comment.html', context)
-
-
 
 
 @login_required(login_url='login')

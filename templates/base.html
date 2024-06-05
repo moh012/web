@@ -73,6 +73,16 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+  <script>
+    {% for order in orders %}
+
+$(".order{{order.state}}").click(function(){
+  $(".orderhide").hide()
+  $(".order{{order.state}}").show()
+});
+
+{% endfor %}
+  </script>
 
 </body>
 

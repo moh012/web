@@ -113,14 +113,32 @@ def rm_fave(request, id):
 
 
 def order_grid(request):
+    try:
+        search = Order.objects.all().order_by('-id')
+        title = None
+        if 'search_name' and 'search_type' and 'search_bathroom' in request.GET:
+            title = request.GET['search_name']
+            order_type = request.GET['search_type']
+            search_room = request.GET['search_room']
+            search_bathroom = request.GET['search_bathroom']
+            if title:
+                search = search.filter(
+                    title__icontains=title,
+                    order_type__icontains=order_type,
+                    room_number__icontains=search_room,
+                    bathrooms__icontains=search_bathroom,
+                )
+    except Exception as e:
+        messages.error(request, f"حدث خطأ: {e}")
 
     context = {
-        'orders': Order.objects.all(),
+        'orders': search,
     }
 
     return render(request, 'order/order_grid.html', context)
 
 
+@login_required(login_url='login')
 def order_single(request, id):
     ord = Order.objects.get(id=id)
 

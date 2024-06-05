@@ -87,12 +87,15 @@ class Photo_Property(models.Model):
 
 
 class Comparison(models.Model):
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     property = models.ForeignKey(Property,
                                  on_delete=models.DO_NOTHING,
                                  null=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    location = models.CharField(max_length=100)
-    description = models.CharField(max_length=100)
+    # price = models.DecimalField(max_digits=5, decimal_places=2)
+    # location = models.CharField(max_length=100)
+    # description = models.CharField(max_length=100)
 
 
 class Favorite(models.Model):
