@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.template import loader  #اضافتي للمستقبل القريب
-from property.models import City, Property
+from property.models import City, Property, Area
 from order.models import Order, Booking
 from django.contrib.auth.models import User
 
@@ -10,7 +10,8 @@ from django.contrib.auth.models import User
 def index(request):
 
     context = {
-        'citys': City.objects.all(),
+        'city': City.objects.all(),
+        'area': Area.objects.all(),
         'alluser': User.objects.all().count(),
         'allproperty': Property.objects.all().count(),
         'allorder': Order.objects.all().count(),
@@ -18,4 +19,3 @@ def index(request):
     }
 
     return render(request, 'pages/index.html', context)
-   

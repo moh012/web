@@ -18,17 +18,23 @@ class Agent(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
-    profil_photo = models.ImageField(upload_to=filepath1, blank=True, default='uploads/avatar.png')
+    profil_photo = models.ImageField(upload_to=filepath1,
+                                     blank=True,
+                                     default='uploads/avatar.png')
     state = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
-    photo = models.ImageField(upload_to=filepath1, blank=True, default='uploads/avatar.png')
+    photo = models.ImageField(upload_to=filepath1,
+                              blank=True,
+                              default='uploads/avatar.png')
     state = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.user.username
-    

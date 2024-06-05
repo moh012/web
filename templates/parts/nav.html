@@ -10,80 +10,76 @@
     <span class="close-box-collapse right-boxed bi bi-x"></span>
     <div class="box-collapse-wrap form">
 
-      <form class="form-a">
+      <form class="form-a" method="GET" action="{% if request.user.customer %}{% url 'property_grid' %}{% endif %}{% if request.user.agent %}{% url 'order_grid' %}{% endif %}">
         <div class="row">
-          <div class="col-md-12 mb-2">
+          <!-- <div class="col-md-12 mb-3">
             <div class="form-group">
+              <label for="" style="display: flex;">البحث</label>
+              <input type="text" name="search_details" class="form-control form-control-lg form-control-a" placeholder="كلمات مفتاحية...">
+            </div>
+          </div> -->
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="Type">حالة العقار</label>
+              <select class="form-control form-select form-control-a" name="search_name" id="proprity">
+                <option value="">إختر حالة العقار</option>
+                {% if request.user.agent %}
+                <option>شراء</option>
+                {% endif %}
+                {% if request.user.customer %}
+                <option>إيجار</option>
+                {% endif %}
+                <option>بيع</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
               <label class="pb-2" for="Type">نوع العقار </label>
-              <select class="form-control form-select form-control-a" id="proprity">
-                <option> شقة </option>
-                <option> فيلا</option>
+              <select class="form-control form-select form-control-a" name="search_type" id="proprity">
+                <option value="">إختر نوع العقار</option>
+                <option>شقة</option>
+                <option>فيلا</option>
                 <option>أرض</option>
-                <option> محل</option>
-                <option> شاليهات</option>
-                <option> عزبة</option>
+                <option>محل</option>
+                <option>شاليهات</option>
+                <option>غرفة</option>
               </select>
             </div>
-          </div>  
+          </div>
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="Type">المدينة</label>
-              <select class="form-control form-select form-control-a" id="Type">
-                <option>أمانة العاصمة </option>
-                <option> صنعاء</option>
-                <option>عدن</option>
-                <option> حضرموت</option>
-                <option> تعز</option>
-                <option> الحديدة</option>
-                <option> إب</option>
-                <option> أبين</option>
-                <option> البيضاء</option>
-                <option> لحج</option>
-                <option> مأرب</option>
-                <option> شبوة</option>
-                <option> الجوف</option>
-                <option> المهرة</option>
-                <option> المحويت</option>
-                <option> صعدة</option>
-                <option> حجة</option>
-                <option> الضالع</option>
-                <option> عمران</option>
-                <option> ذمار</option>
-                <option> ريمة</option>
-              </select>
-            </div>
-          </div>  
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="city">المديرية</label>
-              <select class="form-control form-select form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
-              </select>
-            </div>
-          </div>  
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="bedrooms"> عدد الغرف</label>
-              <select class="form-control form-select form-control-a" id="bedrooms">
+              <label class="pb-2" for="bedrooms">الغرف</label>
+              <select class="form-control form-select form-control-a" name="search_room" id="bedrooms">
+                <option value="">إختر عدد الغرف</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
                 <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9+</option>
+                <option>+7</option>
               </select>
             </div>
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="bedrooms"> ديوان </label>
+              <label class="pb-2" for="garages">دورات المياه</label>
+              <select class="form-control form-select form-control-a" name="search_bathroom" id="bathrooms">
+                <option value="">إختر عدد دورات المياة</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>+7</option>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 mb-2">
+            <div class="form-group mt-3">
+              <label class="pb-2" for="bedrooms">الصالات</label>
               <select class="form-control form-select form-control-a" id="bedrooms">
                 <option>لاشيء</option>
                 <option>1</option>
@@ -96,20 +92,7 @@
           </div>
           <div class="col-md-6 mb-2">
             <div class="form-group mt-3">
-              <label class="pb-2" for="garages">الكراج</label>
-              <select class="form-control form-select form-control-a" id="garages">
-                <option>لاشيء</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="bathrooms">دورات المياه</label>
+              <label class="pb-2" for="bathrooms">الادوار</label>
               <select class="form-control form-select form-control-a" id="bathrooms">
                 <option>1</option>
                 <option>2</option>
@@ -118,20 +101,6 @@
                 <option>5</option>
               </select>
             </div>
-          </div>
-          <div class="col-md-6 mb-2" style="width: 100%;">
-            <div class="form-group mt-3">
-              <label class="pb-2" for="propertyType" style="display: flex;">الصالات</label>
-              <select class="form-control form-select form-control-a" name="hall" id="hall" title="عدد الصالات" style="line-height: 2;">
-                <option>لاشيء</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5+</option>
-              </select>
-            </div>
-            <br>
           </div>
           <div class="col-md-6 mb-3" style="width: 25%;">
             <div class="form-group">
@@ -184,7 +153,7 @@
           <div class="col-md-12 mb-3">
             <div class="form-group">
               <label for="" style="display: flex;">الموقع</label>
-              <input type="text" name="location_property" class="form-control form-control-lg form-control-a" placeholder="بجانب..." title="قم بإدخال موقع العقار" required>
+              <input type="text" name="location_property" class="form-control form-control-lg form-control-a" placeholder="بجانب..." title="قم بإدخال موقع العقار" >
             </div>
           </div>
           <div class="col-md-6 mb-2" style="width: 100%;">
@@ -252,20 +221,20 @@
           <label for="" style="display: flex;">نوع السكن</label>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="houseType" class="" value="عزبة" required style="width: 20px; height: 20px;">
+                <input type="radio" name="houseType" class="" value="عزبة"  style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">عزبة</label>
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-                <input type="radio" name="houseType" class="" value="عوائل" required style="width: 20px; height: 20px;">
+                <input type="radio" name="houseType" class="" value="عوائل"  style="width: 20px; height: 20px;">
                 <label for="" style="font-size: 20px;">عوائل</label>
             </div>
           </div>    <br>    
           <div class="col-md-12 mb-3">
             <div class="form-group">
               <label for="" style="display: flex;">المساحة</label>
-              <input type="text" name="space" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" required>
+              <input type="text" name="space" id="numberInput" pattern="\d+" oninput="checkInput()"  class="form-control form-control-lg form-control-a"  placeholder="مثال...340m2" title="قم بإدخال مساحة العقار" >
             </div>
             <script>
               function checkInput() {
@@ -283,12 +252,12 @@
           <label for="" style="display: flex;">السعر</label>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-              <input type="text" name="minPrice" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" required>
+              <input type="text" name="minPrice" class="form-control form-control-lg form-control-a" id="priceLow" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأدنى" >
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <div class="form-group">
-              <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" required>
+              <input type="text" name="maxPrice" class="form-control form-control-lg form-control-a" id="priceHigh" pattern="\d+" oninput="checkPriceRange()" placeholder="الحد الأعلى" >
             </div>
             <script>
               function checkPriceRange() {
@@ -300,11 +269,17 @@
                    }
               }
            </script>
-          </div>
-         
+          </div> -->
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+         <center>
           <div class="col-md-12">
             <button type="submit" class="btn btn-b">البحث عن عقار</button>
           </div>
+        </center>
         </div>
       </form>
     </div>
@@ -365,16 +340,19 @@
           </li>
           {% endif %}
 
-          {% if request.user.is_authenticated %}
-          {% if request.user.customer %}
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'fave' %}active{% endif %}" href="{% url 'fave' %}">المفضلة</a>
-          </li>
-          {% endif %}
-          {% endif %}
-
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="{% url 'chat' %}">الدردشة</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              تفضيلات
+            </a>
+              <div class="dropdown-menu">
+                {% if request.user.is_authenticated %}
+                {% if request.user.customer %}
+                  <a class="dropdown-item {% if request.resolver_match.url_name == 'fave' %}active{% endif %}" href="{% url 'fave' %}">المفضلة</a>
+                  <a class="dropdown-item {% if request.resolver_match.url_name == 'comparison' %}active{% endif %}" href="{% url 'comparison' %}">المقارنة</a>
+                {% endif %}
+                {% endif %}
+                <a class="dropdown-item {% if request.resolver_match.url_name == 'chat' %}active{% endif %}" href="{% url 'chat' %}">الدردشة</a>
+              </div>
           </li>
 
           <li class="nav-item dropdown">
