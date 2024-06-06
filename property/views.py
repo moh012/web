@@ -94,7 +94,8 @@ def property_grid(request):
 
 
 
-@login_required
+
+@login_required(login_url='login')
 def property_single(request, property_id):
     property = get_object_or_404(Property, id=property_id)
     comments = property.comments.filter(parent_comment__isnull=True) 
@@ -124,7 +125,7 @@ def property_single(request, property_id):
     }
     return render(request, 'property/property_single.html', context)
 
-@login_required
+@login_required(login_url='login')
 def reply_to_comment(request, comment_id):
     parent_comment = get_object_or_404(Comment, id=comment_id)
     property = parent_comment.property

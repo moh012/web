@@ -112,7 +112,7 @@ def userdata(request):
                                 messages.success(request,
                                                  'مرحبا وكيلنا العزيز ')
                                 user.save()
-                                return redirect('userdata')
+                                return redirect('login')
 
                             elif account_type == 'customer':
                                 Customer.objects.create(user=user,
