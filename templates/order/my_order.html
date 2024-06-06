@@ -91,23 +91,49 @@
               <h3 class="title-d1">الطلبات ({{num_orders}})</h3>
             </div>
           </div>
-          <div class="row property-grid grid">
-            <div class="col-sm-12">
-              <div class="grid-option">
-                <form>
-                  <select class="custom-select">
-                    <option selected>All</option>
-                    <option value="1">New to Old</option>
-                    <option value="2">For Rent</option>
-                    <option value="3">For Sale</option>
-                  </select>
-                </form>
-              </div>
-            </div>
+          <section class="property-grid grid">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="grid-option">
+                    <form>
+                      <select class="custom-select" id="sort-select">
+                        <option value="all">الكل</option>
+                        <option value="seriousOrder">الطلبات الجادة</option>
+                        <option value="rental">إيجار</option>
+                        <option value="buying">شراء</option>
+                      </select>
+                    </form>
+                  </div>
+                </div>
+                
+                <script>
+                  const sortSelect = document.getElementById('sort-select');
+      sortSelect.addEventListener('change', filterOrders);
+      
+      function filterOrders() {
+        const selectedValue = sortSelect.value;
+        const orderElements = document.querySelectorAll('.order');
+      
+        orderElements.forEach(order => {
+          if (selectedValue === 'all') {
+            order.style.display = 'block';
+          } else if (selectedValue === 'rental' && order.classList.contains('rental')) {
+            order.style.display = 'block';
+          } else if (selectedValue === 'buying' && order.classList.contains('buying')) {
+            order.style.display = 'block';
+          } else if (selectedValue === 'seriousOrder' && order.classList.contains('order-state')) {
+            order.style.display = 'block';
+          } else {
+            order.style.display = 'none';
+          }
+        });
+      }
+                </script>
 
             {% for order in orders %}
           <!-- بداية الطلب -->
-          <div class="col-md-4">
+          <div class="col-md-4 order order-{{order.order_type}} {% if order.state %}order-state{% endif %} {% if order.title == 'إيجار' %}rental{% endif %} {% if order.title == 'شراء' %}buying{% endif %} {% if order.id %}old-to-new{% endif %}">
             <div class="card-box-a card-shadow">
               <a href="{% url 'order_single' order.id %}">
               <div class="img-box-a">
@@ -133,7 +159,7 @@
                     <div class="price-box d-flex">
                       <span class="price-a">وبين | {{order.end_price}} ريال</span>
                     </div>
-                    <a href="{% url 'order_single' order.id %}" class="link-a">{{order.order_date}}
+                    <a href="{% url 'order_single' order.id %}" class="link-a">{{order.area}} , {{order.area.city}}
                       <!-- <span class="bi bi-chevron-left"></span> -->
                     </a>
                   </div>
@@ -162,7 +188,9 @@
                             خيارات
                         </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            {% if request.user.agent %}
+                              <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
                             {% if user.is_authenticated and user.customer %}
                             {% if request.user.customer == order.customer %}

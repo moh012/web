@@ -24,18 +24,26 @@ class Report_Agent(models.Model):
     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True)
     agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
     report_type = models.CharField(max_length=100)
-    report_text = models.CharField(max_length=100)
     report_state = models.CharField(max_length=100)
+    report_text = models.CharField(max_length=150)
+
+    def __str__(self):
+        return f"الوكيل {self.agent} يبلغ عن : - {self.report_type}"
 
 
 class Report_Customer(models.Model):
-    ads = models.ForeignKey(ADS, on_delete=models.DO_NOTHING, null=True)
+    property = models.ForeignKey(Property,
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     customer = models.ForeignKey(Customer,
                                  on_delete=models.DO_NOTHING,
                                  null=True)
-    report_text = models.CharField(max_length=150)
     report_type = models.CharField(max_length=100)
-    report_state = models.CharField(max_length=50)
+    report_state = models.CharField(max_length=100)
+    report_text = models.CharField(max_length=150)
+
+    def __str__(self):
+        return f"المستخدم {self.customer} يبلغ عن :  - {self.report_type}"
 
 
 class Evaluation(models.Model):
@@ -54,26 +62,44 @@ class Contact(models.Model):
     message = models.TextField(null=True)
 
     def __str__(self):
-        return self.username
+        return f"{self.username}"
+
 
 #التعليقات
 class Comment(models.Model):
-    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='comments' ,null=True)
-    agent = models.ForeignKey(Agent, related_name='comments', on_delete=models.DO_NOTHING, null=True)
-    customer = models.ForeignKey(Customer, related_name='comments', on_delete=models.DO_NOTHING, null=True)
+    property = models.ForeignKey(Property,
+                                 on_delete=models.CASCADE,
+                                 related_name='comments',
+                                 null=True)
+    agent = models.ForeignKey(Agent,
+                              related_name='comments',
+                              on_delete=models.DO_NOTHING,
+                              null=True)
+    customer = models.ForeignKey(Customer,
+                                 related_name='comments',
+                                 on_delete=models.DO_NOTHING,
+                                 null=True)
     comment = models.TextField()
-    date = models.DateTimeField(auto_now_add=True ,null=True)
-    is_reply = models.BooleanField(default=False) 
-    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)
+    is_reply = models.BooleanField(default=False)
+    parent_comment = models.ForeignKey('self',
+                                       on_delete=models.CASCADE,
+                                       related_name='replies',
+                                       null=True,
+                                       blank=True)
 
     def __str__(self):
-        return self.comment[:20]
-    
+        return f"{self.comment[:20]}"
+
 
 #chat
 class Message(models.Model):
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='received_messages')
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE,
+                               related_name='sent_messages')
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 on_delete=models.CASCADE,
+                                 related_name='received_messages')
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
 

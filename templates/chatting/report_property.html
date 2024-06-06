@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+الإبلاغ عن عقار
+{% endblock %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+<div class="col-md-7">
+  {% if request.user.is_authenticated and user.customer %}
+  <form method="post">
+    {% csrf_token %}
+  {% else %}
+    <div id="login-popup" class="popup">
+      <div class="popup-content">
+        <button id="close-button" class="bi bi-x" style="color: white;"></button>
+        <h3>يجب عليك اولاً</h3>
+        <h5>تسجيل الدخول</h5>
+        <br>
+        <br>
+        <a href="{% url 'login' %}" class="btn btn-a">تسجيل الدخول</a>
+        <br>
+        <br>
+        <a href="{% url 'userdata' %}">إنشاء حساب</a>
+      </div>
+    </div>
+  {% endif %}
+      <div class="row">
+      
+        <h1>الإبلاغ عن عقار</h1>
+        
+
+        <br>
+        <br>
+
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="report_type" style="display: flex;">نوع البلاغ</label>
+            <select class="form-control form-select form-control-a" name="report_type" title="نوع البلاغ" style="line-height: 2;">
+              <option value="">إختر نوع البلاغ</option>
+              <option>إساءة في تعامل صاحب العقار</option>
+              <option>السعر مختلف عن ماهو معروض</option>
+              <option>عقارات مزيفة أو احتيالية</option>
+              <option>عقارات مسروقة أو مفقودة</option>
+              <option>عقارات محجوزة أو مرهونة</option>
+              <option>عقارات تنتهك القوانين أو شروط الإيجار</option>
+              <option>إساءة استخدام أو إهمال العقارات</option>
+              <option>نزاعات حول ملكية العقارات</option>
+              <option>اختلاس أموال أو تزوير في المعاملات العقارية</option>
+              <option>إساءة استخدام البيانات أو المعلومات العقارية</option>
+              <option>إشكاليات في تسليم أو تسلم العقارات</option>
+              <option>مشاكل أخرى متعلقة بالجودة أو السلامة في العقارات</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="propertyType" style="display: flex;">حالة البلاغ</label>
+            <select class="form-control form-select form-control-a" name="report_status" title="حالة البلاغ" style="line-height: 2;">
+              <option value="">إختر حالة البلاغ</option>
+              <option>متاح للإيجار</option>
+              <option>متاح للبيع</option>
+              <option>مؤجر</option>
+              <option>مباع</option>
+              <option>تحت الصيانة</option>
+              <option>مغلق</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-2" style="width: 100%;">
+          <div class="form-group mt-3">
+            <label class="pb-2" for="report_text" style="display: flex;">ملومات إضافية عن البلاغ</label>
+            <input type="text" name="report_text" class="form-control form-control-lg form-control-a" placeholder="البلاغ..." title="قم بإدخال شرح للبلاغ">
+          </div>
+        </div>
+        
+
+        <div class="col-md-12 text-center">
+          <br>
+          <button type="submit" class="btn btn-a">إرسال البلاغ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</center>
+{% endblock %}
