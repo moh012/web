@@ -112,7 +112,9 @@ function filterOrders() {
                             خيارات
                         </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            {% if request.user.customer %}
+                            <a class="dropdown-item" style="color: red;" href="{% url 'report_property' property.id %}">إبلاغ!</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
                             {% if request.user.customer %}
                             <a class="dropdown-item" href="{% url 'add_comp' property.id %}">إضافة الى المقارنة</a>
@@ -121,7 +123,7 @@ function filterOrders() {
                             {% if user.is_authenticated and user.agent %}
                             {% if request.user.agent == property.agent %}
                             <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
-                            <a class="dropdown-item" href="{% url 'delete_property' property.id %}">حذف</a>
+                            <a class="dropdown-item" style="color: red;" href="{% url 'delete_property' property.id %}">حذف</a>
                             {% endif %}
                             {% endif %}
                           </div>

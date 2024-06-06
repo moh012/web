@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from order.models import Order
 from accounts.models import Customer
 from property.models import Area
@@ -85,10 +85,6 @@ def fave(request):
     }
 
     return render(request, 'order/fave.html', context)
-
-
-from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
 
 
 def add_fave(request, id_property):

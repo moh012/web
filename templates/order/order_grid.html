@@ -125,13 +125,15 @@ function filterOrders() {
                             خيارات
                         </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            {% if request.user.agent %}
+                            <a class="dropdown-item" style="color: red;" href="{% url 'report_order' order.id %}">إبلاغ!</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
                             <!-- {% post_to_whatsapp object_or_url "Share via WhatsApp" %} -->
                             {% if user.is_authenticated and user.customer %}
                             {% if request.user.customer == order.customer %}
                             <a class="dropdown-item" href="{% url 'edit_order' order.id %}">تعديل</a>
-                            <a class="dropdown-item" href="{% url 'delete_order' order.id %}">حذف</a>
+                            <a class="dropdown-item" style="color: red;" href="{% url 'delete_order' order.id %}">حذف</a>
                             {% endif %}
                             {% endif %}
                           </div>
