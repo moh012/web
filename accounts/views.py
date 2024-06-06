@@ -11,7 +11,6 @@ import re
 from django.core.files.storage import default_storage
 
 
-
 def login(request):
     if request.method == 'POST' and 'btnlogin' in request.POST:
 
@@ -48,8 +47,6 @@ def logout(request):
     return redirect('index')
 
 
-
-
 def userdata(request):
     if request.method == 'POST' and 'btncreate' in request.POST:
         user_photo = None
@@ -62,7 +59,6 @@ def userdata(request):
         account_type = request.POST.get('account_type', None)
         is_added = None
         usernum = request.GET.get('numberInput')
-
 
         if 'user' in request.POST: username = request.POST['user']
         else:
@@ -84,7 +80,7 @@ def userdata(request):
         if 'accepted' in request.POST: accepted = request.POST['accepted']
 
         #التحقق من القيم
-        if username and password and email and account_type :
+        if username and password and email and account_type:
             #الموافقة على الشروط
             if accepted == 'on':
                 # التحقق من وجود المستخدم
@@ -180,9 +176,9 @@ def verification(request):
 
         return render(request, 'accounts/verification.html')
 
+
 def privacy_policy(request):
     return render(request, 'accounts/privacy_policy.html')
-
 
 
 @login_required
@@ -212,4 +208,4 @@ def edit_profile(request):
 
 
 def pyment(request):
-    return render(request , 'accounts/pyment.html')
+    return render(request, 'accounts/pyment.html')

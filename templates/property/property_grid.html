@@ -29,20 +29,41 @@
           <div class="col-sm-12">
             <div class="grid-option">
               <form>
-                <select class="custom-select">
-                  <option selected>All</option>
-                  <option value="1">New to Old</option>
-                  <option value="2">For Rent</option>
-                  <option value="3">For Sale</option>
+                <select class="custom-select" id="property-select">
+                  <option value="all">الكل</option>
+                  <option value="rental">إيجار</option>
+                  <option value="buying">بيع</option>
                 </select>
               </form>
             </div>
           </div>
+          
+          <script>
+            const sortSelect = document.getElementById('property-select');
+sortSelect.addEventListener('change', filterOrders);
+
+function filterOrders() {
+  const selectedValue = sortSelect.value;
+  const orderElements = document.querySelectorAll('.property');
+
+  orderElements.forEach(order => {
+    if (selectedValue === 'all') {
+      order.style.display = 'block';
+    } else if (selectedValue === 'rental' && order.classList.contains('rental')) {
+      order.style.display = 'block';
+    } else if (selectedValue === 'buying' && order.classList.contains('buying')) {
+      order.style.display = 'block';
+    } else {
+      order.style.display = 'none';
+    }
+  });
+}
+          </script>
         
           {% include 'parts/alerts.html' %}
 
         {% for property in properties %}
-          <div class="col-md-4">
+          <div class="col-md-4 property property-{{property.property_type}} {% if property.state %}order-state{% endif %} {% if property.title == 'إيجار' %}rental{% endif %} {% if property.title == 'بيع' %}buying{% endif %} {% if property.id %}old-to-new{% endif %}">
             <div class="card-box-a card-shadow">
               <div class="img-box-a">
                 {% if property.img %}
@@ -63,7 +84,7 @@
                     <div class="price-box d-flex">
                       <span class="price-a">السعر | {{property.price}} ريال</span>
                     </div>
-                    <a href="{% url 'property_single' property.id %}" class="link-a">{{property.property_date}}
+                    <a href="{% url 'property_single' property.id %}" class="link-a">{{property.area}} , {{property.area.city}}
                     </a>
                   </div>
                   <div class="card-footer-a">
@@ -91,15 +112,18 @@
                             خيارات
                         </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
+                            {% if request.user.customer %}
+                            <a class="dropdown-item" style="color: red;" href="{% url 'report_property' property.id %}">إبلاغ!</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
                             {% if request.user.customer %}
+                            <a class="dropdown-item" href="{% url 'add_comp' property.id %}">إضافة الى المقارنة</a>
                             <a class="dropdown-item" style="color: #2eca6a;" href="{% url 'add_fave' property.id %}">إضافة الى المفضلة</a>
                             {% endif %}
                             {% if user.is_authenticated and user.agent %}
                             {% if request.user.agent == property.agent %}
                             <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
-                            <a class="dropdown-item" href="{% url 'delete_property' property.id %}">حذف</a>
+                            <a class="dropdown-item" style="color: red;" href="{% url 'delete_property' property.id %}">حذف</a>
                             {% endif %}
                             {% endif %}
                           </div>
@@ -110,6 +134,10 @@
               </div>
             </div>
           </div>
+          {% empty %}
+          <center>
+            <h1 class="title-single">لا يوجد <span class="color-b">عقار</span> حالياً...</h1>
+          </center>
           {% endfor %}
         </div>
       </div>

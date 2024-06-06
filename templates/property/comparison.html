@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+المقارنة
+{% endblock %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="title-single-box">
+              <h1 class="title-single">المقارنة ({{countComp}}/3)</h1>
+            </div>
+          </div>
+          <!-- <div class="col-md-12 col-lg-4">
+            <nav aria-label="bread-crumb" class="breadcrumb-box d-flex justify-content-lg-end">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      خيارات
+                  </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                      <a class="dropdown-item" href="#">تعديل</a>
+                      <a class="dropdown-item" href="{% url 'contact' %}">حذف</a>
+                    </div>
+                </li>
+              </ul>
+            </nav>
+          </div> -->
+        </div>
+      </div>
+    </section><!-- End Intro Single-->
+    <!-- ======= Property Single ======= -->
+    <section class="property-single nav-arrow-b">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            {% include 'parts/alerts.html' %}
+            <div class="row justify-content">
+            <!-- Com -->
+            {% if user.is_authenticated and user.customer %}
+            {% for comp in comp %}
+            {% if request.user.customer == comp.customer %}
+            <div class="col-md-5 col-lg-4" style="border-left: 3px dashed #2eca6a;">
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d1 section-t4">
+                        <a href="{% url 'property_single' comp.property.id %}">
+                          <h3 class="title-d1 text-brand">تفاصيل العقار</h3>
+                        </a>
+                          <a href="{% url 'rm_comp' comp.id %}"><span>إزالة</span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="summary-list">
+                    <ul class="list">
+                        <li class="d-flex justify-content-between">
+                            <span><img src="{{comp.property.img.url}}" alt="" width="250px" height="150px"></span>
+                          </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>رقم العقار:</strong>
+                        <span>{{comp.property.id}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>نوع العقار:</strong>
+                        <span>{{comp.property.title}} , {{comp.property.property_type}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>المديرية:</strong>
+                        <span>{{comp.property.area}} , {{comp.property.area.city}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>السعر:</strong>
+                        <span>{{comp.property.price}} ريال</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>الموقع:</strong>
+                        <span>{{comp.property.location}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>نوع العقار:</strong>
+                        <span>{{comp.property.property_type}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>حالة العقار:</strong>
+                        <span>{{comp.property.build_year}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>نوع السكن:</strong>
+                        <span>{{comp.property.house_type}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>الشوارع:</strong>
+                        <span>{{comp.property.street_number}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>المساحة:</strong>
+                        <span>{{comp.property.space}}m
+                          <sup>2</sup>
+                        </span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>غرف:</strong>
+                        <span>{{comp.property.room_number}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>دورات المياه:</strong>
+                        <span>{{comp.property.bathrooms}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>الصالات:</strong>
+                        <span>{{comp.property.hall_room}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between" style="border-bottom: 1px solid black ;">
+                        <strong>الادوار:</strong>
+                        <span>{{comp.property.floor}}</span>
+                      </li>
+                      <br>
+                      <div class="title-box-d1">
+                        <h6 class="title-d1" style="font-size: 20px;">ملحقات وتفصايل أكثر </h6>
+                      </div>
+                      {% if comp.property.pool == True %}
+                        <li class="d-flex justify-content-between">مسبح</li>
+                      {% endif %}
+                      {% if comp.property.kitchen == True %}
+                        <li class="d-flex justify-content-between">مطبخ راكب</li>
+                      {% endif %}
+                      {% if comp.property.roof == True %}
+                        <li class="d-flex justify-content-between">مع سطح</li>
+                      {% endif %}
+                      {% if comp.property.modern == True %}
+                        <li class="d-flex justify-content-between">جديدة</li>
+                      {% endif %}
+                      {% if comp.property.appendix == True %}
+                        <li class="d-flex justify-content-between">حوش</li>
+                      {% endif %}
+                      {% if comp.property.elevator == True %}
+                        <li class="d-flex justify-content-between">مصعد</li>
+                      {% endif %}
+                      {% if comp.property.basement == True %}
+                        <li class="d-flex justify-content-between">بدروم</li>
+                      {% endif %}
+                      {% if comp.property.furnished == True %}
+                        <li class="d-flex justify-content-between">مفروشة</li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+                <!-- End Com -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Property Single-->
+    
+
+  </main><!-- End #main -->
+
+
+  <style>
+    .box-comments {
+      width: 100%;
+      height: 500px;
+      overflow-y: auto;
+      border-top: 2px solid #64b482;
+      border-bottom: 2px solid #2eca6a;
+      padding: 10px;
+      direction: rtl;
+  }
+  
+  .list-comments {
+      list-style-type: none;
+      padding: 0;
+  }
+  
+  .comment-item {
+      display: flex;
+      margin-bottom: 15px;
+      align-items: flex-start;
+  }
+  
+  .comment-avatar img,
+  .reply-avatar img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+  }
+  
+  .comment-details {
+      margin-right: 15px;
+      flex-grow: 1;
+  }
+  
+  .comment-details p {
+      margin: 0;
+      line-height: 1.5;
+  }
+  
+  .comment-details .reply-link {
+      color: #2eca6a;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 5px;
+      display: inline-block;
+  }
+  
+  .replies {
+      margin-top: 10px;
+      margin-right: 45px;
+      border-left: 2px solid #ddd;
+      padding-left: 15px;
+  }
+  
+  .reply {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 10px;
+  }
+  
+  .reply-details {
+      margin-right: 15px;
+      flex-grow: 1;
+  }
+  
+  .reply-details p {
+      margin: 0;
+      line-height: 1.5;
+  }
+  
+  .form-comments {
+      margin-top: 30px;
+  }
+  
+  .form-comments .form-a {
+      direction: rtl;
+  }
+  
+  .form-comments .form-group {
+      margin-bottom: 1rem;
+  }
+  
+  .form-comments .btn {
+      background-color: #2eca6a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+  }
+  
+  </style>
+{% endblock %}
