@@ -148,6 +148,7 @@ def property_grid(request):
     return render(request, 'property/property_grid.html', context)
 
 
+
 @login_required(login_url='login')
 def property_single(request, property_id):
     property = get_object_or_404(Property, id=property_id)
@@ -177,7 +178,6 @@ def property_single(request, property_id):
         'photos': photos,
     }
     return render(request, 'property/property_single.html', context)
-
 
 @login_required
 def reply_to_comment(request, comment_id):

@@ -1,6 +1,10 @@
+
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 import datetime
+from django.utils.text import slugify
+
 import os
 
 # Create your models here.
@@ -22,9 +26,21 @@ class Agent(models.Model):
                                      blank=True,
                                      default='uploads/avatar.png')
     state = models.BooleanField(default=False, null=True)
+    who_i = models.CharField(_("من أنا :"),max_length=250 , blank=True , null=True)
+    address = models.CharField(_("العنوان  :"),max_length=250 , blank=True , null=True)
+    # slug = models.SlugField(_("slug") , blank=True , null= True)
+    facebook = models.CharField(max_length=100 , blank=True , null=True)
+    instagram = models.CharField(max_length=100 , blank=True , null=True)
+    twitter = models.CharField(max_length=100 , blank=True , null=True)
+
+    # def save(self , *args , **kwargs):
+    #     if not self.slug:
+    #         self.slug= slugify(self.user.username)
+    #     super(Agent, self).save(*args , **kwargs)
 
     def __str__(self):
         return self.user.username
+        
 
 
 class Customer(models.Model):

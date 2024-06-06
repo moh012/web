@@ -1,8 +1,12 @@
+
+from django.contrib.auth.models import User  
+
 from django.db import models
 from django.conf import settings
+
 from accounts.models import Agent, Customer
 
-
+from django.utils import timezone
 # Create your models here.
 class Notification(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -14,18 +18,26 @@ class Notification(models.Model):
 
 class Financial_Movement(models.Model):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE,
-                             null=True)
-    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True)
+    agent = models.ForeignKey(Agent, on_delete=models.DO_NOTHING, null=True , blank=True)
     customer = models.ForeignKey(Customer,
                                  on_delete=models.DO_NOTHING,
-                                 null=True)
-    discription = models.TextField()
-    method = models.CharField(max_length=100)
-    data_time = models.DateTimeField()
-    reference = models.CharField(max_length=100)
-    admin_configration = models.BooleanField()
-    im_port = models.DecimalField(max_digits=5, decimal_places=2)
-    export = models.DecimalField(max_digits=5, decimal_places=2)
+                                 null=True , blank=True)
+    admin_configration = models.BooleanField(null=True , blank=True, default=False)
+    date_time = models.DateTimeField(default=timezone.now , blank=True)
     img = models.ImageField(upload_to='fmPhoto/%Y/%m/%d/')
+    reference = models.CharField(max_length=100 , null=True , blank=True)
+    
+    
+    # discription = models.TextField(null=True , blank=True)
+    # method = models.CharField(max_length=100 , blank=True)
+    # im_port = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    # export = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True )
+
+
+    class Meta:
+            verbose_name = "Financial Movement"
+            verbose_name_plural = "Financial Movements"
+
+    def __str__(self):
+        return self.reference
+

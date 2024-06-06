@@ -20,6 +20,6 @@ urlpatterns = [
          auth_views.PasswordChangeDoneView.as_view(
              template_name='accounts/password_change_done.html'),
          name='password_change_done'),
-    path('pyment', views.pyment, name='pyment'),
 
+    # path('<slug:slug>/', views.edit_profile, name='edit_profile'),
 ]
