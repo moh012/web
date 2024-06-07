@@ -5,91 +5,113 @@
 الملف الشخصي
 {% endblock %}
 
-{% block content %}
+{% block content%}
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
+<br><br><br><br><br><br><br>
 <center>
-<div class="col-md-7">
-
-
+<div class="col-md-7 colore: #2eca6a;" >
   {% if request.user.is_authenticated %}
-
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
     {% include 'parts/alerts.html' %}   
       <div class="row">
- 
-        <h1> اعدادات الحساب</h1>
-
+               <h1> اعدادات الحساب</h1>
         <br><br> <br>
-       <!-- <div class="col-md-12 mb-3">
-            <div class="form-group; roundees-circle ">
-              <label for="" style="display: flex;">أضف صورة</label>
-              <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" required >
-            </div>
-        </div>
-      </div> -->
-      <div class="col-md-12 mb-3 text-center">
-        {% if user_profile %}
-          <img src="{{ user_profile.photo.url }}" alt="صورة المستخدم" class="rounded-circle" width="150" height="150">
-        {% else %}
-          <img src="{% static 'uploads/avatar.png' %}" alt="الصورة الافتراضية" class="rounded-circle" width="150" height="150">
-        {% endif %}
-      </div>
-      <div class="col-md-12 mb-3">
-        <div class="form-group">
-          <label for="" style="display: flex;">أضف صورة</label>
-          <input type="file" name="user_photo" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة">
-        </div>
-      </div>
-      <br> <br> <br>
-     
-      <div class="col-md-12 mb-3">
-        <div class="form-group">
-          <input type="text" name="user" class="form-control form-control-lg form-control-a" placeholder="إسمك" title="قم بإدخال إسمك" required value="{{user}}">
-        </div>
-      </div>
-        <br>
-        <br>
-        <br>
-        
-        <div class="col-md-12 mb-3">
-          <div class="form-group">
-         
-            <input type="email" name="email" class="form-control form-control-lg form-control-a" placeholder="عنوان البريد الإلكتروني" title="قم بإدخال البريد الإلكتروني"
-                   required value="{{email}}">
-          </div>
+        <div class="col-md-4">
+            <div class="agent-avatar-box">
+              {% if agt.profil_photo  %}
+                  <img src="{{agt.profil_photo.url}}" alt=""  class="agent-avatar img-fluid">
+            {% elif cust.photo %}
+                <img src="{{cust.photo.url}}" alt="" class="img-fluid">
+
+            {% else %}
+              <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid">
+            {% endif %}
           
-          <br>
-          <div class="col-md-12 mb-3">
-            <div class="form-group">
-              <label for="" style="font-size: 20px;"><a href="{% url 'change_password' %}">تغيير كلمة المرور</a></label>
+        </div>
+      </div>
+      <br> <br> <br><br>
+      <div class="col-md-8 mb-8" >
+        <div class="form-group">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row ">
+              <div class="form-group col-md-12">
+                <label for="inputUsername" >اسم المستخدم</label>
+                <input type="text" name="user"  class="form-control" id="inputUsername" placeholder="الاسم"  value="{{user}}">
+              </div>
+            </div>
+            <div class="form-row ">
+            <div class="form-group col-md-12">
+              <label for="inputEmail">البريد الإلكتروني</label>
+              <input type="email" name="email" class="form-control" id="inputEmail" placeholder="example@gmail.com"  value="{{email}}">
             </div>
           </div>
-      <div class="col-md-12 text-center">
-        <br>
-        <button type="submit" class="btn btn-a" name="btnsave"> حفظ </button>
+          <div class="col-md-12 mb-2">
+            <div class="form-group roundees-circle">
+              <label for="user_photo" style="display: flex;">  قم برفع صورة لتحديث صورة الملف السخصي </label>
+              <input type="file" id="user_photo" name="image_user" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="">
+            </div>
+          </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputFirstName">الاسم الأول</label>
+                <input type="text" name="first_name " class="form-control" id="inputFirstName" value="{{user.first_name}}">
+              </div>
+              <div class="form-group col-md-12">
+                <label for="inputLastName">الاسم الأخير</label>
+                <input type="text" name="last_name" class="form-control" id="inputLastName" value="{{user.last_name}} ">
+              </div>
+            </div>
+            {% if user.agent %}
+            <div class="form-group col-md-12">
+              <label for="inputAddress">العنوان</label>
+              <input type="text" name="address"  class="form-control" id="inputAddress" placeholder=" شارع ...."  value="{{agt.address}}">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputAddress">  نبذة عني:</label>
+              <input type="text" name="who_i" class="form-control" id="inputAddress" placeholder=" " value="{{agt.who_i}}" >
+            </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+              <label for="inputAddress">  رابط حساب الفيسبوك</label>
+              <input type="text"  name="facebook"  class="form-control" id="inputAddress" placeholder=" " value="{% if request.user.agent %} {{agt.facebook}} {% endif %} {% if request.user.customer %} {{cust.facebook}} {% endif %} ">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputAddress">  رابط حساب الانستا</label>
+              <input type="text" name="instagram"  class="form-control" id="inputAddress" placeholder=" "  value=" {% if request.user.agent %}  {{agt.instagram}} {% endif %} {% if request.user.customer %} {{cust.instagram}} {% endif %}">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputAddress">  رابط حساب تويتر</label>
+              <input type="text" name="twitter"   class="form-control" id="inputAddress" placeholder=" " value="{% if request.user.agent %}  {{agt.twitter}} {% endif %} {% if request.user.customer %} {{cust.twitter}} {% endif %}">
+            </div>
+            <br>
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="" style="font-size: 20px;"><a href="{% url 'change_password' %}">تغيير كلمة المرور</a></label>
+              </div>
+            </div>
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-a border border:2px" name="btnsave"> حفظ </button>
+              </div>
+          </form>
+        </div>
       </div>
+      <div class="col-md-12 mb-3">
+
     </div>
   </form>
   {% else %}
 
   <h1> اعدادات الحساب</h1>
   <h4 class="alert alert-danger">
-     يجب عليك
-     <a href="{% url 'login' %}" class="text-dark">
-      تسجيل الدخول
-
-     </a>
+      يجب عليك
+      <a href="{% url 'login' %}" class="text-dark">
+        تسجيل الدخول
+      </a>
   </h4>
   {% endif %}
 </div>
 </center>
+
 {% endblock %}
