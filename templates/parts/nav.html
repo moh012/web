@@ -375,11 +375,14 @@
                       
                   </a>
                   <div class="dropdown-menu">
-                      <a class="dropdown-item {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' %}">حسابي </a>
+                    <a class="dropdown-item {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}" href="{% url 'edit_profile' request.user.id  %}">حسابي </a>
+
                       {% if request.user.customer %}
+
                           <a class="dropdown-item {% if request.resolver_match.url_name == 'my_order' %}active{% endif %}" href="{% url 'my_order' request.user.customer.id %}">طلباتي </a>
                       {% endif %}
                       {% if request.user.agent %}
+
                           <a class="dropdown-item {% if request.resolver_match.url_name == 'my_property' %}active{% endif %}" href="{% url 'my_property' request.user.agent.id %}">عقاراتي </a>
                       {% endif %}
                       <a class="dropdown-item {% if request.resolver_match.url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">تسجيل الخروج </a>
