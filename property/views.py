@@ -58,61 +58,39 @@ def property(request):
         'area': Area.objects.all(),
     }
 
+    prop = Property()
+
     if request.method == 'POST':
-        agent = request.user.agent
-        title = request.POST.get('property')
-        propertyType = request.POST.get('propertyType')
-        area = Area(id=request.POST.get('area'))
-        location = request.POST.get('location_property')
+        prop.agent = request.user.agent
         if len(request.FILES) != 0:
-            img = request.FILES['image_property']
-        description = request.POST.get('description')
-        price = request.POST.get('price_property')
-        room_number = request.POST.get('room_property')
-        hall_room = request.POST.get('hall_property')
-        bathrooms = request.POST.get('bathroom_property')
-        floor = request.POST.get('floor_property')
-        street_number = request.POST.get('street_property')
-        build_year = request.POST.get('propertyAge')
-        house_type = request.POST.get('AccommodationType')
-        space = request.POST.get('space')
-        pool = request.POST.get('pool_property')
-        kitchen = request.POST.get('kitchen_property')
-        roof = request.POST.get('Roof_property')
-        modern = request.POST.get('new_property')
-        yard = request.POST.get('yard_property')
-        elevator = request.POST.get('elevator_property')
-        basement = request.POST.get('basement_property')
-        furnished = request.POST.get('Furnished_property')
-        data = Property(agent=agent,
-                        title=title,
-                        property_type=propertyType,
-                        area=area,
-                        price=price,
-                        room_number=room_number,
-                        floor=floor,
-                        location=location,
-                        img=img,
-                        details=description,
-                        build_year=build_year,
-                        bathrooms=bathrooms,
-                        hall_room=hall_room,
-                        house_type=house_type,
-                        basement=basement,
-                        pool=pool,
-                        kitchen=kitchen,
-                        furnished=furnished,
-                        elevator=elevator,
-                        street_number=street_number,
-                        appendix=yard,
-                        roof=roof,
-                        modern=modern,
-                        space=space)
-        data.save()
+            prop.img = request.FILES['image_property']
+        prop.title = request.POST.get('property')
+        prop.property_type = request.POST.get('propertyType')
+        prop.area = Area(id=request.POST.get('area'))
+        prop.location = request.POST.get('location_property')
+        prop.details = request.POST.get('description')
+        prop.price = request.POST.get('price_property')
+        prop.room_number = request.POST.get('room_property')
+        prop.hall_room = request.POST.get('hall_property')
+        prop.bathrooms = request.POST.get('bathroom_property')
+        prop.floor = request.POST.get('floor_property')
+        prop.street_number = request.POST.get('street_property')
+        prop.build_year = request.POST.get('propertyAge')
+        prop.house_type = request.POST.get('AccommodationType')
+        prop.space = request.POST.get('space')
+        prop.pool = request.POST.get('pool_property')
+        prop.kitchen = request.POST.get('kitchen_property')
+        prop.roof = request.POST.get('Roof_property')
+        prop.modern = request.POST.get('new_property')
+        prop.appendix = request.POST.get('yard_property')
+        prop.elevator = request.POST.get('elevator_property')
+        prop.basement = request.POST.get('basement_property')
+        prop.furnished = request.POST.get('Furnished_property')
+        prop.save()
         files = request.FILES.getlist('files')
         for file in files:
             new_file = Photo_Property(
-                property=data,
+                property=prop,
                 photo=file,
             )
             new_file.save()
@@ -148,7 +126,6 @@ def property_grid(request):
     return render(request, 'property/property_grid.html', context)
 
 
-
 @login_required(login_url='login')
 def property_single(request, property_id):
     property = get_object_or_404(Property, id=property_id)
@@ -178,6 +155,7 @@ def property_single(request, property_id):
         'photos': photos,
     }
     return render(request, 'property/property_single.html', context)
+
 
 @login_required
 def reply_to_comment(request, comment_id):

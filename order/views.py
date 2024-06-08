@@ -20,58 +20,34 @@ def order(request):
         'area': Area.objects.all(),
     }
 
+    ord = Order()
+
     if request.method == 'POST':
-        customer = request.user.customer
-        title = request.POST.get('orderTitle')
-        orderType = request.POST.get('orderType')
-        area = Area(id=request.POST.get('area'))
-        location = request.POST.get('location')
-        minPrice = request.POST.get('minPrice')
-        maxPrice = request.POST.get('maxPrice')
-        room = request.POST.get('room')
-        hall = request.POST.get('hall')
-        bathroom = request.POST.get('bathroom')
-        floor = request.POST.get('floor')
-        street = request.POST.get('street')
-        propertyAge = request.POST.get('propertyAge')
-        houseType = request.POST.get('houseType')
-        space = request.POST.get('space')
-        description = request.POST.get('description')
-        pool = request.POST.get('pool')
-        kitchen = request.POST.get('kitchen')
-        roof = request.POST.get('roof')
-        yard = request.POST.get('yard')
-        elev = request.POST.get('elev')
-        basement = request.POST.get('basement')
-        furnish = request.POST.get('furnish')
-        modern = request.POST.get('modern')
-        data = Order(
-            customer=customer,
-            title=title,
-            order_type=orderType,
-            #  city=city,
-            area=area,
-            start_price=minPrice,
-            end_price=maxPrice,
-            room_number=room,
-            floor=floor,
-            location=location,
-            details=description,
-            build_year=propertyAge,
-            bathrooms=bathroom,
-            hall_room=hall,
-            housetype=houseType,
-            basement=basement,
-            pool=pool,
-            kitchen=kitchen,
-            furnished=furnish,
-            elevator=elev,
-            street_number=street,
-            appendix=yard,
-            roof=roof,
-            modern=modern,
-            space=space)
-        data.save()
+        ord.customer = request.user.customer
+        ord.title = request.POST.get('orderTitle')
+        ord.order_type = request.POST.get('orderType')
+        ord.area = Area(id=request.POST.get('area'))
+        ord.location = request.POST.get('location')
+        ord.start_price = request.POST.get('minPrice')
+        ord.end_price = request.POST.get('maxPrice')
+        ord.room_number = request.POST.get('room')
+        ord.hall_room = request.POST.get('hall')
+        ord.bathrooms = request.POST.get('bathroom')
+        ord.floor = request.POST.get('floor')
+        ord.street_number = request.POST.get('street')
+        ord.build_year = request.POST.get('propertyAge')
+        ord.housetype = request.POST.get('houseType')
+        ord.space = request.POST.get('space')
+        ord.details = request.POST.get('description')
+        ord.pool = request.POST.get('pool')
+        ord.kitchen = request.POST.get('kitchen')
+        ord.roof = request.POST.get('roof')
+        ord.modern = request.POST.get('yard')
+        ord.appendix = request.POST.get('elev')
+        ord.elevator = request.POST.get('basement')
+        ord.basement = request.POST.get('furnish')
+        ord.furnished = request.POST.get('modern')
+        ord.save()
         messages.success(request, "تم إضافة الطلب بنجاح!")
         return redirect('order_grid')
 
