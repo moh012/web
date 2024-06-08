@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_social_share',
-   
 ]
 
 MIDDLEWARE = [
@@ -140,7 +139,6 @@ LOGOUT_REDIRECT_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
 login_url = 'login'
 
-
 #resat Password
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'localhost'
@@ -150,9 +148,14 @@ login_url = 'login'
 # EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = False
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mnmn030405@gmail.com'
+EMAIL_HOST_PASSWORD = 'mpum urtq crer vzss'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'EJAD Team <ejad@ejad.com>'
