@@ -11,6 +11,7 @@ import re
 from django.core.files.storage import default_storage
 import os
 
+
 def login(request):
     if request.method == 'POST' and 'btnlogin' in request.POST:
 
@@ -180,7 +181,8 @@ def verification(request):
 def privacy_policy(request):
     return render(request, 'accounts/privacy_policy.html')
 
-#The old Code 
+
+#The old Code
 # @login_required
 # def edit_profile(request ,id):
 #     if request.method == 'POST':
@@ -207,15 +209,20 @@ def privacy_policy(request):
 #     }
 #     return render(request, 'accounts/edit_profile.html', context)
 
-def edit_profile(request,id):
+
+def edit_profile(request, id):
     if request.method == 'POST' and 'btnsave' in request.POST:
-        
+
         if request.user is not None and request.user.id is not None:
-            
+
             agt = Agent.objects.filter(user=request.user).first()
             cust = Customer.objects.filter(user=request.user).first()
 
-            if request.POST['user'] and ['email'] and ['image_user'] and ['first_name'] and ['last_name']  and ['address'] and ['who_i'] and ['facebook'] and ['instagram'] and ['twitter'] :
+            if request.POST['user'] and ['email'] and ['image_user'] and [
+                    'first_name'
+            ] and ['last_name'] and ['address'] and ['who_i'] and [
+                    'facebook'
+            ] and ['instagram'] and ['twitter']:
                 request.user.username = request.POST['user']
                 request.user.email = request.POST['email']
                 request.user.first_name = request.POST['first_name']
@@ -223,10 +230,8 @@ def edit_profile(request,id):
                 request.user.save()
 
                 if hasattr(request.user, 'agent'):
-                    if len(request.FILES) != 0:
-                        if len(agt.profil_photo ) > 0:
-                            os.remove(agt.profil_photo.path)
-                        agt.profil_photo = request.FILES['image_user']
+                    request.user.agent.profil_photo = request.FILES[
+                        'image_user']
                     request.user.agent.address = request.POST['address']
                     request.user.agent.who_i = request.POST['who_i']
                     request.user.agent.facebook = request.POST['facebook']
@@ -235,10 +240,7 @@ def edit_profile(request,id):
                     request.user.agent.save()
 
                 elif hasattr(request.user, 'customer'):
-                    if len(request.FILES) != 0:
-                        if len(cust.photo) > 0:
-                            os.remove(cust.photo.path)
-                        cust.photo = request.FILES['image_user']
+                    request.user.customer.photo = request.FILES['image_user']
                     request.user.customer.facebook = request.POST['facebook']
                     request.user.customer.instagram = request.POST['instagram']
                     request.user.customer.twitter = request.POST['twitter']
@@ -249,7 +251,7 @@ def edit_profile(request,id):
             else:
                 messages.error(request, 'تحقق من القيم')
 
-        return redirect('edit_profile')
+            return redirect('index')
 
     else:
         if request.user is not None:
@@ -258,9 +260,9 @@ def edit_profile(request,id):
                 agt = Agent.objects.filter(user=request.user).first()
                 cust = Customer.objects.filter(user=request.user).first()
                 context = {
-                    'agt':agt,
-                    'cust':cust,
-                    'email':request.user.email,
+                    'agt': agt,
+                    'cust': cust,
+                    'email': request.user.email,
                 }
-   
+
     return render(request, 'accounts/edit_profile.html', context)
