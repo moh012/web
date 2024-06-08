@@ -57,51 +57,53 @@
         <br>
         <div class="col-md-6 mb-2" style="width: 100%;">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المحافظة</label>
-            <select class="form-control form-select form-control-a" name="city" id="area" title="المحافظة" style="line-height: 2;">
-                <option>{{ord.area.city}}</option>
-                <option>الأمانة</option>
-                <option>صنعاء</option>
-                <option>عدن</option>
-                <option>تعز</option>
-                <option>إب</option>
-                <option>الحديدة</option>
-                <option>حجة</option>
-                <option>عمران</option>
-                <option>البيضاء</option>
-                <option>الجوف</option>
-                <option>ذمار</option>
-                <option>شبوة</option>
-                <option>مأرب</option>
-                <option>المهرة</option>
-                <option>أبين</option>
-                <option>لحج</option>
-                <option>المحويت</option>
-                <option>الضالع</option>
-                <option>صعدة</option>
-                <option>ريمة</option>
+            <label class="pb-2" for="city-select" style="display: flex;">المحافظة</label>
+            <select class="form-control form-select form-control-a" name="city" id="city-select" title="المحافظة" style="line-height: 2;">
+              <option value="">إختر محافظة</option>
+              {% for city in city %}
+                  <option value="{{ city.id }}">{{ city.city_name }}</option>
+              {% endfor %}
             </select>
           </div>
         </div>
         <br>
-        <div class="col-md-6 mb-2" style="width: 100%;">
+        <div class="col-md-6 mb-2" style="width: 100%;" id="area-div">
           <div class="form-group mt-3">
-            <label class="pb-2" for="propertyType" style="display: flex;">المديرية</label>
-            <select class="form-control form-select form-control-a" name="area" id="area" title="المديرية" style="line-height: 2;">
-                <option>{{ord.area}}</option>
-                <option>الوحدة</option>
-                <option>معين</option>
-                <option>صنعاء القديمة</option>
-                <option>شعوب</option>
-                <option>اّزال</option>
-                <option>الصافية</option>
-                <option>السبعين</option>
-                <option>التحرير</option>
-                <option>الثورة</option>
-                <option>بني حارث</option>
+            <label class="pb-2" for="area-select" style="display: flex;">المديرية</label>
+            <select class="form-control form-select form-control-a" name="area" id="area-select" title="المديرية" style="line-height: 2;">
+                <option value="{{ord.area.id}}">إختر مديرية</option>
+                {% for area in area %}
+                    <option value="{{ area.id }}" data-city-id="{{ area.city.id }}">{{ area.area_name }}</option>
+                {% endfor %}
             </select>
           </div>
         </div>
+
+        <script>
+          const citySelect = document.getElementById('city-select');
+          const areaSelect = document.getElementById('area-select');
+          const areaDiv = document.getElementById('area-div');
+
+          // Initially hide the area-select element
+          areaDiv.style.display = 'none';
+
+          citySelect.addEventListener('change', function() {
+              const selectedCityId = this.value;
+
+              // Show the area-select element when a city is selected
+              if (selectedCityId !== '') {
+                  areaDiv.style.display = 'block';
+              } else {
+                  areaSelect.style.display = 'none';
+              }
+
+              // Filter areas based on selected city
+              Array.from(areaSelect.options).forEach(option => {
+                  const cityId = option.dataset.cityId;
+                  option.style.display = selectedCityId === '' || cityId === selectedCityId ? 'block' : 'none';
+              });
+          });
+        </script>
         <br>
         <br>
         <br>

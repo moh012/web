@@ -35,16 +35,8 @@
                   {% else %}
                     <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid">
                   {% endif %}
-              
                 </div>
-
               </div>
-              <div class="col-md-3">
-                <p>
-                  <strong>  نبذة عني :</strong>
-                  <span class="color-text-a">  {{agt.who_i}}</span>
-                </p>
-              </div>  
               <div class="col-md-5 section-md-t3">
                 <div class="agent-info-box">
                   <div class="agent-title">
@@ -60,6 +52,10 @@
                       صنعاء
                     </p>
                     <div class="info-agents color-a">
+                      <p>
+                        <strong>  نبذة عني :</strong>
+                        <span class="color-text-a">  {{agt.who_i}}</span>
+                      </p>
                       <p>
                         <strong>العنوان: </strong>
                         <span class="color-text-a">{{agt.address}}</span>
