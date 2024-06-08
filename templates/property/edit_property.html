@@ -78,7 +78,7 @@
           <div class="form-group mt-3">
             <label class="pb-2" for="area-select" style="display: flex;">المديرية</label>
             <select class="form-control form-select form-control-a" name="area" id="area-select" title="المديرية" style="line-height: 2;">
-                <option value="{{prop.area}}">إختر مديرية</option>
+                <option value="{{prop.area.id}}">إختر مديرية</option>
                 {% for area in area %}
                     <option value="{{ area.id }}" data-city-id="{{ area.city.id }}">{{ area.area_name }}</option>
                 {% endfor %}

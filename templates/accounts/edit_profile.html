@@ -22,10 +22,10 @@
               {% if agt.profil_photo %}
                   <img src="{{agt.profil_photo.url}}" alt=""  class="agent-avatar img-fluid" style="border-radius: 50%;">
             {% elif cust.photo %}
-                <img src="{{cust.photo.url}}" alt="" class="img-fluid">
+                <img src="{{cust.photo.url}}" alt="" class="img-fluid" style="border-radius: 50%;">
 
             {% else %}
-              <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid">
+              <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid" style="border-radius: 50%;">
             {% endif %}
           
         </div>
@@ -49,13 +49,6 @@
               </div>
             </div>
             <br>
-          <div class="col-md-12 mb-2">
-            <div class="form-group roundees-circle">
-              <label for="user_photo" style="display: flex;">تحديث صورة الملف السخصي</label>
-              <input type="file" id="user_photo" name="image_user" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة" value="">
-            </div>
-          </div>
-          <br>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="inputFirstName" style="display: flex;">الاسم الأول</label>

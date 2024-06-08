@@ -218,11 +218,11 @@ def edit_profile(request, id):
             agt = Agent.objects.filter(user=request.user).first()
             cust = Customer.objects.filter(user=request.user).first()
 
-            if request.POST['user'] and ['email'] and ['image_user'] and [
-                    'first_name'
-            ] and ['last_name'] and ['address'] and ['who_i'] and [
-                    'facebook'
-            ] and ['instagram'] and ['twitter']:
+            if request.POST['user'] and ['email'] and ['first_name'] and [
+                    'last_name'
+            ] and ['address'] and ['who_i'] and ['facebook'] and [
+                    'instagram'
+            ] and ['twitter']:
                 request.user.username = request.POST['user']
                 request.user.email = request.POST['email']
                 request.user.first_name = request.POST['first_name']
@@ -230,8 +230,6 @@ def edit_profile(request, id):
                 request.user.save()
 
                 if hasattr(request.user, 'agent'):
-                    request.user.agent.profil_photo = request.FILES[
-                        'image_user']
                     request.user.agent.address = request.POST['address']
                     request.user.agent.who_i = request.POST['who_i']
                     request.user.agent.facebook = request.POST['facebook']
@@ -240,7 +238,6 @@ def edit_profile(request, id):
                     request.user.agent.save()
 
                 elif hasattr(request.user, 'customer'):
-                    request.user.customer.photo = request.FILES['image_user']
                     request.user.customer.facebook = request.POST['facebook']
                     request.user.customer.instagram = request.POST['instagram']
                     request.user.customer.twitter = request.POST['twitter']

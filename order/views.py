@@ -166,6 +166,7 @@ def edit_order(request, id):
     if request.method == "POST":
         ord.title = request.POST.get('orderTitle')
         ord.order_type = request.POST.get('orderType')
+        ord.area = Area(id=request.POST.get('area'))
         ord.location = request.POST.get('location')
         ord.start_price = request.POST.get('minPrice')
         ord.end_price = request.POST.get('maxPrice')
@@ -189,7 +190,11 @@ def edit_order(request, id):
         ord.save()
         messages.warning(request, "تم تعديل الطلب بنجاح!")
         return redirect('order_grid')
-    context = {'ord': ord}
+    context = {
+        'ord': ord,
+        'city': City.objects.all(),
+        'area': Area.objects.all(),
+    }
     return render(request, 'order/edit_order.html', context)
 
 
