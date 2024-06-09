@@ -26,10 +26,10 @@
                 {% if request.user.agent %}
                 <option>شراء</option>
                 {% endif %}
-                {% if request.user.customer %}
                 <option>إيجار</option>
-                {% endif %}
+                {% if request.user.customer %}
                 <option>بيع</option>
+                {% endif %}
               </select>
             </div>
           </div>

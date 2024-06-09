@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load social_share %}
 
 {% block title %}
 العقارات
@@ -115,7 +116,7 @@ function filterOrders() {
                             {% if request.user.customer %}
                             <a class="dropdown-item" style="color: red;" href="{% url 'report_property' property.id %}">إبلاغ!</a>
                             {% endif %}
-                            <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            <a class="dropdown-item" href="">مشاركة</a>
                             {% if request.user.customer %}
                             <a class="dropdown-item" href="{% url 'add_comp' property.id %}">إضافة الى المقارنة</a>
                             <a class="dropdown-item" style="color: #2eca6a;" href="{% url 'add_fave' property.id %}">إضافة الى المفضلة</a>

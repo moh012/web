@@ -104,12 +104,15 @@ def property_grid(request):
     try:
         search = Property.objects.all()
         title = None
+        property_type = None
+        search_room = None
+        search_bathroom = None
         if 'search_name' and 'search_type' and 'search_bathroom' in request.GET:
             title = request.GET['search_name']
             property_type = request.GET['search_type']
             search_room = request.GET['search_room']
             search_bathroom = request.GET['search_bathroom']
-            if title:
+            if title or property_type or search_room or search_bathroom:
                 search = search.filter(
                     title__icontains=title,
                     property_type__icontains=property_type,
