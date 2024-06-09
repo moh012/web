@@ -52,14 +52,18 @@
                       صنعاء
                     </p>
                     <div class="info-agents color-a">
+                      {% if agt.who_i %}
                       <p>
                         <strong>  نبذة عني :</strong>
                         <span class="color-text-a">  {{agt.who_i}}</span>
                       </p>
+                      {% endif %}
+                      {% if agt.address %}
                       <p>
                         <strong>العنوان: </strong>
                         <span class="color-text-a">{{agt.address}}</span>
                       </p>
+                      {% endif %}
                       <p>
                         <strong>جوال: </strong>
                         <span class="color-text-a">{{agt.phone}}</span>
@@ -72,26 +76,27 @@
                   </div>
                   <div class="socials-footer">
                     <ul class="list-inline">
+                      {% if agt.facebook %}
                       <li class="list-inline-item">
-                        <a href="{{agt.facebook}}" class="link-one">
+                        <a href="{{agt.facebook}}" target="_blank" class="link-one">
                           <i class="bi bi-facebook" aria-hidden="true"></i>
                         </a>
                       </li>
+                      {% endif %}
+                      {% if agt.twitter %}
                       <li class="list-inline-item">
-                        <a href="{{agt.twitter}}" class="link-one">
+                        <a href="{{agt.twitter}}" target="_blank" class="link-one">
                           <i class="bi bi-twitter" aria-hidden="true"></i>
                         </a>
                       </li>
+                      {% endif %}
+                      {% if agt.instagram %}
                       <li class="list-inline-item">
-                        <a href="{{agt.instagram}}" class="link-one">
+                        <a href="{{agt.instagram}}" target="_blank" class="link-one">
                           <i class="bi bi-instagram" aria-hidden="true"></i>
                         </a>
                       </li>
-                      <li class="list-inline-item">
-                        <a href="#" class="link-one">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
-                        </a>
-                      </li>
+                      {% endif %}
                     </ul>
                   </div>
                 </div>

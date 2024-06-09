@@ -128,7 +128,7 @@ function filterOrders() {
                             {% if request.user.agent %}
                             <a class="dropdown-item" style="color: red;" href="{% url 'report_order' order.id %}">إبلاغ!</a>
                             {% endif %}
-                            <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                            <a class="dropdown-item" href="">مشاركة</a>
                             <!-- {% post_to_whatsapp object_or_url "Share via WhatsApp" %} -->
                             {% if user.is_authenticated and user.customer %}
                             {% if request.user.customer == order.customer %}
