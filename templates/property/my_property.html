@@ -200,8 +200,13 @@
                               <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
                               {% if user.is_authenticated and user.agent %}
                               {% if request.user.agent == property.agent %}
+                              {% if property.state == True %}
+                              <a class="dropdown-item" style="color: #2eca6a;" href="{% url 'payment' property.id %}">ترويج العقار</a>
+                              {% endif %}
                               <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
-                              <a class="dropdown-item" href="{% url 'delete_property' property.id %}">حذف</a>
+                              {% if property.state == False %}
+                              <a class="dropdown-item" style="color: red;" href="{% url 'delete_property' property.id %}">حذف</a>
+                              {% endif %}
                               {% endif %}
                               {% endif %}
                             </div>

@@ -123,8 +123,11 @@ function filterOrders() {
                             {% endif %}
                             {% if user.is_authenticated and user.agent %}
                             {% if request.user.agent == property.agent %}
+                            <a class="dropdown-item" style="color: #2eca6a;" href="{% url 'payment' property.id %}">ترويج العقار</a>
                             <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
+                            {% if property.state == False %}
                             <a class="dropdown-item" style="color: red;" href="{% url 'delete_property' property.id %}">حذف</a>
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                           </div>

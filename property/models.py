@@ -69,9 +69,7 @@ class Property(models.Model):
     basement = models.BooleanField(default=False, null=True)
     furnished = models.BooleanField(default=False, null=True)
     property_date = models.DateField(default=timezone.now)
-    state = models.SmallIntegerField(default=0,
-                                     choices=[(0, 'inactive'), (1, 'banned'),
-                                              (2, 'active')])
+    state = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.title

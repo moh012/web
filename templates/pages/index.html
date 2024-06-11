@@ -147,55 +147,70 @@
         <div id="property-carousel" class="swiper">
           <div class="swiper-wrapper">
 
-            
+            {% for property in properties %}
+            {% if property.state == True %}
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="{% static 'assets/img/property-6.jpg' %}" alt="" class="img-a img-fluid">
+                {% if property.img %}
+                    <img src="{{property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                {% else %}
+                    <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                {% endif %}
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
                       <h2 class="card-title-a">
-                        <a href="#">فله
-                          <br /> ثلاثة ادوار</a>
+                        <a href="{% url 'property_single' property.id %}">{{property.title}}
+                          <br>{{property.property_type}}</a>
                       </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">السعر | $ 12.000</span>
+                        <span class="price-a">السعر | {{property.price}} ريال</span>
                       </div>
-                      <a href="#" class="link-a">مزيد من التفاصيل
-                        <span class="bi bi-chevron-left"></span>
+                      <a href="{% url 'property_single' property.id %}" class="link-a">{{property.area}} , {{property.area.city}}
                       </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
                           <h4 class="card-info-title">المساحة</h4>
-                          <span>340m
+                          <span>{{property.space}}m
                             <sup>2</sup>
                           </span>
                         </li>
                         <li>
                           <h4 class="card-info-title">الغرف</h4>
-                          <span>2</span>
+                          <span>{{property.room_number}}</span>
                         </li>
                         <li>
                           <h4 class="card-info-title">دورات المياه</h4>
-                          <span>4</span>
+                          <span>{{property.bathrooms}}</span>
                         </li>
                         <li>
                           <h4 class="card-info-title">الصالات</h4>
-                          <span>1</span>
+                          <span>{{property.hall_room}}</span>
                         </li>
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
                               خيارات
                           </a>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" style="color: red;" href="{% url 'blog_grid' %}">إبلاغ!</a>
-                              <a class="dropdown-item" href="{% url 'blog_grid' %}">مشاركة</a>
+                              {% if request.user.customer %}
+                              <a class="dropdown-item" style="color: red;" href="{% url 'report_property' property.id %}">إبلاغ!</a>
+                              {% endif %}
+                              <a class="dropdown-item" href="">مشاركة</a>
+                              {% if request.user.customer %}
+                              <a class="dropdown-item" href="{% url 'add_comp' property.id %}">إضافة الى المقارنة</a>
+                              <a class="dropdown-item" style="color: #2eca6a;" href="{% url 'add_fave' property.id %}">إضافة الى المفضلة</a>
+                              {% endif %}
+                              {% if user.is_authenticated and user.agent %}
+                              {% if request.user.agent == property.agent %}
+                              <a class="dropdown-item" href="{% url 'edit_property' property.id %}">تعديل</a>
+                              {% endif %}
+                              {% endif %}
                             </div>
                         </li>
                       </ul>
@@ -204,7 +219,8 @@
                 </div>
               </div>
             </div><!-- End carousel item -->
-
+            {% endif %}
+            {% endfor %}
 
           </div>
         </div>
