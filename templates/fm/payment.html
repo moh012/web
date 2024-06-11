@@ -8,6 +8,39 @@
 {% block content %}
 <br><br><br><br><br><br>
 
+{% if request.user.customer %}
+<center>
+<h1>طلب جاد</h1>
+        <br>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <h4>بــ <strong>10,000</strong> <span class="color-b">ريال</span> فقط</h4>
+            <br>
+            <p>عند الترقية الى <span class="color-b">طلب جاد </span>، تأخذ إهتمام أكبر من قبل الوكلاء العقاريين <br> وأيضاً يصبح طلبك من الخيارات الأولى في صفحة الطلبات <br> يمكنك استرجاع المبلغ مالم تتم الخدمة</p>
+          </div>
+        </div>
+        <hr>
+  </center>
+ {% endif %}
+
+ {% if request.user.agent %}
+<center>
+<h1>طلب ترويج عقار</h1>
+        <br>
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <h4>بــ <strong>20,000</strong> <span class="color-b">ريال</span> فقط</h4>
+            <br>
+            <p>عند ترويج <span class="color-b">عقارك</span>، يتم عرض العقار في الصفحة الرئيسية الخاصة بالموقع<br> وأيضاً يعرض عقارك على عملاء أكثر </p>
+          </div>
+        </div>
+        <hr>
+  </center>
+ {% endif %}
+
+<center>
+ {% include 'parts/alerts.html' %}
+</center>
 
 <div class="container mt-8">
   <div class="row justify-content-center">

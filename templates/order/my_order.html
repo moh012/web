@@ -196,7 +196,9 @@
                             {% if user.is_authenticated and user.customer %}
                             {% if request.user.customer == order.customer %}
                             <a class="dropdown-item" href="{% url 'edit_order' order.id %}">تعديل</a>
-                            <a class="dropdown-item" href="{% url 'delete_order' order.id %}">حذف</a>
+                            {% if order.state == False %}
+                            <a class="dropdown-item" style="color: red;" href="{% url 'delete_order' order.id %}">حذف</a>
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                           </div>

@@ -122,17 +122,17 @@ def order_single(request, id):
     return render(request, 'order/order_single.html', context)
 
 
-@login_required(login_url='login')
-def serious_order(request, id):
-    ord = Order.objects.get(id=id)
+# @login_required(login_url='login')
+# def serious_order(request, id):
+#     ord = Order.objects.get(id=id)
 
-    if request.method == "POST":
-        ord.state = True
-        ord.save()
-        messages.success(request, "تم ترقية طلبك إلى طلب جاد!")
-        return redirect('order_grid')
+#     if request.method == "POST":
+#         ord.state = True
+#         ord.save()
+#         messages.success(request, "تم ترقية طلبك إلى طلب جاد!")
+#         return redirect('order_grid')
 
-    return render(request, 'order/serious_order.html')
+#     return render(request, 'order/serious_order.html')
 
 
 @login_required(login_url='login')

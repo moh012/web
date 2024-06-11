@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-ryv3bxa5)7qfq-_hm3r17^f!b*cv3%+pycrz#-q!g-++k@n&tx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ejadteam.pythonanywhere.com']
-
+ALLOWED_HOSTS = []
+#https://ejadteam.pythonanywhere.com/
 # Application definition
 
 INSTALLED_APPS = [
@@ -86,7 +86,19 @@ DATABASES = {
     }
 }
 
-# Password validation
+#postgrsesql data base 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "ejaddb",
+#         "USER": "postgres",
+#         "PASSWORD": "admin",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
+
+# Password validation  127.0.0.1
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [

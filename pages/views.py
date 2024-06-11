@@ -12,6 +12,7 @@ def index(request):
     context = {
         'city': City.objects.all(),
         'area': Area.objects.all(),
+        'properties': Property.objects.all(),
         'alluser': User.objects.all().count(),
         'allproperty': Property.objects.all().count(),
         'allorder': Order.objects.all().count(),
