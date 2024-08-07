@@ -74,7 +74,7 @@ function filterOrders() {
             <div class="card-box-a card-shadow">
               <a href="{% url 'order_single' order.id %}">
               <div class="img-box-a">
-                <img src="{% static 'assets/img/about-2.jpg' %}" alt="" class="img-a img-fluid">
+                <img src="{% static 'assets/img/about-2.jpg' %}" loading="lazy" alt="" class="img-a img-fluid">
               </div>
               <div class="card-overlay">
                 {% if order.state == True %}
