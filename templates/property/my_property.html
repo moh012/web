@@ -31,9 +31,9 @@
               <div class="col-md-3">
                 <div class="agent-avatar-box">
                   {% if agt.profil_photo %}
-                      <img src="{{agt.profil_photo.url}}" alt="" class="agent-avatar img-fluid">
+                      <img src="{{agt.profil_photo.url}}" loading="lazy" alt="" class="agent-avatar img-fluid">
                   {% else %}
-                    <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid">
+                    <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="" class="agent-avatar img-fluid">
                   {% endif %}
                 </div>
               </div>
@@ -149,9 +149,9 @@
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                   {% if property.img %}
-                  <img src="{{property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                  <img src="{{property.img.url}}" loading="lazy" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
                   {% else %}
-                  <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid">
+                  <img src="{% static 'assets/img/noPhoto.png' %}" loading="lazy" alt="" class="img-a img-fluid">
                   {% endif %}
                 </div>
                 <div class="card-overlay">

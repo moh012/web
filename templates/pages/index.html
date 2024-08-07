@@ -99,7 +99,7 @@
             <div class="carousel-item-b swiper-slide">
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
-                  <img src="{{city.phohto.url}}" alt="" class="img-a img-fluid">
+                  <img src="{{city.phohto.url}}" loading="lazy" alt="" class="img-a img-fluid">
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
@@ -153,9 +153,9 @@
               <div class="card-box-a card-shadow">
                 <div class="img-box-a">
                 {% if property.img %}
-                    <img src="{{property.img.url}}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                    <img src="{{property.img.url}}" loading="lazy" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
                 {% else %}
-                    <img src="{% static 'assets/img/noPhoto.png' %}" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
+                    <img src="{% static 'assets/img/noPhoto.png' %}" loading="lazy" alt="" class="img-a img-fluid" style="height: 350px; width: 100%;">
                 {% endif %}
                 </div>
                 <div class="card-overlay">

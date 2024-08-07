@@ -128,7 +128,7 @@
         <div class="col-md-12 mb-3">
             <div class="form-group">
               {% if prop.img %}
-              <img src="{{prop.img.url}}" alt="image here" class="img-a img-fluid">
+              <img src="{{prop.img.url}}" loading="lazy" alt="image here" class="img-a img-fluid">
               {% endif %}
               <label for="" style="display: flex;">أضف صورة رئيسية</label>
               <input type="file" name="image_property" accept="image/*" class="form-control form-control-lg form-control-a" placeholder="صورة" title="قم بإضافة صورة">
@@ -141,7 +141,7 @@
           <div class="form-group">
             {% for photo in photo %}
             {% if photo.photo %}
-              <img src="{{photo.photo.url}}" alt="image here" class="img-a img-fluid">
+              <img src="{{photo.photo.url}}" loading="lazy" alt="image here" class="img-a img-fluid">
             {% endif %}
             {% endfor %}
             <!-- <label for="" style="display: flex;">صور اضافية للعقار</label>

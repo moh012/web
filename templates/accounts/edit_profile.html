@@ -20,12 +20,12 @@
         <div class="col-md-4">
             <div class="agent-avatar-box">
               {% if agt.profil_photo %}
-                  <img src="{{agt.profil_photo.url}}" alt=""  class="agent-avatar img-fluid" style="border-radius: 50%;">
+                  <img src="{{agt.profil_photo.url}}" loading="lazy" alt=""  class="agent-avatar img-fluid" style="border-radius: 50%;">
             {% elif cust.photo %}
-                <img src="{{cust.photo.url}}" alt="" class="img-fluid" style="border-radius: 50%;">
+                <img src="{{cust.photo.url}}" loading="lazy" alt="" class="img-fluid" style="border-radius: 50%;">
 
             {% else %}
-              <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="agent-avatar img-fluid" style="border-radius: 50%;">
+              <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="" class="agent-avatar img-fluid" style="border-radius: 50%;">
             {% endif %}
           
         </div>

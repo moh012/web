@@ -69,7 +69,7 @@
                 {% if property.img %}
                 <div class="carousel-item-b swiper-slide">
                   <a href="{{property.img.url}}" class="image-link">
-                    <img src="{{property.img.url}}" alt="image here" class="img-a img-fluid">
+                    <img src="{{property.img.url}}" loading="lazy" alt="image here" class="img-a img-fluid">
                   </a>
                 </div>
                 {% endif %}
@@ -77,7 +77,7 @@
                 {% if photo.photo %}
                 <div class="carousel-item-b swiper-slide">
                   <a href="{{photo.photo.url}}" class="image-link">
-                    <img src="{{photo.photo.url}}" alt="image here" class="img-a img-fluid">
+                    <img src="{{photo.photo.url}}" loading="lazy" alt="image here" class="img-a img-fluid">
                   </a>
                 </div>
                 {% endif %}
@@ -239,7 +239,7 @@
                 <iframe src="https://player.vimeo.com/video/73221098" width="100%" height="460" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
               </div>
               <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-                <img src="{% static 'assets/img/plan2.jpg' %}" alt="" class="img-fluid">
+                <img src="{% static 'assets/img/plan2.jpg' %}" loading="lazy" alt="" class="img-fluid">
               </div>
               <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d351.0065110662988!2d44.19335008930394!3d15.330416314604419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1603dbee2b198d27%3A0xe08a1e804cdb1fe1!2z2KfZhNit2Yog2KfZhNiz2YrYp9iz2Yo!5e0!3m2!1sar!2s!4v1706391286389!5m2!1sar!2s"
@@ -260,9 +260,9 @@
               <div class="col-md-6 col-lg-4">
                 <a href="{% url 'agent_single' id=property.agent.id %}">
                   {% if property.agent.profil_photo %}
-                    <img src="{{property.agent.profil_photo.url}}" alt="" class="img-fluid">
+                    <img src="{{property.agent.profil_photo.url}}" loading="lazy" alt="" class="img-fluid">
                     {% else %}
-                    <img src="{% static 'assets/img/avatar1.png' %}" alt="" class="img-fluid">
+                    <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="" class="img-fluid">
                     {% endif %}
               </a>
               </div>
@@ -355,15 +355,15 @@
                           <div class="comment-avatar">
                               {% if comment.customer %}
                                   {% if comment.customer.photo %}
-                                      <img src="{{ comment.customer.photo.url }}" alt="">
+                                      <img src="{{ comment.customer.photo.url }}" loading="lazy" alt="">
                                   {% else %}
-                                      <img src="{% static 'assets/img/avatar1.png' %}" alt="">
+                                      <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="">
                                   {% endif %}
                               {% elif comment.agent %}
                                   {% if comment.agent.profil_photo %}
-                                      <img src="{{ comment.agent.profil_photo.url }}" alt="">
+                                      <img src="{{ comment.agent.profil_photo.url }}" loading="lazy" alt="">
                                   {% else %}
-                                      <img src="{% static 'assets/img/avatar1.png' %}" alt="">
+                                      <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="">
                                   {% endif %}
                               {% endif %}
                           </div>
@@ -384,15 +384,15 @@
                                     <div class="reply-avatar">
                                         {% if reply.customer %}
                                             {% if reply.customer.photo %}
-                                                <img src="{{ reply.customer.photo.url }}" alt="">
+                                                <img src="{{ reply.customer.photo.url }}" loading="lazy" alt="">
                                             {% else %}
-                                                <img src="{% static 'assets/img/avatar1.png' %}" alt="">
+                                                <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="">
                                             {% endif %}
                                         {% elif reply.agent %}
                                             {% if reply.agent.profil_photo %}
-                                                <img src="{{ reply.agent.profil_photo.url }}" alt="">
+                                                <img src="{{ reply.agent.profil_photo.url }}" loading="lazy" alt="">
                                             {% else %}
-                                                <img src="{% static 'assets/img/avatar1.png' %}" alt="">
+                                                <img src="{% static 'assets/img/avatar1.png' %}" loading="lazy" alt="">
                                             {% endif %}
                                         {% endif %}
                                     </div>
